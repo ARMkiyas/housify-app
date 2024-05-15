@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "626917610268",
+    "project_id": "housify-ujjxfr",
+    "storage_bucket": "housify-ujjxfr.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:626917610268:android:b2c6bd23460099f11b20d9",
+        "android_client_info": {
+          "package_name": "com.kiyascloud.housify"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCLfV32A22ZvTeOA2ENiVRvXOnm8oepjC0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
