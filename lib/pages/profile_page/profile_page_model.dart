@@ -1,11 +1,13 @@
 import '/flutter_flow/flutter_flow_util.dart';
-import 'auth_home_widget.dart' show AuthHomeWidget;
+import 'profile_page_widget.dart' show ProfilePageWidget;
 import 'package:flutter/material.dart';
 
-class AuthHomeModel extends FlutterFlowModel<AuthHomeWidget> {
+class ProfilePageModel extends FlutterFlowModel<ProfilePageWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
+  // State field(s) for SwitchListTile widget.
+  bool? switchListTileValue;
 
   @override
   void initState(BuildContext context) {}
