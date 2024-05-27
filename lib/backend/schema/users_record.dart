@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:collection/collection.dart';
 
 import '/backend/schema/util/firestore_util.dart';
-import '/backend/schema/util/schema_util.dart';
+import '/backend/schema/enums/enums.dart';
 
 import 'index.dart';
 
@@ -55,15 +55,25 @@ class UsersRecord extends FirestoreRecord {
   DateTime? get lastActiveTime => _lastActiveTime;
   bool hasLastActiveTime() => _lastActiveTime != null;
 
-  // "role" field.
-  String? _role;
-  String get role => _role ?? '';
-  bool hasRole() => _role != null;
-
   // "title" field.
   String? _title;
   String get title => _title ?? '';
   bool hasTitle() => _title != null;
+
+  // "role" field.
+  Roles? _role;
+  Roles? get role => _role;
+  bool hasRole() => _role != null;
+
+  // "phone" field.
+  String? _phone;
+  String get phone => _phone ?? '';
+  bool hasPhone() => _phone != null;
+
+  // "professon" field.
+  DocumentReference? _professon;
+  DocumentReference? get professon => _professon;
+  bool hasProfesson() => _professon != null;
 
   void _initializeFields() {
     _email = snapshotData['email'] as String?;
@@ -74,8 +84,10 @@ class UsersRecord extends FirestoreRecord {
     _phoneNumber = snapshotData['phone_number'] as String?;
     _shortDescription = snapshotData['shortDescription'] as String?;
     _lastActiveTime = snapshotData['last_active_time'] as DateTime?;
-    _role = snapshotData['role'] as String?;
     _title = snapshotData['title'] as String?;
+    _role = deserializeEnum<Roles>(snapshotData['role']);
+    _phone = snapshotData['phone'] as String?;
+    _professon = snapshotData['professon'] as DocumentReference?;
   }
 
   static CollectionReference get collection =>
@@ -120,8 +132,10 @@ Map<String, dynamic> createUsersRecordData({
   String? phoneNumber,
   String? shortDescription,
   DateTime? lastActiveTime,
-  String? role,
   String? title,
+  Roles? role,
+  String? phone,
+  DocumentReference? professon,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -133,8 +147,10 @@ Map<String, dynamic> createUsersRecordData({
       'phone_number': phoneNumber,
       'shortDescription': shortDescription,
       'last_active_time': lastActiveTime,
-      'role': role,
       'title': title,
+      'role': role,
+      'phone': phone,
+      'professon': professon,
     }.withoutNulls,
   );
 
@@ -154,8 +170,10 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e1?.phoneNumber == e2?.phoneNumber &&
         e1?.shortDescription == e2?.shortDescription &&
         e1?.lastActiveTime == e2?.lastActiveTime &&
+        e1?.title == e2?.title &&
         e1?.role == e2?.role &&
-        e1?.title == e2?.title;
+        e1?.phone == e2?.phone &&
+        e1?.professon == e2?.professon;
   }
 
   @override
@@ -168,8 +186,10 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e?.phoneNumber,
         e?.shortDescription,
         e?.lastActiveTime,
+        e?.title,
         e?.role,
-        e?.title
+        e?.phone,
+        e?.professon
       ]);
 
   @override

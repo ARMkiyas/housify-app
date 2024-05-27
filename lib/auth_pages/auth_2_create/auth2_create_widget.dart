@@ -1,8 +1,13 @@
 import '/auth/firebase_auth/auth_util.dart';
+import '/backend/backend.dart';
+import '/backend/schema/enums/enums.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
+import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/flutter_flow/form_field_controller.dart';
+import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -28,6 +33,9 @@ class _Auth2CreateWidgetState extends State<Auth2CreateWidget>
   void initState() {
     super.initState();
     _model = createModel(context, () => Auth2CreateModel());
+
+    _model.nameTextController ??= TextEditingController();
+    _model.nameFocusNode ??= FocusNode();
 
     _model.emailAddressTextController ??= TextEditingController();
     _model.emailAddressFocusNode ??= FocusNode();
@@ -110,7 +118,7 @@ class _Auth2CreateWidgetState extends State<Auth2CreateWidget>
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 70.0, 0.0, 32.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
                   child: Container(
                     width: 200.0,
                     height: 70.0,
@@ -198,6 +206,198 @@ class _Auth2CreateWidgetState extends State<Auth2CreateWidget>
                                     ),
                               ),
                             ),
+                            SwitchListTile.adaptive(
+                              value: _model.isSellerValue ??= false,
+                              onChanged: (newValue) async {
+                                setState(
+                                    () => _model.isSellerValue = newValue);
+                              },
+                              title: Text(
+                                'seller',
+                                style: FlutterFlowTheme.of(context)
+                                    .titleLarge
+                                    .override(
+                                      fontFamily: 'Readex Pro',
+                                      letterSpacing: 0.0,
+                                    ),
+                              ),
+                              subtitle: Text(
+                                'i am going to provide service',
+                                style: FlutterFlowTheme.of(context)
+                                    .labelMedium
+                                    .override(
+                                      fontFamily: 'Readex Pro',
+                                      letterSpacing: 0.0,
+                                    ),
+                              ),
+                              tileColor: FlutterFlowTheme.of(context)
+                                  .secondaryBackground,
+                              activeColor: FlutterFlowTheme.of(context).primary,
+                              activeTrackColor:
+                                  FlutterFlowTheme.of(context).accent1,
+                              dense: false,
+                              controlAffinity: ListTileControlAffinity.trailing,
+                              contentPadding: const EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 0.0, 0.0, 16.0),
+                            ),
+                            if (_model.isSellerValue ?? true)
+                              Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 0.0, 0.0, 16.0),
+                                child: StreamBuilder<List<ProfessonsRecord>>(
+                                  stream: queryProfessonsRecord(
+                                    queryBuilder: (professonsRecord) =>
+                                        professonsRecord.orderBy('professoion'),
+                                  ),
+                                  builder: (context, snapshot) {
+                                    // Customize what your widget looks like when it's loading.
+                                    if (!snapshot.hasData) {
+                                      return Center(
+                                        child: SizedBox(
+                                          width: 50.0,
+                                          height: 50.0,
+                                          child: CircularProgressIndicator(
+                                            valueColor:
+                                                AlwaysStoppedAnimation<Color>(
+                                              FlutterFlowTheme.of(context)
+                                                  .primary,
+                                            ),
+                                          ),
+                                        ),
+                                      );
+                                    }
+                                    List<ProfessonsRecord>
+                                        proDropdownProfessonsRecordList =
+                                        snapshot.data!;
+                                    return FlutterFlowDropDown<String>(
+                                      controller:
+                                          _model.proDropdownValueController ??=
+                                              FormFieldController<String>(
+                                        _model.proDropdownValue ??= '',
+                                      ),
+                                      options: List<String>.from(<String>[]),
+                                      optionLabels:
+                                          proDropdownProfessonsRecordList
+                                              .map((e) => e.professoion)
+                                              .toList(),
+                                      onChanged: (val) => setState(
+                                          () => _model.proDropdownValue = val),
+                                      width: 300.0,
+                                      height: 56.0,
+                                      searchHintTextStyle:
+                                          FlutterFlowTheme.of(context)
+                                              .labelMedium
+                                              .override(
+                                                fontFamily: 'Readex Pro',
+                                                letterSpacing: 0.0,
+                                              ),
+                                      searchTextStyle:
+                                          FlutterFlowTheme.of(context)
+                                              .bodyMedium
+                                              .override(
+                                                fontFamily: 'Readex Pro',
+                                                letterSpacing: 0.0,
+                                              ),
+                                      textStyle: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .override(
+                                            fontFamily: 'Readex Pro',
+                                            fontSize: 16.0,
+                                            letterSpacing: 0.0,
+                                          ),
+                                      hintText: 'profession',
+                                      searchHintText: 'Search for an item...',
+                                      icon: Icon(
+                                        Icons.keyboard_arrow_down_rounded,
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryText,
+                                        size: 24.0,
+                                      ),
+                                      fillColor: FlutterFlowTheme.of(context)
+                                          .primaryBackground,
+                                      elevation: 2.0,
+                                      borderColor: FlutterFlowTheme.of(context)
+                                          .alternate,
+                                      borderWidth: 2.0,
+                                      borderRadius: 12.0,
+                                      margin: const EdgeInsetsDirectional.fromSTEB(
+                                          16.0, 4.0, 16.0, 4.0),
+                                      hidesUnderline: true,
+                                      isOverButton: true,
+                                      isSearchable: true,
+                                      isMultiSelect: false,
+                                    );
+                                  },
+                                ),
+                              ),
+                            Padding(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 0.0, 0.0, 16.0),
+                              child: SizedBox(
+                                width: double.infinity,
+                                child: TextFormField(
+                                  controller: _model.nameTextController,
+                                  focusNode: _model.nameFocusNode,
+                                  autofocus: true,
+                                  autofillHints: const [AutofillHints.name],
+                                  obscureText: false,
+                                  decoration: InputDecoration(
+                                    labelStyle: FlutterFlowTheme.of(context)
+                                        .labelLarge
+                                        .override(
+                                          fontFamily: 'Readex Pro',
+                                          letterSpacing: 0.0,
+                                        ),
+                                    hintText: 'name',
+                                    enabledBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color: FlutterFlowTheme.of(context)
+                                            .alternate,
+                                        width: 2.0,
+                                      ),
+                                      borderRadius: BorderRadius.circular(12.0),
+                                    ),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color: FlutterFlowTheme.of(context)
+                                            .primary,
+                                        width: 2.0,
+                                      ),
+                                      borderRadius: BorderRadius.circular(12.0),
+                                    ),
+                                    errorBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color:
+                                            FlutterFlowTheme.of(context).error,
+                                        width: 2.0,
+                                      ),
+                                      borderRadius: BorderRadius.circular(12.0),
+                                    ),
+                                    focusedErrorBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color:
+                                            FlutterFlowTheme.of(context).error,
+                                        width: 2.0,
+                                      ),
+                                      borderRadius: BorderRadius.circular(12.0),
+                                    ),
+                                    filled: true,
+                                    fillColor: FlutterFlowTheme.of(context)
+                                        .primaryBackground,
+                                  ),
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyLarge
+                                      .override(
+                                        fontFamily: 'Readex Pro',
+                                        letterSpacing: 0.0,
+                                      ),
+                                  cursorColor:
+                                      FlutterFlowTheme.of(context).primary,
+                                  validator: _model.nameTextControllerValidator
+                                      .asValidator(context),
+                                ),
+                              ),
+                            ),
                             Padding(
                               padding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 0.0, 0.0, 16.0),
@@ -210,13 +410,13 @@ class _Auth2CreateWidgetState extends State<Auth2CreateWidget>
                                   autofillHints: const [AutofillHints.email],
                                   obscureText: false,
                                   decoration: InputDecoration(
-                                    labelText: 'Email',
                                     labelStyle: FlutterFlowTheme.of(context)
                                         .labelLarge
                                         .override(
                                           fontFamily: 'Readex Pro',
                                           letterSpacing: 0.0,
                                         ),
+                                    hintText: 'Email',
                                     enabledBorder: OutlineInputBorder(
                                       borderSide: BorderSide(
                                         color: FlutterFlowTheme.of(context)
@@ -280,13 +480,13 @@ class _Auth2CreateWidgetState extends State<Auth2CreateWidget>
                                   autofillHints: const [AutofillHints.password],
                                   obscureText: !_model.passwordVisibility,
                                   decoration: InputDecoration(
-                                    labelText: 'Password',
                                     labelStyle: FlutterFlowTheme.of(context)
                                         .labelLarge
                                         .override(
                                           fontFamily: 'Readex Pro',
                                           letterSpacing: 0.0,
                                         ),
+                                    hintText: 'Password',
                                     enabledBorder: OutlineInputBorder(
                                       borderSide: BorderSide(
                                         color: FlutterFlowTheme.of(context)
@@ -369,8 +569,28 @@ class _Auth2CreateWidgetState extends State<Auth2CreateWidget>
                                     return;
                                   }
 
-                                  context.pushNamedAuth(
-                                      'auth_WelcomeScreen', context.mounted);
+                                  await UsersRecord.collection
+                                      .doc(user.uid)
+                                      .update(createUsersRecordData(
+                                        email: _model
+                                            .emailAddressTextController.text,
+                                        displayName:
+                                            _model.nameTextController.text,
+                                        role: _model.isSellerValue!
+                                            ? Roles.seller
+                                            : Roles.customer,
+                                        professon: _model.isSellerValue!
+                                            ? functions.getReference(
+                                                _model.proDropdownValue!)
+                                            : null,
+                                      ));
+
+                                  if (loggedIn) {
+                                    context.goNamedAuth(
+                                        'homepage', context.mounted);
+                                  } else {
+                                    return;
+                                  }
                                 },
                                 text: 'Create Account',
                                 options: FFButtonOptions(
@@ -427,7 +647,7 @@ class _Auth2CreateWidgetState extends State<Auth2CreateWidget>
                                   }
 
                                   context.goNamedAuth(
-                                      'HomePage', context.mounted);
+                                      'homepage', context.mounted);
                                 },
                                 text: 'Continue with Google',
                                 icon: const FaIcon(
@@ -463,60 +683,71 @@ class _Auth2CreateWidgetState extends State<Auth2CreateWidget>
                                 ),
                               ),
                             ),
-                            isAndroid
-                                ? Container()
-                                : Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 0.0, 0.0, 16.0),
-                                    child: FFButtonWidget(
-                                      onPressed: () async {
-                                        GoRouter.of(context).prepareAuthEvent();
-                                        final user = await authManager
-                                            .signInWithApple(context);
-                                        if (user == null) {
-                                          return;
-                                        }
+                            if (responsiveVisibility(
+                              context: context,
+                              phone: false,
+                              tablet: false,
+                              tabletLandscape: false,
+                              desktop: false,
+                            ))
+                              isAndroid
+                                  ? Container()
+                                  : Padding(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 0.0, 0.0, 16.0),
+                                      child: FFButtonWidget(
+                                        onPressed: () async {
+                                          GoRouter.of(context)
+                                              .prepareAuthEvent();
+                                          final user = await authManager
+                                              .signInWithApple(context);
+                                          if (user == null) {
+                                            return;
+                                          }
 
-                                        context.goNamedAuth(
-                                            'HomePage', context.mounted);
-                                      },
-                                      text: 'Continue with Apple',
-                                      icon: const FaIcon(
-                                        FontAwesomeIcons.apple,
-                                        size: 20.0,
-                                      ),
-                                      options: FFButtonOptions(
-                                        width: double.infinity,
-                                        height: 44.0,
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 0.0, 0.0, 0.0),
-                                        iconPadding:
-                                            const EdgeInsetsDirectional.fromSTEB(
-                                                0.0, 0.0, 0.0, 0.0),
-                                        color: FlutterFlowTheme.of(context)
-                                            .secondaryBackground,
-                                        textStyle: FlutterFlowTheme.of(context)
-                                            .titleSmall
-                                            .override(
-                                              fontFamily: 'Readex Pro',
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primaryText,
-                                              letterSpacing: 0.0,
-                                            ),
-                                        elevation: 0.0,
-                                        borderSide: BorderSide(
-                                          color: FlutterFlowTheme.of(context)
-                                              .alternate,
-                                          width: 2.0,
+                                          context.goNamedAuth(
+                                              'homepage', context.mounted);
+                                        },
+                                        text: 'Continue with Apple',
+                                        icon: const FaIcon(
+                                          FontAwesomeIcons.apple,
+                                          size: 20.0,
                                         ),
-                                        borderRadius:
-                                            BorderRadius.circular(12.0),
-                                        hoverColor: FlutterFlowTheme.of(context)
-                                            .primaryBackground,
+                                        options: FFButtonOptions(
+                                          width: double.infinity,
+                                          height: 44.0,
+                                          padding:
+                                              const EdgeInsetsDirectional.fromSTEB(
+                                                  0.0, 0.0, 0.0, 0.0),
+                                          iconPadding:
+                                              const EdgeInsetsDirectional.fromSTEB(
+                                                  0.0, 0.0, 0.0, 0.0),
+                                          color: FlutterFlowTheme.of(context)
+                                              .secondaryBackground,
+                                          textStyle: FlutterFlowTheme.of(
+                                                  context)
+                                              .titleSmall
+                                              .override(
+                                                fontFamily: 'Readex Pro',
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryText,
+                                                letterSpacing: 0.0,
+                                              ),
+                                          elevation: 0.0,
+                                          borderSide: BorderSide(
+                                            color: FlutterFlowTheme.of(context)
+                                                .alternate,
+                                            width: 2.0,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(12.0),
+                                          hoverColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .primaryBackground,
+                                        ),
                                       ),
                                     ),
-                                  ),
 
                             // You will have to add an action on this rich text to go to your login page.
                             Align(
