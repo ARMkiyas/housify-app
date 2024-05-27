@@ -1,25 +1,25 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
-import 'auth_home_model.dart';
-export 'auth_home_model.dart';
+import 'homepage_model.dart';
+export 'homepage_model.dart';
 
-class AuthHomeWidget extends StatefulWidget {
-  const AuthHomeWidget({super.key});
+class HomepageWidget extends StatefulWidget {
+  const HomepageWidget({super.key});
 
   @override
-  State<AuthHomeWidget> createState() => _AuthHomeWidgetState();
+  State<HomepageWidget> createState() => _HomepageWidgetState();
 }
 
-class _AuthHomeWidgetState extends State<AuthHomeWidget> {
-  late AuthHomeModel _model;
+class _HomepageWidgetState extends State<HomepageWidget> {
+  late HomepageModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => AuthHomeModel());
+    _model = createModel(context, () => HomepageModel());
   }
 
   @override
