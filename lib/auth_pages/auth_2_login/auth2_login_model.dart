@@ -1,3 +1,4 @@
+import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'auth2_login_widget.dart' show Auth2LoginWidget;
 import 'package:flutter/material.dart';
@@ -15,6 +16,8 @@ class Auth2LoginModel extends FlutterFlowModel<Auth2LoginWidget> {
   TextEditingController? passwordTextController;
   late bool passwordVisibility;
   String? Function(BuildContext, String?)? passwordTextControllerValidator;
+  // Stores action output result for [Backend Call - Read Document] action in Button widget.
+  SellersRecord? sellerData;
 
   @override
   void initState(BuildContext context) {
