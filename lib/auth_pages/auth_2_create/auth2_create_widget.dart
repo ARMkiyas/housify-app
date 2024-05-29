@@ -245,10 +245,7 @@ class _Auth2CreateWidgetState extends State<Auth2CreateWidget>
                                 padding: const EdgeInsetsDirectional.fromSTEB(
                                     0.0, 0.0, 0.0, 16.0),
                                 child: StreamBuilder<List<ProfessonsRecord>>(
-                                  stream: queryProfessonsRecord(
-                                    queryBuilder: (professonsRecord) =>
-                                        professonsRecord.orderBy('professoion'),
-                                  ),
+                                  stream: queryProfessonsRecord(),
                                   builder: (context, snapshot) {
                                     // Customize what your widget looks like when it's loading.
                                     if (!snapshot.hasData) {
@@ -275,7 +272,7 @@ class _Auth2CreateWidgetState extends State<Auth2CreateWidget>
                                               FormFieldController<String>(
                                         _model.proDropdownValue ??= '',
                                       ),
-                                      options: List<String>.from(<String>[]),
+                                      options: List<String>.from(['0']),
                                       optionLabels:
                                           proDropdownProfessonsRecordList
                                               .map((e) => e.professoion)
@@ -572,23 +569,28 @@ class _Auth2CreateWidgetState extends State<Auth2CreateWidget>
                                   await UsersRecord.collection
                                       .doc(user.uid)
                                       .update(createUsersRecordData(
-                                        email: _model
-                                            .emailAddressTextController.text,
                                         displayName:
                                             _model.nameTextController.text,
+                                        email: _model
+                                            .emailAddressTextController.text,
                                         role: _model.isSellerValue!
                                             ? Roles.seller
                                             : Roles.customer,
-                                        professon: _model.isSellerValue!
-                                            ? functions.getReference(
-                                                _model.proDropdownValue!)
-                                            : null,
+                                        professon: functions.getReference(
+                                            _model.proDropdownValue!),
+                                        photoUrl: '',
                                       ));
 
-                                  if (loggedIn) {
-                                    context.goNamedAuth(
-                                        'homepage', context.mounted);
+                                  if (currentUserDocument?.role ==
+                                      Roles.seller) {
+                                    context.pushNamedAuth(
+                                        'auth_2_sellerform', context.mounted);
+
+                                    return;
                                   } else {
+                                    context.pushNamedAuth(
+                                        'cus_homepage', context.mounted);
+
                                     return;
                                   }
                                 },
@@ -647,7 +649,7 @@ class _Auth2CreateWidgetState extends State<Auth2CreateWidget>
                                   }
 
                                   context.goNamedAuth(
-                                      'homepage', context.mounted);
+                                      'cus_homepage', context.mounted);
                                 },
                                 text: 'Continue with Google',
                                 icon: const FaIcon(
@@ -706,7 +708,7 @@ class _Auth2CreateWidgetState extends State<Auth2CreateWidget>
                                           }
 
                                           context.goNamedAuth(
-                                              'homepage', context.mounted);
+                                              'cus_homepage', context.mounted);
                                         },
                                         text: 'Continue with Apple',
                                         icon: const FaIcon(

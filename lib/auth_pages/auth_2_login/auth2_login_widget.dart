@@ -1,4 +1,6 @@
 import '/auth/firebase_auth/auth_util.dart';
+import '/backend/backend.dart';
+import '/backend/schema/enums/enums.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -285,7 +287,7 @@ class _Auth2LoginWidgetState extends State<Auth2LoginWidget>
                                           fontFamily: 'Readex Pro',
                                           letterSpacing: 0.0,
                                         ),
-                                    hintText: 'Email',
+                                    hintText: 'Paaword',
                                     enabledBorder: OutlineInputBorder(
                                       borderSide: BorderSide(
                                         color: FlutterFlowTheme.of(context)
@@ -356,6 +358,7 @@ class _Auth2LoginWidgetState extends State<Auth2LoginWidget>
                                   0.0, 0.0, 0.0, 16.0),
                               child: FFButtonWidget(
                                 onPressed: () async {
+                                  var shouldSetState = false;
                                   GoRouter.of(context).prepareAuthEvent();
 
                                   final user =
@@ -369,11 +372,49 @@ class _Auth2LoginWidgetState extends State<Auth2LoginWidget>
                                   }
 
                                   if (loggedIn) {
-                                    context.goNamedAuth(
-                                        'homepage', context.mounted);
+                                    if (currentUserDocument?.role ==
+                                        Roles.customer) {
+                                      context.pushNamedAuth(
+                                          'cus_homepage', context.mounted);
+
+                                      if (shouldSetState) setState(() {});
+                                      return;
+                                    } else {
+                                      if (currentUserDocument?.seller != null) {
+                                        _model.sellerData =
+                                            await SellersRecord.getDocumentOnce(
+                                                currentUserDocument!.seller!);
+                                        shouldSetState = true;
+                                        if (_model.sellerData?.verified ==
+                                            true) {
+                                          context.pushNamedAuth(
+                                              'cus_homepage', context.mounted);
+
+                                          if (shouldSetState) setState(() {});
+                                          return;
+                                        } else {
+                                          context.pushNamedAuth(
+                                              'Verfication_wait',
+                                              context.mounted);
+
+                                          if (shouldSetState) setState(() {});
+                                          return;
+                                        }
+                                      } else {
+                                        context.pushNamedAuth(
+                                            'auth_2_sellerform',
+                                            context.mounted);
+
+                                        if (shouldSetState) setState(() {});
+                                        return;
+                                      }
+                                    }
                                   } else {
+                                    if (shouldSetState) setState(() {});
                                     return;
                                   }
+
+                                  if (shouldSetState) setState(() {});
                                 },
                                 text: 'Sign In',
                                 options: FFButtonOptions(
@@ -430,7 +471,7 @@ class _Auth2LoginWidgetState extends State<Auth2LoginWidget>
                                   }
 
                                   context.goNamedAuth(
-                                      'homepage', context.mounted);
+                                      'cus_homepage', context.mounted);
                                 },
                                 text: 'Continue with Google',
                                 icon: const FaIcon(
@@ -489,7 +530,7 @@ class _Auth2LoginWidgetState extends State<Auth2LoginWidget>
                                           }
 
                                           context.goNamedAuth(
-                                              'homepage', context.mounted);
+                                              'cus_homepage', context.mounted);
                                         },
                                         text: 'Continue with Apple',
                                         icon: const FaIcon(
