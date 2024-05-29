@@ -85,11 +85,12 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               : const AuthWelcomeScreenWidget(),
         ),
         FFRoute(
-          name: 'homepage',
-          path: '/homepage',
+          name: 'cus_homepage',
+          path: '/cusHomepage',
+          requireAuth: true,
           builder: (context, params) => params.isEmpty
-              ? const NavBarPage(initialPage: 'homepage')
-              : const HomepageWidget(),
+              ? const NavBarPage(initialPage: 'cus_homepage')
+              : const CusHomepageWidget(),
         ),
         FFRoute(
           name: 'auth_WelcomeScreen',
@@ -117,6 +118,16 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => params.isEmpty
               ? const NavBarPage(initialPage: 'ProfilePage')
               : const ProfilePageWidget(),
+        ),
+        FFRoute(
+          name: 'auth_2_sellerform',
+          path: '/auth2Sellerform',
+          builder: (context, params) => const Auth2SellerformWidget(),
+        ),
+        FFRoute(
+          name: 'Verfication_wait',
+          path: '/verficationWait',
+          builder: (context, params) => const VerficationWaitWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

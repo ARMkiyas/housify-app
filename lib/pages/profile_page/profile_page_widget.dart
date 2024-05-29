@@ -253,31 +253,36 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget>
                 ),
                 child: Padding(
                   padding: const EdgeInsets.all(2.0),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(60.0),
-                    child: Image.network(
-                      'https://images.unsplash.com/photo-1592520113018-180c8bc831c9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTI3fHxwcm9maWxlfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=900&q=60',
-                      width: 100.0,
-                      height: 100.0,
-                      fit: BoxFit.cover,
+                  child: AuthUserStreamWidget(
+                    builder: (context) => ClipRRect(
+                      borderRadius: BorderRadius.circular(60.0),
+                      child: Image.network(
+                        currentUserPhoto,
+                        width: 100.0,
+                        height: 100.0,
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
                 ),
               ).animateOnPageLoad(animationsMap['cardOnPageLoadAnimation']!),
               Padding(
                 padding: const EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
-                child: Text(
-                  'Andrea Davis',
-                  style: FlutterFlowTheme.of(context).headlineSmall.override(
-                        fontFamily: 'Inter',
-                        letterSpacing: 0.0,
-                      ),
-                ).animateOnPageLoad(animationsMap['textOnPageLoadAnimation1']!),
+                child: AuthUserStreamWidget(
+                  builder: (context) => Text(
+                    currentUserDisplayName,
+                    style: FlutterFlowTheme.of(context).headlineSmall.override(
+                          fontFamily: 'Inter',
+                          letterSpacing: 0.0,
+                        ),
+                  ).animateOnPageLoad(
+                      animationsMap['textOnPageLoadAnimation1']!),
+                ),
               ),
               Padding(
                 padding: const EdgeInsetsDirectional.fromSTEB(0.0, 4.0, 0.0, 0.0),
                 child: Text(
-                  'andrea@domainname.com',
+                  currentUserEmail,
                   style: FlutterFlowTheme.of(context).titleSmall.override(
                         fontFamily: 'Readex Pro',
                         color: FlutterFlowTheme.of(context).secondary,

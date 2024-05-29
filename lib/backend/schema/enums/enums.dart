@@ -11,6 +11,11 @@ enum Professons {
   Electrician,
 }
 
+enum IdTypes {
+  PassPort,
+  NationalID,
+}
+
 extension FFEnumExtensions<T extends Enum> on T {
   String serialize() => name;
 }
@@ -26,6 +31,8 @@ T? deserializeEnum<T>(String? value) {
       return Roles.values.deserialize(value) as T?;
     case (Professons):
       return Professons.values.deserialize(value) as T?;
+    case (IdTypes):
+      return IdTypes.values.deserialize(value) as T?;
     default:
       return null;
   }

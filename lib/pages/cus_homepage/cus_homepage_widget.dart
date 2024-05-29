@@ -1,25 +1,38 @@
+import '/auth/firebase_auth/auth_util.dart';
+import '/backend/schema/enums/enums.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
-import 'homepage_model.dart';
-export 'homepage_model.dart';
+import 'package:flutter/scheduler.dart';
+import 'cus_homepage_model.dart';
+export 'cus_homepage_model.dart';
 
-class HomepageWidget extends StatefulWidget {
-  const HomepageWidget({super.key});
+class CusHomepageWidget extends StatefulWidget {
+  const CusHomepageWidget({super.key});
 
   @override
-  State<HomepageWidget> createState() => _HomepageWidgetState();
+  State<CusHomepageWidget> createState() => _CusHomepageWidgetState();
 }
 
-class _HomepageWidgetState extends State<HomepageWidget> {
-  late HomepageModel _model;
+class _CusHomepageWidgetState extends State<CusHomepageWidget> {
+  late CusHomepageModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => HomepageModel());
+    _model = createModel(context, () => CusHomepageModel());
+
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      if (currentUserDocument?.role == Roles.customer) {
+        return;
+      }
+
+      context.safePop();
+      return;
+    });
   }
 
   @override
@@ -38,6 +51,22 @@ class _HomepageWidgetState extends State<HomepageWidget> {
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          automaticallyImplyLeading: false,
+          title: Text(
+            'Page Title',
+            style: FlutterFlowTheme.of(context).headlineMedium.override(
+                  fontFamily: 'Inter',
+                  color: FlutterFlowTheme.of(context).primaryText,
+                  fontSize: 22.0,
+                  letterSpacing: 0.0,
+                ),
+          ),
+          actions: const [],
+          centerTitle: false,
+          elevation: 0.0,
+        ),
         body: SafeArea(
           top: true,
           child: Align(
