@@ -8,7 +8,6 @@ import '/backend/schema/structs/index.dart';
 import '/auth/base_auth_user_provider.dart';
 
 import '/index.dart';
-import '/main.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 
@@ -74,23 +73,22 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       initialLocation: '/',
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
-      errorBuilder: (context, state) =>
-          appStateNotifier.loggedIn ? const NavBarPage() : const AuthWelcomeScreenWidget(),
+      errorBuilder: (context, state) => appStateNotifier.loggedIn
+          ? const HomepageWidget()
+          : const AuthWelcomeScreenWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
           builder: (context, _) => appStateNotifier.loggedIn
-              ? const NavBarPage()
+              ? const HomepageWidget()
               : const AuthWelcomeScreenWidget(),
         ),
         FFRoute(
-          name: 'cus_homepage',
-          path: '/cusHomepage',
+          name: 'homepage',
+          path: '/homepage',
           requireAuth: true,
-          builder: (context, params) => params.isEmpty
-              ? const NavBarPage(initialPage: 'cus_homepage')
-              : const CusHomepageWidget(),
+          builder: (context, params) => const HomepageWidget(),
         ),
         FFRoute(
           name: 'auth_WelcomeScreen',
@@ -115,9 +113,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'ProfilePage',
           path: '/profilePage',
-          builder: (context, params) => params.isEmpty
-              ? const NavBarPage(initialPage: 'ProfilePage')
-              : const ProfilePageWidget(),
+          builder: (context, params) => const ProfilePageWidget(),
         ),
         FFRoute(
           name: 'auth_2_sellerform',
@@ -128,6 +124,16 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'Verfication_wait',
           path: '/verficationWait',
           builder: (context, params) => const VerficationWaitWidget(),
+        ),
+        FFRoute(
+          name: 'category_page',
+          path: '/categoryPage',
+          builder: (context, params) => const CategoryPageWidget(),
+        ),
+        FFRoute(
+          name: 'orders_page',
+          path: '/ordersPage',
+          builder: (context, params) => const OrdersPageWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

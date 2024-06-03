@@ -374,8 +374,8 @@ class _Auth2LoginWidgetState extends State<Auth2LoginWidget>
                                   if (loggedIn) {
                                     if (currentUserDocument?.role ==
                                         Roles.customer) {
-                                      context.pushNamedAuth(
-                                          'cus_homepage', context.mounted);
+                                      context.goNamedAuth(
+                                          'homepage', context.mounted);
 
                                       if (shouldSetState) setState(() {});
                                       return;
@@ -387,13 +387,13 @@ class _Auth2LoginWidgetState extends State<Auth2LoginWidget>
                                         shouldSetState = true;
                                         if (_model.sellerData?.verified ==
                                             true) {
-                                          context.pushNamedAuth(
-                                              'cus_homepage', context.mounted);
+                                          context.goNamedAuth(
+                                              'homepage', context.mounted);
 
                                           if (shouldSetState) setState(() {});
                                           return;
                                         } else {
-                                          context.pushNamedAuth(
+                                          context.goNamedAuth(
                                               'Verfication_wait',
                                               context.mounted);
 
@@ -401,8 +401,7 @@ class _Auth2LoginWidgetState extends State<Auth2LoginWidget>
                                           return;
                                         }
                                       } else {
-                                        context.pushNamedAuth(
-                                            'auth_2_sellerform',
+                                        context.goNamedAuth('auth_2_sellerform',
                                             context.mounted);
 
                                         if (shouldSetState) setState(() {});
@@ -471,7 +470,7 @@ class _Auth2LoginWidgetState extends State<Auth2LoginWidget>
                                   }
 
                                   context.goNamedAuth(
-                                      'cus_homepage', context.mounted);
+                                      'homepage', context.mounted);
                                 },
                                 text: 'Continue with Google',
                                 icon: const FaIcon(
@@ -530,7 +529,7 @@ class _Auth2LoginWidgetState extends State<Auth2LoginWidget>
                                           }
 
                                           context.goNamedAuth(
-                                              'cus_homepage', context.mounted);
+                                              'homepage', context.mounted);
                                         },
                                         text: 'Continue with Apple',
                                         icon: const FaIcon(

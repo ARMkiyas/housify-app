@@ -1,14 +1,12 @@
 import '/componets/nav/nav_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import 'profile_page_widget.dart' show ProfilePageWidget;
+import 'orders_page_widget.dart' show OrdersPageWidget;
 import 'package:flutter/material.dart';
 
-class ProfilePageModel extends FlutterFlowModel<ProfilePageWidget> {
+class OrdersPageModel extends FlutterFlowModel<OrdersPageWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
-  // State field(s) for SwitchListTile widget.
-  bool? switchListTileValue;
   // Model for nav component.
   late NavModel navModel;
 
