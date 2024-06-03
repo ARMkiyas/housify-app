@@ -600,7 +600,7 @@ class _AuthWelcomeScreenWidgetState extends State<AuthWelcomeScreenWidget>
                                 16.0, 12.0, 16.0, 0.0),
                             child: FFButtonWidget(
                               onPressed: () async {
-                                context.pushNamed('auth_2_Login');
+                                context.goNamed('auth_2_Login');
                               },
                               text: 'Login',
                               options: FFButtonOptions(
@@ -635,7 +635,7 @@ class _AuthWelcomeScreenWidgetState extends State<AuthWelcomeScreenWidget>
                                 16.0, 12.0, 16.0, 44.0),
                             child: FFButtonWidget(
                               onPressed: () async {
-                                context.pushNamed('auth_2_Create');
+                                context.goNamed('auth_2_Create');
                               },
                               text: 'Create an Account',
                               options: FFButtonOptions(

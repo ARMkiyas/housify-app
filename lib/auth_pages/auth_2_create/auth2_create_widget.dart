@@ -272,7 +272,10 @@ class _Auth2CreateWidgetState extends State<Auth2CreateWidget>
                                               FormFieldController<String>(
                                         _model.proDropdownValue ??= '',
                                       ),
-                                      options: List<String>.from(['0']),
+                                      options: List<String>.from(
+                                          proDropdownProfessonsRecordList
+                                              .map((e) => e.professoion)
+                                              .toList()),
                                       optionLabels:
                                           proDropdownProfessonsRecordList
                                               .map((e) => e.professoion)
@@ -583,13 +586,13 @@ class _Auth2CreateWidgetState extends State<Auth2CreateWidget>
 
                                   if (currentUserDocument?.role ==
                                       Roles.seller) {
-                                    context.pushNamedAuth(
+                                    context.goNamedAuth(
                                         'auth_2_sellerform', context.mounted);
 
                                     return;
                                   } else {
-                                    context.pushNamedAuth(
-                                        'cus_homepage', context.mounted);
+                                    context.goNamedAuth(
+                                        'homepage', context.mounted);
 
                                     return;
                                   }
@@ -649,7 +652,7 @@ class _Auth2CreateWidgetState extends State<Auth2CreateWidget>
                                   }
 
                                   context.goNamedAuth(
-                                      'cus_homepage', context.mounted);
+                                      'homepage', context.mounted);
                                 },
                                 text: 'Continue with Google',
                                 icon: const FaIcon(
@@ -708,7 +711,7 @@ class _Auth2CreateWidgetState extends State<Auth2CreateWidget>
                                           }
 
                                           context.goNamedAuth(
-                                              'cus_homepage', context.mounted);
+                                              'homepage', context.mounted);
                                         },
                                         text: 'Continue with Apple',
                                         icon: const FaIcon(
