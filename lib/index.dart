@@ -1,5 +1,5 @@
 // Export pages
-export '/pages/cus_homepage/cus_homepage_widget.dart' show CusHomepageWidget;
+export '/pages/homepage/homepage_widget.dart' show HomepageWidget;
 export '/auth_welcome_screen/auth_welcome_screen_widget.dart'
     show AuthWelcomeScreenWidget;
 export '/auth_pages/auth_2_create/auth2_create_widget.dart'
@@ -12,3 +12,5 @@ export '/auth_pages/auth_2_sellerform/auth2_sellerform_widget.dart'
     show Auth2SellerformWidget;
 export '/verfication_wait/verfication_wait_widget.dart'
     show VerficationWaitWidget;
+export '/pages/category_page/category_page_widget.dart' show CategoryPageWidget;
+export '/pages/orders_page/orders_page_widget.dart' show OrdersPageWidget;
