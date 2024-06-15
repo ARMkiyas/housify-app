@@ -1,6 +1,9 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'adminage_model.dart';
 export 'adminage_model.dart';
 
@@ -49,7 +52,7 @@ class _AdminageWidgetState extends State<AdminageWidget> {
                   Expanded(
                     child: Padding(
                       padding:
-                          const EdgeInsetsDirectional.fromSTEB(15.0, 0.0, 15.0, 0.0),
+                          EdgeInsetsDirectional.fromSTEB(15.0, 0.0, 15.0, 0.0),
                       child: Container(
                         width: 100.0,
                         height: 47.0,
@@ -62,9 +65,9 @@ class _AdminageWidgetState extends State<AdminageWidget> {
                           ),
                         ),
                         child: Align(
-                          alignment: const AlignmentDirectional(0.0, 0.0),
+                          alignment: AlignmentDirectional(0.0, 0.0),
                           child: Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
+                            padding: EdgeInsetsDirectional.fromSTEB(
                                 0.0, 10.0, 0.0, 10.0),
                             child: Text(
                               'Service Providers',
@@ -86,7 +89,7 @@ class _AdminageWidgetState extends State<AdminageWidget> {
                 ],
               ),
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 15.0, 0.0, 0.0),
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 15.0, 0.0, 0.0),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   children: [

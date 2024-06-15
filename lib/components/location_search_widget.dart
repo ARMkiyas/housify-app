@@ -2,9 +2,13 @@ import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import 'dart:math';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'location_search_model.dart';
 export 'location_search_model.dart';
 
@@ -44,8 +48,8 @@ class _LocationSearchWidgetState extends State<LocationSearchWidget>
             curve: Curves.easeInOut,
             delay: 0.0.ms,
             duration: 600.0.ms,
-            begin: const Offset(0.0, 0.0),
-            end: const Offset(0.0, 0.0),
+            begin: Offset(0.0, 0.0),
+            end: Offset(0.0, 0.0),
           ),
         ],
       ),
@@ -68,12 +72,12 @@ class _LocationSearchWidgetState extends State<LocationSearchWidget>
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(16.0),
+      padding: EdgeInsets.all(16.0),
       child: Container(
         width: double.infinity,
         decoration: BoxDecoration(
           color: FlutterFlowTheme.of(context).secondaryBackground,
-          boxShadow: const [
+          boxShadow: [
             BoxShadow(
               blurRadius: 4.0,
               color: Color(0x33000000),
@@ -88,13 +92,13 @@ class _LocationSearchWidgetState extends State<LocationSearchWidget>
           mainAxisSize: MainAxisSize.max,
           children: [
             Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(8.0, 20.0, 8.0, 0.0),
+              padding: EdgeInsetsDirectional.fromSTEB(8.0, 20.0, 8.0, 0.0),
               child: TextFormField(
                 controller: _model.textController,
                 focusNode: _model.textFieldFocusNode,
                 onChanged: (_) => EasyDebounce.debounce(
                   '_model.textController',
-                  const Duration(milliseconds: 2000),
+                  Duration(milliseconds: 2000),
                   () async {
                     _model.geoListforward =
                         await MapBoxGroup.forwareGeoLocationEncordingCall.call(
@@ -151,7 +155,7 @@ class _LocationSearchWidgetState extends State<LocationSearchWidget>
                     ),
                     borderRadius: BorderRadius.circular(8.0),
                   ),
-                  prefixIcon: const Icon(
+                  prefixIcon: Icon(
                     Icons.search,
                   ),
                 ),
@@ -168,7 +172,7 @@ class _LocationSearchWidgetState extends State<LocationSearchWidget>
                 height: 200.0,
                 decoration: BoxDecoration(
                   color: FlutterFlowTheme.of(context).secondaryBackground,
-                  boxShadow: const [
+                  boxShadow: [
                     BoxShadow(
                       blurRadius: 4.0,
                       color: Color(0x33000000),
@@ -180,10 +184,10 @@ class _LocationSearchWidgetState extends State<LocationSearchWidget>
                   ],
                 ),
                 child: Align(
-                  alignment: const AlignmentDirectional(0.0, 0.0),
+                  alignment: AlignmentDirectional(0.0, 0.0),
                   child: Padding(
                     padding:
-                        const EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
+                        EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
                     child: Builder(
                       builder: (context) {
                         final placesFound =
@@ -194,7 +198,7 @@ class _LocationSearchWidgetState extends State<LocationSearchWidget>
                                     ?.toList() ??
                                 [];
                         return ListView.separated(
-                          padding: const EdgeInsets.fromLTRB(
+                          padding: EdgeInsets.fromLTRB(
                             0,
                             5.0,
                             0,
@@ -202,7 +206,7 @@ class _LocationSearchWidgetState extends State<LocationSearchWidget>
                           ),
                           scrollDirection: Axis.vertical,
                           itemCount: placesFound.length,
-                          separatorBuilder: (_, __) => const SizedBox(height: 10.0),
+                          separatorBuilder: (_, __) => SizedBox(height: 10.0),
                           itemBuilder: (context, placesFoundIndex) {
                             final placesFoundItem =
                                 placesFound[placesFoundIndex];
@@ -237,7 +241,7 @@ class _LocationSearchWidgetState extends State<LocationSearchWidget>
                                       .secondaryBackground,
                                 ),
                                 child: Padding(
-                                  padding: const EdgeInsets.all(4.0),
+                                  padding: EdgeInsets.all(4.0),
                                   child: Text(
                                     getJsonField(
                                       placesFoundItem,

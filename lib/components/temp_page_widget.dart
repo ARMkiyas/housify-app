@@ -1,6 +1,8 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'temp_page_model.dart';
 export 'temp_page_model.dart';
 
@@ -36,7 +38,7 @@ class _TempPageWidgetState extends State<TempPageWidget> {
   @override
   Widget build(BuildContext context) {
     return Align(
-      alignment: const AlignmentDirectional(0.0, -1.0),
+      alignment: AlignmentDirectional(0.0, -1.0),
       child: Column(
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.center,
@@ -47,7 +49,7 @@ class _TempPageWidgetState extends State<TempPageWidget> {
             size: 90.0,
           ),
           Padding(
-            padding: const EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
+            padding: EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
             child: Text(
               'customer Home',
               textAlign: TextAlign.center,
@@ -59,7 +61,7 @@ class _TempPageWidgetState extends State<TempPageWidget> {
             ),
           ),
           Padding(
-            padding: const EdgeInsetsDirectional.fromSTEB(16.0, 8.0, 16.0, 0.0),
+            padding: EdgeInsetsDirectional.fromSTEB(16.0, 8.0, 16.0, 0.0),
             child: Text(
               'You can delete this and create your home page here.',
               textAlign: TextAlign.center,

@@ -1,8 +1,13 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
+import '/backend/api_requests/api_manager.dart';
 import '/backend/backend.dart';
+import '/backend/schema/enums/enums.dart';
+import '/backend/schema/structs/index.dart';
+import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 
@@ -14,7 +19,7 @@ Future issellervarfied(BuildContext context) async {
     singleRecord: true,
   ).then((s) => s.firstOrNull);
   if (sellerData != null) {
-    if (sellerData.verified == true) {
+    if (sellerData?.verified == true) {
       context.goNamed('seller_home_page');
     } else {
       context.goNamed('Verfication_wait');
@@ -27,7 +32,7 @@ Future issellervarfied(BuildContext context) async {
 Future updateCurrentLocation(BuildContext context) async {
   ApiCallResponse? currentDeviceLocation;
   LatLng currentUserLocationValue =
-      await getCurrentUserLocation(defaultLocation: const LatLng(0.0, 0.0));
+      await getCurrentUserLocation(defaultLocation: LatLng(0.0, 0.0));
 
   currentDeviceLocation = await MapBoxGroup.reverseGeoLocationEncodingCall.call(
     longitude: valueOrDefault<double>(
@@ -41,7 +46,7 @@ Future updateCurrentLocation(BuildContext context) async {
   );
   FFAppState().DeviceCurrentLoctationAddress =
       MapBoxGroup.reverseGeoLocationEncodingCall.fullAddress(
-    (currentDeviceLocation.jsonBody ?? ''),
+    (currentDeviceLocation?.jsonBody ?? ''),
   )!;
   FFAppState().update(() {});
 }

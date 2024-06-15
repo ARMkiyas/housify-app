@@ -6,8 +6,11 @@ import '/components/historycard_widget.dart';
 import '/componets/nav/nav_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'order_page_model.dart';
 export 'order_page_model.dart';
 
@@ -59,7 +62,7 @@ class _OrderPageWidgetState extends State<OrderPageWidget>
               Column(
                 children: [
                   Align(
-                    alignment: const Alignment(0.0, 0),
+                    alignment: Alignment(0.0, 0),
                     child: TabBar(
                       isScrollable: true,
                       labelColor: FlutterFlowTheme.of(context).primaryText,
@@ -70,10 +73,10 @@ class _OrderPageWidgetState extends State<OrderPageWidget>
                                 fontFamily: 'Readex Pro',
                                 letterSpacing: 0.0,
                               ),
-                      unselectedLabelStyle: const TextStyle(),
+                      unselectedLabelStyle: TextStyle(),
                       indicatorColor: FlutterFlowTheme.of(context).primaryText,
-                      padding: const EdgeInsets.all(4.0),
-                      tabs: const [
+                      padding: EdgeInsets.all(4.0),
+                      tabs: [
                         Tab(
                           text: 'Ongoing',
                         ),
@@ -159,7 +162,7 @@ class _OrderPageWidgetState extends State<OrderPageWidget>
                                       .waitForFirestoreRequestCompleted();
                                 },
                                 child: ListView.separated(
-                                  padding: const EdgeInsets.fromLTRB(
+                                  padding: EdgeInsets.fromLTRB(
                                     0,
                                     24.0,
                                     0,
@@ -169,7 +172,7 @@ class _OrderPageWidgetState extends State<OrderPageWidget>
                                   scrollDirection: Axis.vertical,
                                   itemCount: listViewOrdersRecordList.length,
                                   separatorBuilder: (_, __) =>
-                                      const SizedBox(height: 24.0),
+                                      SizedBox(height: 24.0),
                                   itemBuilder: (context, listViewIndex) {
                                     final listViewOrdersRecord =
                                         listViewOrdersRecordList[listViewIndex];
@@ -214,7 +217,7 @@ class _OrderPageWidgetState extends State<OrderPageWidget>
                                           },
                                           child: Container(
                                             width: double.infinity,
-                                            decoration: const BoxDecoration(),
+                                            decoration: BoxDecoration(),
                                             child: HistorycardWidget(
                                               key: Key(
                                                   'Keyy0w_${listViewIndex}_of_${listViewOrdersRecordList.length}'),
@@ -231,7 +234,7 @@ class _OrderPageWidgetState extends State<OrderPageWidget>
                                           color: FlutterFlowTheme.of(context)
                                               .primaryText,
                                         ),
-                                      ].divide(const SizedBox(height: 16.0)),
+                                      ].divide(SizedBox(height: 16.0)),
                                     );
                                   },
                                 ),
@@ -288,7 +291,7 @@ class _OrderPageWidgetState extends State<OrderPageWidget>
                               List<OrdersRecord> listViewOrdersRecordList =
                                   snapshot.data!;
                               return ListView.separated(
-                                padding: const EdgeInsets.fromLTRB(
+                                padding: EdgeInsets.fromLTRB(
                                   0,
                                   24.0,
                                   0,
@@ -298,7 +301,7 @@ class _OrderPageWidgetState extends State<OrderPageWidget>
                                 scrollDirection: Axis.vertical,
                                 itemCount: listViewOrdersRecordList.length,
                                 separatorBuilder: (_, __) =>
-                                    const SizedBox(height: 24.0),
+                                    SizedBox(height: 24.0),
                                 itemBuilder: (context, listViewIndex) {
                                   final listViewOrdersRecord =
                                       listViewOrdersRecordList[listViewIndex];
@@ -307,7 +310,7 @@ class _OrderPageWidgetState extends State<OrderPageWidget>
                                     children: [
                                       Container(
                                         width: double.infinity,
-                                        decoration: const BoxDecoration(),
+                                        decoration: BoxDecoration(),
                                         child: HistorycardWidget(
                                           key: Key(
                                               'Keyvem_${listViewIndex}_of_${listViewOrdersRecordList.length}'),
@@ -323,7 +326,7 @@ class _OrderPageWidgetState extends State<OrderPageWidget>
                                         color: FlutterFlowTheme.of(context)
                                             .primaryText,
                                       ),
-                                    ].divide(const SizedBox(height: 16.0)),
+                                    ].divide(SizedBox(height: 16.0)),
                                   );
                                 },
                               );
@@ -336,11 +339,11 @@ class _OrderPageWidgetState extends State<OrderPageWidget>
                 ],
               ),
               Align(
-                alignment: const AlignmentDirectional(0.0, 1.0),
+                alignment: AlignmentDirectional(0.0, 1.0),
                 child: wrapWithModel(
                   model: _model.navModel,
                   updateCallback: () => setState(() {}),
-                  child: const NavWidget(
+                  child: NavWidget(
                     pageseletcted: Pages.orders,
                   ),
                 ),

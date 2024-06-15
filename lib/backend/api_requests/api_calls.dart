@@ -1,4 +1,6 @@
 import 'dart:convert';
+import 'dart:typed_data';
+import '../schema/structs/index.dart';
 
 import 'package:flutter/foundation.dart';
 
@@ -38,7 +40,7 @@ class ReverseGeoLocationEncodingCall {
     return ApiManager.instance.makeApiCall(
       callName: 'ReverseGeoLocationEncoding',
       apiUrl:
-          '$baseUrl/search/geocode/v6/reverse?limit=1&longitude=$longitude&latitude=$latitude&access_token=$accessToken',
+          '${baseUrl}/search/geocode/v6/reverse?limit=1&longitude=${longitude}&latitude=${latitude}&access_token=${accessToken}',
       callType: ApiCallType.GET,
       headers: {},
       params: {},
@@ -98,7 +100,7 @@ class ForwareGeoLocationEncordingCall {
     return ApiManager.instance.makeApiCall(
       callName: 'ForwareGeoLocationEncording',
       apiUrl:
-          '$baseUrl/search/geocode/v6/forward?q=$location&access_token=$accessToken',
+          '${baseUrl}/search/geocode/v6/forward?q=${location}&access_token=${accessToken}',
       callType: ApiCallType.GET,
       headers: {},
       params: {},

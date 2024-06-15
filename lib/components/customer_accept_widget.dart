@@ -4,7 +4,11 @@ import '/backend/schema/enums/enums.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'customer_accept_model.dart';
 export 'customer_accept_model.dart';
 
@@ -46,7 +50,7 @@ class _CustomerAcceptWidgetState extends State<CustomerAcceptWidget> {
   Widget build(BuildContext context) {
     return Container(
       width: 500.0,
-      constraints: const BoxConstraints(
+      constraints: BoxConstraints(
         maxWidth: 570.0,
       ),
       decoration: BoxDecoration(
@@ -58,12 +62,12 @@ class _CustomerAcceptWidgetState extends State<CustomerAcceptWidget> {
         ),
       ),
       child: Padding(
-        padding: const EdgeInsets.all(12.0),
+        padding: EdgeInsets.all(12.0),
         child: Column(
           mainAxisSize: MainAxisSize.max,
           children: [
             Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 8.0),
+              padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 8.0),
               child: Row(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -107,7 +111,7 @@ class _CustomerAcceptWidgetState extends State<CustomerAcceptWidget> {
                               fontWeight: FontWeight.bold,
                             ),
                       ),
-                    ].divide(const SizedBox(height: 4.0)),
+                    ].divide(SizedBox(height: 4.0)),
                   ),
                   Row(
                     mainAxisSize: MainAxisSize.max,
@@ -123,9 +127,9 @@ class _CustomerAcceptWidgetState extends State<CustomerAcceptWidget> {
                         text: 'Cancel',
                         options: FFButtonOptions(
                           height: 40.0,
-                          padding: const EdgeInsetsDirectional.fromSTEB(
+                          padding: EdgeInsetsDirectional.fromSTEB(
                               24.0, 0.0, 24.0, 0.0),
-                          iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                          iconPadding: EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 0.0),
                           color: FlutterFlowTheme.of(context).error,
                           textStyle:
@@ -135,7 +139,7 @@ class _CustomerAcceptWidgetState extends State<CustomerAcceptWidget> {
                                     letterSpacing: 0.0,
                                   ),
                           elevation: 3.0,
-                          borderSide: const BorderSide(
+                          borderSide: BorderSide(
                             color: Colors.transparent,
                             width: 1.0,
                           ),
@@ -171,9 +175,9 @@ class _CustomerAcceptWidgetState extends State<CustomerAcceptWidget> {
                               : 'Accept',
                           options: FFButtonOptions(
                             height: 40.0,
-                            padding: const EdgeInsetsDirectional.fromSTEB(
+                            padding: EdgeInsetsDirectional.fromSTEB(
                                 24.0, 0.0, 24.0, 0.0),
-                            iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                            iconPadding: EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 0.0, 0.0),
                             color: FlutterFlowTheme.of(context).primary,
                             textStyle: FlutterFlowTheme.of(context)
@@ -184,7 +188,7 @@ class _CustomerAcceptWidgetState extends State<CustomerAcceptWidget> {
                                   letterSpacing: 0.0,
                                 ),
                             elevation: 3.0,
-                            borderSide: const BorderSide(
+                            borderSide: BorderSide(
                               color: Colors.transparent,
                               width: 1.0,
                             ),
@@ -192,7 +196,7 @@ class _CustomerAcceptWidgetState extends State<CustomerAcceptWidget> {
                           ),
                         ),
                       ),
-                    ].divide(const SizedBox(width: 10.0)),
+                    ].divide(SizedBox(width: 10.0)),
                   ),
                 ],
               ),
@@ -203,7 +207,7 @@ class _CustomerAcceptWidgetState extends State<CustomerAcceptWidget> {
               color: FlutterFlowTheme.of(context).alternate,
             ),
             Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 0.0),
+              padding: EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 0.0),
               child: Row(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -222,14 +226,14 @@ class _CustomerAcceptWidgetState extends State<CustomerAcceptWidget> {
                                     letterSpacing: 0.0,
                                   ),
                         ),
-                      ].divide(const SizedBox(height: 4.0)),
+                      ].divide(SizedBox(height: 4.0)),
                     ),
                   ),
                 ],
               ),
             ),
             Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 8.0),
+              padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 8.0),
               child: StreamBuilder<List<UsersRecord>>(
                 stream: queryUsersRecord(
                   queryBuilder: (usersRecord) => usersRecord.where(
@@ -271,7 +275,7 @@ class _CustomerAcceptWidgetState extends State<CustomerAcceptWidget> {
                           textScaler: MediaQuery.of(context).textScaler,
                           text: TextSpan(
                             children: [
-                              const TextSpan(
+                              TextSpan(
                                 text: 'Seller name\n',
                                 style: TextStyle(),
                               ),
@@ -304,7 +308,7 @@ class _CustomerAcceptWidgetState extends State<CustomerAcceptWidget> {
                           textScaler: MediaQuery.of(context).textScaler,
                           text: TextSpan(
                             children: [
-                              const TextSpan(
+                              TextSpan(
                                 text: 'Seller Email #\n',
                                 style: TextStyle(),
                               ),
@@ -332,13 +336,13 @@ class _CustomerAcceptWidgetState extends State<CustomerAcceptWidget> {
                           ),
                         ),
                       ),
-                    ].divide(const SizedBox(width: 12.0)),
+                    ].divide(SizedBox(width: 12.0)),
                   );
                 },
               ),
             ),
             Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 8.0),
+              padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 8.0),
               child: Row(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -349,7 +353,7 @@ class _CustomerAcceptWidgetState extends State<CustomerAcceptWidget> {
                       textScaler: MediaQuery.of(context).textScaler,
                       text: TextSpan(
                         children: [
-                          const TextSpan(
+                          TextSpan(
                             text: 'Cutomer phone\n',
                             style: TextStyle(),
                           ),
@@ -380,7 +384,7 @@ class _CustomerAcceptWidgetState extends State<CustomerAcceptWidget> {
                       textScaler: MediaQuery.of(context).textScaler,
                       text: TextSpan(
                         children: [
-                          const TextSpan(
+                          TextSpan(
                             text: 'Currrent status #\n',
                             style: TextStyle(),
                           ),
@@ -406,11 +410,11 @@ class _CustomerAcceptWidgetState extends State<CustomerAcceptWidget> {
                       ),
                     ),
                   ),
-                ].divide(const SizedBox(width: 12.0)),
+                ].divide(SizedBox(width: 12.0)),
               ),
             ),
             Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 8.0),
+              padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 8.0),
               child: Row(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -421,7 +425,7 @@ class _CustomerAcceptWidgetState extends State<CustomerAcceptWidget> {
                       textScaler: MediaQuery.of(context).textScaler,
                       text: TextSpan(
                         children: [
-                          const TextSpan(
+                          TextSpan(
                             text: 'address\n',
                             style: TextStyle(),
                           ),
@@ -452,7 +456,7 @@ class _CustomerAcceptWidgetState extends State<CustomerAcceptWidget> {
                       textScaler: MediaQuery.of(context).textScaler,
                       text: TextSpan(
                         children: [
-                          const TextSpan(
+                          TextSpan(
                             text: 'Payment Method\n',
                             style: TextStyle(),
                           ),
@@ -478,16 +482,16 @@ class _CustomerAcceptWidgetState extends State<CustomerAcceptWidget> {
                       ),
                     ),
                   ),
-                ].divide(const SizedBox(width: 12.0)),
+                ].divide(SizedBox(width: 12.0)),
               ),
             ),
             Align(
-              alignment: const AlignmentDirectional(-1.0, 0.0),
+              alignment: AlignmentDirectional(-1.0, 0.0),
               child: RichText(
                 textScaler: MediaQuery.of(context).textScaler,
                 text: TextSpan(
                   children: [
-                    const TextSpan(
+                    TextSpan(
                       text: 'Notes\n',
                       style: TextStyle(),
                     ),
@@ -507,7 +511,7 @@ class _CustomerAcceptWidgetState extends State<CustomerAcceptWidget> {
                 ),
               ),
             ),
-          ].divide(const SizedBox(height: 4.0)).addToEnd(const SizedBox(height: 12.0)),
+          ].divide(SizedBox(height: 4.0)).addToEnd(SizedBox(height: 12.0)),
         ),
       ),
     );

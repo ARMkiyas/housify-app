@@ -2,11 +2,15 @@ import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'dart:math';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart'
     as smooth_page_indicator;
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'auth_welcome_screen_model.dart';
 export 'auth_welcome_screen_model.dart';
 
@@ -41,15 +45,15 @@ class _AuthWelcomeScreenWidgetState extends State<AuthWelcomeScreenWidget>
             curve: Curves.easeOut,
             delay: 0.0.ms,
             duration: 3200.0.ms,
-            begin: const Offset(0.0, -80.0),
-            end: const Offset(0.0, 0.0),
+            begin: Offset(0.0, -80.0),
+            end: Offset(0.0, 0.0),
           ),
           MoveEffect(
             curve: Curves.easeInOut,
             delay: 3200.0.ms,
             duration: 3200.0.ms,
-            begin: const Offset(0.0, 0.0),
-            end: const Offset(0.0, -80.0),
+            begin: Offset(0.0, 0.0),
+            end: Offset(0.0, -80.0),
           ),
         ],
       ),
@@ -68,15 +72,15 @@ class _AuthWelcomeScreenWidgetState extends State<AuthWelcomeScreenWidget>
             curve: Curves.easeInOut,
             delay: 200.0.ms,
             duration: 300.0.ms,
-            begin: const Offset(0.0, 20.0),
-            end: const Offset(0.0, 0.0),
+            begin: Offset(0.0, 20.0),
+            end: Offset(0.0, 0.0),
           ),
           ScaleEffect(
             curve: Curves.easeInOut,
             delay: 200.0.ms,
             duration: 300.0.ms,
-            begin: const Offset(0.9, 0.9),
-            end: const Offset(1.0, 1.0),
+            begin: Offset(0.9, 0.9),
+            end: Offset(1.0, 1.0),
           ),
         ],
       ),
@@ -95,15 +99,15 @@ class _AuthWelcomeScreenWidgetState extends State<AuthWelcomeScreenWidget>
             curve: Curves.easeInOut,
             delay: 300.0.ms,
             duration: 300.0.ms,
-            begin: const Offset(0.0, 20.0),
-            end: const Offset(0.0, 0.0),
+            begin: Offset(0.0, 20.0),
+            end: Offset(0.0, 0.0),
           ),
           ScaleEffect(
             curve: Curves.easeInOut,
             delay: 300.0.ms,
             duration: 300.0.ms,
-            begin: const Offset(0.9, 0.9),
-            end: const Offset(1.0, 1.0),
+            begin: Offset(0.9, 0.9),
+            end: Offset(1.0, 1.0),
           ),
         ],
       ),
@@ -122,15 +126,15 @@ class _AuthWelcomeScreenWidgetState extends State<AuthWelcomeScreenWidget>
             curve: Curves.easeInOut,
             delay: 200.0.ms,
             duration: 300.0.ms,
-            begin: const Offset(0.0, 20.0),
-            end: const Offset(0.0, 0.0),
+            begin: Offset(0.0, 20.0),
+            end: Offset(0.0, 0.0),
           ),
           ScaleEffect(
             curve: Curves.easeInOut,
             delay: 200.0.ms,
             duration: 300.0.ms,
-            begin: const Offset(0.9, 0.9),
-            end: const Offset(1.0, 1.0),
+            begin: Offset(0.9, 0.9),
+            end: Offset(1.0, 1.0),
           ),
         ],
       ),
@@ -149,15 +153,15 @@ class _AuthWelcomeScreenWidgetState extends State<AuthWelcomeScreenWidget>
             curve: Curves.easeInOut,
             delay: 300.0.ms,
             duration: 300.0.ms,
-            begin: const Offset(0.0, 20.0),
-            end: const Offset(0.0, 0.0),
+            begin: Offset(0.0, 20.0),
+            end: Offset(0.0, 0.0),
           ),
           ScaleEffect(
             curve: Curves.easeInOut,
             delay: 300.0.ms,
             duration: 300.0.ms,
-            begin: const Offset(0.9, 0.9),
-            end: const Offset(1.0, 1.0),
+            begin: Offset(0.9, 0.9),
+            end: Offset(1.0, 1.0),
           ),
         ],
       ),
@@ -176,15 +180,15 @@ class _AuthWelcomeScreenWidgetState extends State<AuthWelcomeScreenWidget>
             curve: Curves.easeInOut,
             delay: 200.0.ms,
             duration: 300.0.ms,
-            begin: const Offset(0.0, 20.0),
-            end: const Offset(0.0, 0.0),
+            begin: Offset(0.0, 20.0),
+            end: Offset(0.0, 0.0),
           ),
           ScaleEffect(
             curve: Curves.easeInOut,
             delay: 200.0.ms,
             duration: 300.0.ms,
-            begin: const Offset(0.9, 0.9),
-            end: const Offset(1.0, 1.0),
+            begin: Offset(0.9, 0.9),
+            end: Offset(1.0, 1.0),
           ),
         ],
       ),
@@ -203,15 +207,15 @@ class _AuthWelcomeScreenWidgetState extends State<AuthWelcomeScreenWidget>
             curve: Curves.easeInOut,
             delay: 300.0.ms,
             duration: 300.0.ms,
-            begin: const Offset(0.0, 20.0),
-            end: const Offset(0.0, 0.0),
+            begin: Offset(0.0, 20.0),
+            end: Offset(0.0, 0.0),
           ),
           ScaleEffect(
             curve: Curves.easeInOut,
             delay: 300.0.ms,
             duration: 300.0.ms,
-            begin: const Offset(0.9, 0.9),
-            end: const Offset(1.0, 1.0),
+            begin: Offset(0.9, 0.9),
+            end: Offset(1.0, 1.0),
           ),
         ],
       ),
@@ -249,7 +253,7 @@ class _AuthWelcomeScreenWidgetState extends State<AuthWelcomeScreenWidget>
                     child: MasonryGridView.builder(
                       physics: const NeverScrollableScrollPhysics(),
                       gridDelegate:
-                          const SliverSimpleGridDelegateWithFixedCrossAxisCount(
+                          SliverSimpleGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 3,
                       ),
                       crossAxisSpacing: 10.0,
@@ -258,7 +262,7 @@ class _AuthWelcomeScreenWidgetState extends State<AuthWelcomeScreenWidget>
                       itemBuilder: (context, index) {
                         return [
                           () => ClipRRect(
-                                borderRadius: const BorderRadius.only(
+                                borderRadius: BorderRadius.only(
                                   bottomLeft: Radius.circular(0.0),
                                   bottomRight: Radius.circular(16.0),
                                   topLeft: Radius.circular(0.0),
@@ -281,7 +285,7 @@ class _AuthWelcomeScreenWidgetState extends State<AuthWelcomeScreenWidget>
                                 ),
                               ),
                           () => ClipRRect(
-                                borderRadius: const BorderRadius.only(
+                                borderRadius: BorderRadius.only(
                                   bottomLeft: Radius.circular(0.0),
                                   bottomRight: Radius.circular(16.0),
                                   topLeft: Radius.circular(0.0),
@@ -295,7 +299,7 @@ class _AuthWelcomeScreenWidgetState extends State<AuthWelcomeScreenWidget>
                                 ),
                               ),
                           () => ClipRRect(
-                                borderRadius: const BorderRadius.only(
+                                borderRadius: BorderRadius.only(
                                   bottomLeft: Radius.circular(16.0),
                                   bottomRight: Radius.circular(0.0),
                                   topLeft: Radius.circular(16.0),
@@ -327,7 +331,7 @@ class _AuthWelcomeScreenWidgetState extends State<AuthWelcomeScreenWidget>
                                 ),
                               ),
                           () => ClipRRect(
-                                borderRadius: const BorderRadius.only(
+                                borderRadius: BorderRadius.only(
                                   bottomLeft: Radius.circular(16.0),
                                   bottomRight: Radius.circular(0.0),
                                   topLeft: Radius.circular(16.0),
@@ -359,7 +363,7 @@ class _AuthWelcomeScreenWidgetState extends State<AuthWelcomeScreenWidget>
                                 ),
                               ),
                           () => ClipRRect(
-                                borderRadius: const BorderRadius.only(
+                                borderRadius: BorderRadius.only(
                                   bottomLeft: Radius.circular(16.0),
                                   bottomRight: Radius.circular(0.0),
                                   topLeft: Radius.circular(16.0),
@@ -390,17 +394,17 @@ class _AuthWelcomeScreenWidgetState extends State<AuthWelcomeScreenWidget>
               ],
             ),
             Align(
-              alignment: const AlignmentDirectional(0.0, 0.0),
+              alignment: AlignmentDirectional(0.0, 0.0),
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Align(
-                    alignment: const AlignmentDirectional(0.0, 0.0),
+                    alignment: AlignmentDirectional(0.0, 0.0),
                     child: Container(
                       width: double.infinity,
                       height: 450.0,
-                      constraints: const BoxConstraints(
+                      constraints: BoxConstraints(
                         maxWidth: 670.0,
                       ),
                       decoration: BoxDecoration(
@@ -410,13 +414,13 @@ class _AuthWelcomeScreenWidgetState extends State<AuthWelcomeScreenWidget>
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          SizedBox(
+                          Container(
                             width: double.infinity,
                             height: 230.0,
                             child: Stack(
                               children: [
                                 Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 0.0, 0.0, 50.0),
                                   child: PageView(
                                     controller: _model.pageViewController ??=
@@ -424,7 +428,7 @@ class _AuthWelcomeScreenWidgetState extends State<AuthWelcomeScreenWidget>
                                     scrollDirection: Axis.horizontal,
                                     children: [
                                       Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
                                             48.0, 0.0, 48.0, 0.0),
                                         child: Column(
                                           mainAxisSize: MainAxisSize.max,
@@ -447,7 +451,7 @@ class _AuthWelcomeScreenWidgetState extends State<AuthWelcomeScreenWidget>
                                             ).animateOnPageLoad(animationsMap[
                                                 'textOnPageLoadAnimation1']!),
                                             Padding(
-                                              padding: const EdgeInsetsDirectional
+                                              padding: EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       0.0, 16.0, 0.0, 0.0),
                                               child: Text(
@@ -468,7 +472,7 @@ class _AuthWelcomeScreenWidgetState extends State<AuthWelcomeScreenWidget>
                                         ),
                                       ),
                                       Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
                                             48.0, 0.0, 48.0, 0.0),
                                         child: Column(
                                           mainAxisSize: MainAxisSize.max,
@@ -490,7 +494,7 @@ class _AuthWelcomeScreenWidgetState extends State<AuthWelcomeScreenWidget>
                                             ).animateOnPageLoad(animationsMap[
                                                 'textOnPageLoadAnimation3']!),
                                             Padding(
-                                              padding: const EdgeInsetsDirectional
+                                              padding: EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       0.0, 16.0, 0.0, 0.0),
                                               child: Text(
@@ -511,7 +515,7 @@ class _AuthWelcomeScreenWidgetState extends State<AuthWelcomeScreenWidget>
                                         ),
                                       ),
                                       Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
                                             48.0, 0.0, 48.0, 0.0),
                                         child: Column(
                                           mainAxisSize: MainAxisSize.max,
@@ -533,7 +537,7 @@ class _AuthWelcomeScreenWidgetState extends State<AuthWelcomeScreenWidget>
                                             ).animateOnPageLoad(animationsMap[
                                                 'textOnPageLoadAnimation5']!),
                                             Padding(
-                                              padding: const EdgeInsetsDirectional
+                                              padding: EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       0.0, 16.0, 0.0, 0.0),
                                               child: Text(
@@ -557,9 +561,9 @@ class _AuthWelcomeScreenWidgetState extends State<AuthWelcomeScreenWidget>
                                   ),
                                 ),
                                 Align(
-                                  alignment: const AlignmentDirectional(0.0, 1.0),
+                                  alignment: AlignmentDirectional(0.0, 1.0),
                                   child: Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
                                         0.0, 0.0, 0.0, 10.0),
                                     child: smooth_page_indicator
                                         .SmoothPageIndicator(
@@ -571,7 +575,7 @@ class _AuthWelcomeScreenWidgetState extends State<AuthWelcomeScreenWidget>
                                         await _model.pageViewController!
                                             .animateToPage(
                                           i,
-                                          duration: const Duration(milliseconds: 500),
+                                          duration: Duration(milliseconds: 500),
                                           curve: Curves.ease,
                                         );
                                         setState(() {});
@@ -597,7 +601,7 @@ class _AuthWelcomeScreenWidgetState extends State<AuthWelcomeScreenWidget>
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
+                            padding: EdgeInsetsDirectional.fromSTEB(
                                 16.0, 12.0, 16.0, 0.0),
                             child: FFButtonWidget(
                               onPressed: () async {
@@ -607,9 +611,9 @@ class _AuthWelcomeScreenWidgetState extends State<AuthWelcomeScreenWidget>
                               options: FFButtonOptions(
                                 width: double.infinity,
                                 height: 60.0,
-                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                padding: EdgeInsetsDirectional.fromSTEB(
                                     0.0, 0.0, 0.0, 0.0),
-                                iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                                iconPadding: EdgeInsetsDirectional.fromSTEB(
                                     0.0, 0.0, 0.0, 0.0),
                                 color: FlutterFlowTheme.of(context).primaryText,
                                 textStyle: FlutterFlowTheme.of(context)
@@ -621,7 +625,7 @@ class _AuthWelcomeScreenWidgetState extends State<AuthWelcomeScreenWidget>
                                       letterSpacing: 0.0,
                                     ),
                                 elevation: 4.0,
-                                borderSide: const BorderSide(
+                                borderSide: BorderSide(
                                   color: Colors.transparent,
                                   width: 1.0,
                                 ),
@@ -632,7 +636,7 @@ class _AuthWelcomeScreenWidgetState extends State<AuthWelcomeScreenWidget>
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
+                            padding: EdgeInsetsDirectional.fromSTEB(
                                 16.0, 12.0, 16.0, 44.0),
                             child: FFButtonWidget(
                               onPressed: () async {
@@ -642,9 +646,9 @@ class _AuthWelcomeScreenWidgetState extends State<AuthWelcomeScreenWidget>
                               options: FFButtonOptions(
                                 width: double.infinity,
                                 height: 60.0,
-                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                padding: EdgeInsetsDirectional.fromSTEB(
                                     0.0, 0.0, 0.0, 0.0),
-                                iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                                iconPadding: EdgeInsetsDirectional.fromSTEB(
                                     0.0, 0.0, 0.0, 0.0),
                                 color: FlutterFlowTheme.of(context)
                                     .secondaryBackground,
@@ -655,7 +659,7 @@ class _AuthWelcomeScreenWidgetState extends State<AuthWelcomeScreenWidget>
                                       letterSpacing: 0.0,
                                     ),
                                 elevation: 0.0,
-                                borderSide: const BorderSide(
+                                borderSide: BorderSide(
                                   color: Colors.transparent,
                                   width: 1.0,
                                 ),

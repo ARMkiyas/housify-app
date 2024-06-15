@@ -9,12 +9,16 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'dart:math';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart'
     as smooth_page_indicator;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'service_details_page_model.dart';
 export 'service_details_page_model.dart';
 
@@ -62,8 +66,8 @@ class _ServiceDetailsPageWidgetState extends State<ServiceDetailsPageWidget>
             curve: Curves.easeInOut,
             delay: 0.0.ms,
             duration: 600.0.ms,
-            begin: const Offset(0.6, 0.6),
-            end: const Offset(1.0, 1.0),
+            begin: Offset(0.6, 0.6),
+            end: Offset(1.0, 1.0),
           ),
         ],
       ),
@@ -115,7 +119,7 @@ class _ServiceDetailsPageWidgetState extends State<ServiceDetailsPageWidget>
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
             body: SafeArea(
               top: true,
-              child: SizedBox(
+              child: Container(
                 width: double.infinity,
                 height: double.infinity,
                 child: Stack(
@@ -131,7 +135,7 @@ class _ServiceDetailsPageWidgetState extends State<ServiceDetailsPageWidget>
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: [
-                              SizedBox(
+                              Container(
                                 width: double.infinity,
                                 height:
                                     MediaQuery.sizeOf(context).height * 0.45,
@@ -147,9 +151,9 @@ class _ServiceDetailsPageWidgetState extends State<ServiceDetailsPageWidget>
                                               BorderRadius.circular(0.0),
                                           child: CachedNetworkImage(
                                             fadeInDuration:
-                                                const Duration(milliseconds: 500),
+                                                Duration(milliseconds: 500),
                                             fadeOutDuration:
-                                                const Duration(milliseconds: 500),
+                                                Duration(milliseconds: 500),
                                             imageUrl: valueOrDefault<String>(
                                               widget.sericeDoc?.image,
                                               'https://www.odtap.com/wp-content/uploads/2022/12/46776-scaled.jpg',
@@ -163,9 +167,9 @@ class _ServiceDetailsPageWidgetState extends State<ServiceDetailsPageWidget>
                                     ),
                                     Align(
                                       alignment:
-                                          const AlignmentDirectional(-1.0, 1.0),
+                                          AlignmentDirectional(-1.0, 1.0),
                                       child: Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
                                             20.0, 0.0, 0.0, 16.0),
                                         child: smooth_page_indicator
                                             .SmoothPageIndicator(
@@ -179,7 +183,7 @@ class _ServiceDetailsPageWidgetState extends State<ServiceDetailsPageWidget>
                                                 .animateToPage(
                                               i,
                                               duration:
-                                                  const Duration(milliseconds: 500),
+                                                  Duration(milliseconds: 500),
                                               curve: Curves.ease,
                                             );
                                             setState(() {});
@@ -208,7 +212,7 @@ class _ServiceDetailsPageWidgetState extends State<ServiceDetailsPageWidget>
                             ],
                           ),
                           Padding(
-                            padding: const EdgeInsets.all(24.0),
+                            padding: EdgeInsets.all(24.0),
                             child: Column(
                               mainAxisSize: MainAxisSize.max,
                               crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -239,7 +243,7 @@ class _ServiceDetailsPageWidgetState extends State<ServiceDetailsPageWidget>
                                       ],
                                     ),
                                     Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
                                           0.0, 10.0, 0.0, 0.0),
                                       child: Row(
                                         mainAxisSize: MainAxisSize.max,
@@ -263,7 +267,7 @@ class _ServiceDetailsPageWidgetState extends State<ServiceDetailsPageWidget>
                                                   child: Text(
                                                     '${valueOrDefault<String>(
                                                       widget.sericeDoc?.noOfSold
-                                                          .toString(),
+                                                          ?.toString(),
                                                       '10',
                                                     )} sold',
                                                     textAlign: TextAlign.center,
@@ -283,7 +287,7 @@ class _ServiceDetailsPageWidgetState extends State<ServiceDetailsPageWidget>
                                           ),
                                           Padding(
                                             padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
+                                                EdgeInsetsDirectional.fromSTEB(
                                                     8.0, 0.0, 0.0, 0.0),
                                             child: Icon(
                                               Icons.star_border,
@@ -295,12 +299,12 @@ class _ServiceDetailsPageWidgetState extends State<ServiceDetailsPageWidget>
                                           ),
                                           Padding(
                                             padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
+                                                EdgeInsetsDirectional.fromSTEB(
                                                     8.0, 0.0, 8.0, 0.0),
                                             child: Text(
                                               valueOrDefault<String>(
                                                 widget.sericeDoc?.overallRating
-                                                    .toString(),
+                                                    ?.toString(),
                                                 '0.0',
                                               ),
                                               style: FlutterFlowTheme.of(
@@ -316,7 +320,7 @@ class _ServiceDetailsPageWidgetState extends State<ServiceDetailsPageWidget>
                                             ),
                                           ),
                                           Text(
-                                            '( ${widget.sericeDoc?.noOfReviews.toString()}  reviews )',
+                                            '( ${widget.sericeDoc?.noOfReviews?.toString()}  reviews )',
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium
                                                 .override(
@@ -358,7 +362,7 @@ class _ServiceDetailsPageWidgetState extends State<ServiceDetailsPageWidget>
                                       ],
                                     ),
                                     Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
                                           0.0, 8.0, 0.0, 0.0),
                                       child: Row(
                                         mainAxisSize: MainAxisSize.max,
@@ -386,7 +390,7 @@ class _ServiceDetailsPageWidgetState extends State<ServiceDetailsPageWidget>
                                       ),
                                     ),
                                     Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
                                           0.0, 16.0, 0.0, 0.0),
                                       child: ClipRRect(
                                         borderRadius:
@@ -402,7 +406,7 @@ class _ServiceDetailsPageWidgetState extends State<ServiceDetailsPageWidget>
                                             model: _model.offerCardModel,
                                             updateCallback: () =>
                                                 setState(() {}),
-                                            child: const OfferCardWidget(
+                                            child: OfferCardWidget(
                                               title: 'fggdf',
                                             ),
                                           ),
@@ -412,7 +416,7 @@ class _ServiceDetailsPageWidgetState extends State<ServiceDetailsPageWidget>
                                   ],
                                 ),
                                 Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 24.0, 0.0, 0.0),
                                   child: Column(
                                     mainAxisSize: MainAxisSize.max,
@@ -518,7 +522,7 @@ class _ServiceDetailsPageWidgetState extends State<ServiceDetailsPageWidget>
                                               ],
                                             ),
                                           ),
-                                        ].divide(const SizedBox(width: 16.0)),
+                                        ].divide(SizedBox(width: 16.0)),
                                       ),
                                       Row(
                                         mainAxisSize: MainAxisSize.max,
@@ -560,7 +564,7 @@ class _ServiceDetailsPageWidgetState extends State<ServiceDetailsPageWidget>
                                                   children: [
                                                     Padding(
                                                       padding:
-                                                          const EdgeInsetsDirectional
+                                                          EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   0.0,
                                                                   10.0,
@@ -649,11 +653,11 @@ class _ServiceDetailsPageWidgetState extends State<ServiceDetailsPageWidget>
                                           ),
                                         ],
                                       ),
-                                    ].divide(const SizedBox(height: 16.0)),
+                                    ].divide(SizedBox(height: 16.0)),
                                   ),
                                 ),
                                 Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 24.0, 0.0, 21.0),
                                   child: SingleChildScrollView(
                                     scrollDirection: Axis.horizontal,
@@ -684,7 +688,7 @@ class _ServiceDetailsPageWidgetState extends State<ServiceDetailsPageWidget>
                                                   ),
                                             ),
                                             Padding(
-                                              padding: const EdgeInsetsDirectional
+                                              padding: EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       0.0, 10.0, 0.0, 0.0),
                                               child: Row(
@@ -707,7 +711,7 @@ class _ServiceDetailsPageWidgetState extends State<ServiceDetailsPageWidget>
                                                     ),
                                                     child: Padding(
                                                       padding:
-                                                          const EdgeInsets.all(2.0),
+                                                          EdgeInsets.all(2.0),
                                                       child:
                                                           AuthUserStreamWidget(
                                                         builder: (context) =>
@@ -720,6 +724,9 @@ class _ServiceDetailsPageWidgetState extends State<ServiceDetailsPageWidget>
                                                             valueOrDefault<
                                                                 String>(
                                                               serviceDetailsPageUsersRecord
+                                                                              .photoUrl !=
+                                                                          null &&
+                                                                      serviceDetailsPageUsersRecord
                                                                               .photoUrl !=
                                                                           ''
                                                                   ? currentUserPhoto
@@ -737,7 +744,7 @@ class _ServiceDetailsPageWidgetState extends State<ServiceDetailsPageWidget>
                                                       'cardOnPageLoadAnimation']!),
                                                   Padding(
                                                     padding:
-                                                        const EdgeInsetsDirectional
+                                                        EdgeInsetsDirectional
                                                             .fromSTEB(14.0, 0.0,
                                                                 0.0, 0.0),
                                                     child: Text(
@@ -774,7 +781,7 @@ class _ServiceDetailsPageWidgetState extends State<ServiceDetailsPageWidget>
                             mainAxisSize: MainAxisSize.max,
                             children: [
                               Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                padding: EdgeInsetsDirectional.fromSTEB(
                                     20.0, 0.0, 20.0, 0.0),
                                 child: Row(
                                   mainAxisSize: MainAxisSize.max,
@@ -792,10 +799,10 @@ class _ServiceDetailsPageWidgetState extends State<ServiceDetailsPageWidget>
                                     ),
                                     if (widget.sericeDoc!.noOfReviews > 3)
                                       Container(
-                                        decoration: const BoxDecoration(),
+                                        decoration: BoxDecoration(),
                                         child: Padding(
                                           padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
+                                              EdgeInsetsDirectional.fromSTEB(
                                                   5.0, 5.0, 0.0, 5.0),
                                           child: Text(
                                             'See All Review',
@@ -836,7 +843,7 @@ class _ServiceDetailsPageWidgetState extends State<ServiceDetailsPageWidget>
                                       listViewSellerReviewsRecordList =
                                       snapshot.data!;
                                   return ListView.separated(
-                                    padding: const EdgeInsets.fromLTRB(
+                                    padding: EdgeInsets.fromLTRB(
                                       0,
                                       24.0,
                                       0,
@@ -848,13 +855,13 @@ class _ServiceDetailsPageWidgetState extends State<ServiceDetailsPageWidget>
                                     itemCount:
                                         listViewSellerReviewsRecordList.length,
                                     separatorBuilder: (_, __) =>
-                                        const SizedBox(height: 16.0),
+                                        SizedBox(height: 16.0),
                                     itemBuilder: (context, listViewIndex) {
                                       final listViewSellerReviewsRecord =
                                           listViewSellerReviewsRecordList[
                                               listViewIndex];
                                       return Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
                                             20.0, 0.0, 20.0, 0.0),
                                         child: ReviewsWidget(
                                           key: Key(
@@ -880,24 +887,24 @@ class _ServiceDetailsPageWidgetState extends State<ServiceDetailsPageWidget>
                               ),
                             ],
                           ),
-                        ].addToEnd(const SizedBox(height: 90.0)),
+                        ].addToEnd(SizedBox(height: 90.0)),
                       ),
                     ),
                     Padding(
                       padding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 44.0, 0.0, 0.0),
+                          EdgeInsetsDirectional.fromSTEB(0.0, 44.0, 0.0, 0.0),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
+                            padding: EdgeInsetsDirectional.fromSTEB(
                                 20.0, 0.0, 0.0, 0.0),
                             child: FlutterFlowIconButton(
                               borderColor: Colors.transparent,
                               borderRadius: 99.0,
                               buttonSize: 48.0,
-                              fillColor: const Color(0x7DB6B3B3),
+                              fillColor: Color(0x7DB6B3B3),
                               icon: FaIcon(
                                 FontAwesomeIcons.angleLeft,
                                 color: FlutterFlowTheme.of(context).primaryText,
@@ -912,7 +919,7 @@ class _ServiceDetailsPageWidgetState extends State<ServiceDetailsPageWidget>
                       ),
                     ),
                     Align(
-                      alignment: const AlignmentDirectional(0.0, 1.0),
+                      alignment: AlignmentDirectional(0.0, 1.0),
                       child: Container(
                         width: double.infinity,
                         height: 90.0,
@@ -929,7 +936,7 @@ class _ServiceDetailsPageWidgetState extends State<ServiceDetailsPageWidget>
                               color: FlutterFlowTheme.of(context).pageviewdot,
                             ),
                             Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
+                              padding: EdgeInsetsDirectional.fromSTEB(
                                   20.0, 0.0, 20.0, 0.0),
                               child: Row(
                                 mainAxisSize: MainAxisSize.max,
@@ -1000,7 +1007,7 @@ class _ServiceDetailsPageWidgetState extends State<ServiceDetailsPageWidget>
                                             ),
                                           ],
                                         ),
-                                      ].divide(const SizedBox(height: 4.0)),
+                                      ].divide(SizedBox(height: 4.0)),
                                     ),
                                   ),
                                   Expanded(
@@ -1035,17 +1042,17 @@ class _ServiceDetailsPageWidgetState extends State<ServiceDetailsPageWidget>
                                         );
                                       },
                                       text: 'Hire',
-                                      icon: const FaIcon(
+                                      icon: FaIcon(
                                         FontAwesomeIcons.shoppingBag,
                                         size: 16.0,
                                       ),
                                       options: FFButtonOptions(
                                         width: double.infinity,
                                         height: 48.0,
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
                                             0.0, 8.0, 0.0, 8.0),
                                         iconPadding:
-                                            const EdgeInsetsDirectional.fromSTEB(
+                                            EdgeInsetsDirectional.fromSTEB(
                                                 0.0, 0.0, 0.0, 0.0),
                                         color: FlutterFlowTheme.of(context)
                                             .primaryText,
@@ -1059,7 +1066,7 @@ class _ServiceDetailsPageWidgetState extends State<ServiceDetailsPageWidget>
                                               letterSpacing: 0.0,
                                             ),
                                         elevation: 0.0,
-                                        borderSide: const BorderSide(
+                                        borderSide: BorderSide(
                                           color: Colors.transparent,
                                           width: 1.0,
                                         ),
@@ -1071,7 +1078,7 @@ class _ServiceDetailsPageWidgetState extends State<ServiceDetailsPageWidget>
                                 ],
                               ),
                             ),
-                          ].divide(const SizedBox(height: 8.0)),
+                          ].divide(SizedBox(height: 8.0)),
                         ),
                       ),
                     ),
