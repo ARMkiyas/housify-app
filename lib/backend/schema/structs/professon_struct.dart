@@ -3,7 +3,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '/backend/schema/util/firestore_util.dart';
+import '/backend/schema/util/schema_util.dart';
+import '/backend/schema/enums/enums.dart';
 
+import 'index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 
 class ProfessonStruct extends FFFirebaseStruct {
@@ -17,6 +20,7 @@ class ProfessonStruct extends FFFirebaseStruct {
   String? _professon;
   String get professon => _professon ?? '';
   set professon(String? val) => _professon = val;
+
   bool hasProfesson() => _professon != null;
 
   static ProfessonStruct fromMap(Map<String, dynamic> data) => ProfessonStruct(

@@ -1,15 +1,22 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 import '/backend/backend.dart';
 import '/backend/schema/structs/index.dart';
+import '/backend/schema/enums/enums.dart';
 
 import '/auth/base_auth_user_provider.dart';
 
 import '/index.dart';
+import '/main.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
+import '/flutter_flow/lat_lng.dart';
+import '/flutter_flow/place.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import 'serialization_util.dart';
 
 export 'package:go_router/go_router.dart';
 export 'serialization_util.dart';
@@ -74,66 +81,196 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
       errorBuilder: (context, state) => appStateNotifier.loggedIn
-          ? const HomepageWidget()
-          : const AuthWelcomeScreenWidget(),
+          ? LoadingWidget()
+          : AuthWelcomeScreenWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
           builder: (context, _) => appStateNotifier.loggedIn
-              ? const HomepageWidget()
-              : const AuthWelcomeScreenWidget(),
+              ? LoadingWidget()
+              : AuthWelcomeScreenWidget(),
         ),
         FFRoute(
-          name: 'homepage',
-          path: '/homepage',
+          name: 'Cus_homepage',
+          path: '/cusHomepage',
           requireAuth: true,
-          builder: (context, params) => const HomepageWidget(),
+          builder: (context, params) => CusHomepageWidget(),
         ),
         FFRoute(
           name: 'auth_WelcomeScreen',
           path: '/authWelcomeScreen',
-          builder: (context, params) => const AuthWelcomeScreenWidget(),
+          builder: (context, params) => AuthWelcomeScreenWidget(),
         ),
         FFRoute(
           name: 'auth_2_Create',
           path: '/auth2Create',
-          builder: (context, params) => const Auth2CreateWidget(),
+          builder: (context, params) => Auth2CreateWidget(),
         ),
         FFRoute(
           name: 'auth_2_Login',
           path: '/auth2Login',
-          builder: (context, params) => const Auth2LoginWidget(),
+          builder: (context, params) => Auth2LoginWidget(),
         ),
         FFRoute(
           name: 'auth_2_ForgotPassword',
           path: '/auth2ForgotPassword',
-          builder: (context, params) => const Auth2ForgotPasswordWidget(),
+          builder: (context, params) => Auth2ForgotPasswordWidget(),
         ),
         FFRoute(
           name: 'ProfilePage',
           path: '/profilePage',
-          builder: (context, params) => const ProfilePageWidget(),
+          builder: (context, params) => ProfilePageWidget(),
         ),
         FFRoute(
           name: 'auth_2_sellerform',
           path: '/auth2Sellerform',
-          builder: (context, params) => const Auth2SellerformWidget(),
+          builder: (context, params) => Auth2SellerformWidget(),
         ),
         FFRoute(
           name: 'Verfication_wait',
           path: '/verficationWait',
-          builder: (context, params) => const VerficationWaitWidget(),
+          builder: (context, params) => VerficationWaitWidget(),
         ),
         FFRoute(
           name: 'category_page',
           path: '/categoryPage',
-          builder: (context, params) => const CategoryPageWidget(),
+          builder: (context, params) => CategoryPageWidget(),
         ),
         FFRoute(
-          name: 'orders_page',
-          path: '/ordersPage',
-          builder: (context, params) => const OrdersPageWidget(),
+          name: 'offerpage',
+          path: '/offerpage',
+          builder: (context, params) => OfferpageWidget(),
+        ),
+        FFRoute(
+          name: 'order_page',
+          path: '/orderPage',
+          builder: (context, params) => OrderPageWidget(),
+        ),
+        FFRoute(
+          name: 'Loading',
+          path: '/loading',
+          builder: (context, params) => LoadingWidget(),
+        ),
+        FFRoute(
+          name: 'seller_home_page',
+          path: '/sellerHomePage',
+          builder: (context, params) => SellerHomePageWidget(),
+        ),
+        FFRoute(
+          name: 'Order_view_page',
+          path: '/orderViewPage',
+          asyncParams: {
+            'service': getDoc(['serviceAll'], ServiceAllRecord.fromSnapshot),
+            'seller': getDoc(['users'], UsersRecord.fromSnapshot),
+          },
+          builder: (context, params) => OrderViewPageWidget(
+            service: params.getParam(
+              'service',
+              ParamType.Document,
+            ),
+            seller: params.getParam(
+              'seller',
+              ParamType.Document,
+            ),
+            noofhours: params.getParam(
+              'noofhours',
+              ParamType.double,
+            ),
+            date: params.getParam(
+              'date',
+              ParamType.DateTime,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: 'EditProfile',
+          path: '/editProfile',
+          builder: (context, params) => EditProfileWidget(),
+        ),
+        FFRoute(
+          name: 'Service_details_page',
+          path: '/serviceDetailsPage',
+          asyncParams: {
+            'sericeDoc': getDoc(['serviceAll'], ServiceAllRecord.fromSnapshot),
+          },
+          builder: (context, params) => ServiceDetailsPageWidget(
+            image: params.getParam(
+              'image',
+              ParamType.String,
+            ),
+            sericeDoc: params.getParam(
+              'sericeDoc',
+              ParamType.Document,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: 'AccountSetting',
+          path: '/accountSetting',
+          builder: (context, params) => AccountSettingWidget(),
+        ),
+        FFRoute(
+          name: 'productview_page',
+          path: '/productviewPage',
+          asyncParams: {
+            'ceta': getDoc(['professons'], ProfessonsRecord.fromSnapshot),
+          },
+          builder: (context, params) => ProductviewPageWidget(
+            ceta: params.getParam(
+              'ceta',
+              ParamType.Document,
+            ),
+            search: params.getParam(
+              'search',
+              ParamType.String,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: 'ServiceEditForm',
+          path: '/serviceEditForm',
+          builder: (context, params) => ServiceEditFormWidget(
+            title: params.getParam(
+              'title',
+              ParamType.String,
+            ),
+            description: params.getParam(
+              'description',
+              ParamType.String,
+            ),
+            image: params.getParam(
+              'image',
+              ParamType.String,
+            ),
+            price: params.getParam(
+              'price',
+              ParamType.double,
+            ),
+            location: params.getParam(
+              'location',
+              ParamType.String,
+            ),
+            isnew: params.getParam(
+              'isnew',
+              ParamType.bool,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: 'Adminpage',
+          path: '/adminpage',
+          builder: (context, params) => AdminpageWidget(),
+        ),
+        FFRoute(
+          name: 'adminage',
+          path: '/adminage',
+          builder: (context, params) => AdminageWidget(),
+        ),
+        FFRoute(
+          name: 'ordeplaceed',
+          path: '/ordeplaceed',
+          builder: (context, params) => OrdeplaceedWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
@@ -320,15 +457,11 @@ class FFRoute {
                 )
               : builder(context, ffParams);
           final child = appStateNotifier.loading
-              ? Center(
-                  child: SizedBox(
-                    width: 50.0,
-                    height: 50.0,
-                    child: CircularProgressIndicator(
-                      valueColor: AlwaysStoppedAnimation<Color>(
-                        FlutterFlowTheme.of(context).primary,
-                      ),
-                    ),
+              ? Container(
+                  color: Colors.transparent,
+                  child: Image.asset(
+                    'assets/images/a1f303ff-81a9-46b6-b574-a90d7b54c492.gif',
+                    fit: BoxFit.cover,
                   ),
                 )
               : page;
@@ -373,7 +506,7 @@ class TransitionInfo {
   final Duration duration;
   final Alignment? alignment;
 
-  static TransitionInfo appDefault() => const TransitionInfo(hasTransition: false);
+  static TransitionInfo appDefault() => TransitionInfo(hasTransition: false);
 }
 
 class RootPageContext {

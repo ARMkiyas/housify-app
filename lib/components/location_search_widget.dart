@@ -1,0 +1,274 @@
+import '/backend/api_requests/api_calls.dart';
+import '/flutter_flow/flutter_flow_animations.dart';
+import '/flutter_flow/flutter_flow_theme.dart';
+import '/flutter_flow/flutter_flow_util.dart';
+import 'dart:math';
+import 'package:easy_debounce/easy_debounce.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:flutter_animate/flutter_animate.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+import 'location_search_model.dart';
+export 'location_search_model.dart';
+
+class LocationSearchWidget extends StatefulWidget {
+  const LocationSearchWidget({super.key});
+
+  @override
+  State<LocationSearchWidget> createState() => _LocationSearchWidgetState();
+}
+
+class _LocationSearchWidgetState extends State<LocationSearchWidget>
+    with TickerProviderStateMixin {
+  late LocationSearchModel _model;
+
+  final animationsMap = <String, AnimationInfo>{};
+
+  @override
+  void setState(VoidCallback callback) {
+    super.setState(callback);
+    _model.onUpdate();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _model = createModel(context, () => LocationSearchModel());
+
+    _model.textController ??= TextEditingController();
+    _model.textFieldFocusNode ??= FocusNode();
+
+    animationsMap.addAll({
+      'listViewOnActionTriggerAnimation': AnimationInfo(
+        trigger: AnimationTrigger.onActionTrigger,
+        applyInitialState: true,
+        effectsBuilder: () => [
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 600.0.ms,
+            begin: Offset(0.0, 0.0),
+            end: Offset(0.0, 0.0),
+          ),
+        ],
+      ),
+    });
+    setupAnimations(
+      animationsMap.values.where((anim) =>
+          anim.trigger == AnimationTrigger.onActionTrigger ||
+          !anim.applyInitialState),
+      this,
+    );
+  }
+
+  @override
+  void dispose() {
+    _model.maybeDispose();
+
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.all(16.0),
+      child: Container(
+        width: double.infinity,
+        decoration: BoxDecoration(
+          color: FlutterFlowTheme.of(context).secondaryBackground,
+          boxShadow: [
+            BoxShadow(
+              blurRadius: 4.0,
+              color: Color(0x33000000),
+              offset: Offset(
+                0.0,
+                2.0,
+              ),
+            )
+          ],
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(8.0, 20.0, 8.0, 0.0),
+              child: TextFormField(
+                controller: _model.textController,
+                focusNode: _model.textFieldFocusNode,
+                onChanged: (_) => EasyDebounce.debounce(
+                  '_model.textController',
+                  Duration(milliseconds: 2000),
+                  () async {
+                    _model.geoListforward =
+                        await MapBoxGroup.forwareGeoLocationEncordingCall.call(
+                      location: _model.textController.text,
+                    );
+                    if ((_model.geoListforward?.succeeded ?? true)) {
+                      _model.displayList = true;
+                      setState(() {});
+                    } else {
+                      _model.displayList = false;
+                      setState(() {});
+                    }
+
+                    setState(() {});
+                  },
+                ),
+                autofocus: true,
+                obscureText: false,
+                decoration: InputDecoration(
+                  labelStyle: FlutterFlowTheme.of(context).labelMedium.override(
+                        fontFamily: 'Readex Pro',
+                        letterSpacing: 0.0,
+                      ),
+                  hintText: 'Find your Location',
+                  hintStyle: FlutterFlowTheme.of(context).labelMedium.override(
+                        fontFamily: 'Readex Pro',
+                        letterSpacing: 0.0,
+                      ),
+                  enabledBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color: FlutterFlowTheme.of(context).alternate,
+                      width: 2.0,
+                    ),
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                  focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color: FlutterFlowTheme.of(context).primary,
+                      width: 2.0,
+                    ),
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                  errorBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color: FlutterFlowTheme.of(context).error,
+                      width: 2.0,
+                    ),
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                  focusedErrorBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color: FlutterFlowTheme.of(context).error,
+                      width: 2.0,
+                    ),
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                  prefixIcon: Icon(
+                    Icons.search,
+                  ),
+                ),
+                style: FlutterFlowTheme.of(context).bodyMedium.override(
+                      fontFamily: 'Readex Pro',
+                      letterSpacing: 0.0,
+                    ),
+                validator: _model.textControllerValidator.asValidator(context),
+              ),
+            ),
+            if (_model.displayList)
+              Container(
+                width: double.infinity,
+                height: 200.0,
+                decoration: BoxDecoration(
+                  color: FlutterFlowTheme.of(context).secondaryBackground,
+                  boxShadow: [
+                    BoxShadow(
+                      blurRadius: 4.0,
+                      color: Color(0x33000000),
+                      offset: Offset(
+                        0.0,
+                        2.0,
+                      ),
+                    )
+                  ],
+                ),
+                child: Align(
+                  alignment: AlignmentDirectional(0.0, 0.0),
+                  child: Padding(
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
+                    child: Builder(
+                      builder: (context) {
+                        final placesFound =
+                            MapBoxGroup.forwareGeoLocationEncordingCall
+                                    .fetures(
+                                      (_model.geoListforward?.jsonBody ?? ''),
+                                    )
+                                    ?.toList() ??
+                                [];
+                        return ListView.separated(
+                          padding: EdgeInsets.fromLTRB(
+                            0,
+                            5.0,
+                            0,
+                            0,
+                          ),
+                          scrollDirection: Axis.vertical,
+                          itemCount: placesFound.length,
+                          separatorBuilder: (_, __) => SizedBox(height: 10.0),
+                          itemBuilder: (context, placesFoundIndex) {
+                            final placesFoundItem =
+                                placesFound[placesFoundIndex];
+                            return InkWell(
+                              splashColor: Colors.transparent,
+                              focusColor: Colors.transparent,
+                              hoverColor: Colors.transparent,
+                              highlightColor: Colors.transparent,
+                              onTap: () async {
+                                if (getJsonField(
+                                      placesFoundItem,
+                                      r'''$.properties.full_address''',
+                                    ) !=
+                                    null) {
+                                  FFAppState().DeviceCurrentLoctationAddress =
+                                      getJsonField(
+                                    placesFoundItem,
+                                    r'''$.properties.full_address''',
+                                  ).toString();
+                                  setState(() {});
+                                } else {
+                                  return;
+                                }
+
+                                FFAppState().displayPlacePicker = false;
+                                setState(() {});
+                              },
+                              child: Container(
+                                width: double.infinity,
+                                decoration: BoxDecoration(
+                                  color: FlutterFlowTheme.of(context)
+                                      .secondaryBackground,
+                                ),
+                                child: Padding(
+                                  padding: EdgeInsets.all(4.0),
+                                  child: Text(
+                                    getJsonField(
+                                      placesFoundItem,
+                                      r'''$.properties.full_address''',
+                                    ).toString(),
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          fontFamily: 'Readex Pro',
+                                          letterSpacing: 0.0,
+                                        ),
+                                  ),
+                                ),
+                              ),
+                            );
+                          },
+                        ).animateOnActionTrigger(
+                          animationsMap['listViewOnActionTriggerAnimation']!,
+                        );
+                      },
+                    ),
+                  ),
+                ),
+              ),
+          ],
+        ),
+      ),
+    );
+  }
+}

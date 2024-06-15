@@ -3,15 +3,17 @@ import 'dart:async';
 import 'package:collection/collection.dart';
 
 import '/backend/schema/util/firestore_util.dart';
+import '/backend/schema/util/schema_util.dart';
 import '/backend/schema/enums/enums.dart';
 
 import 'index.dart';
+import '/flutter_flow/flutter_flow_util.dart';
 
 class SellersRecord extends FirestoreRecord {
   SellersRecord._(
-    super.reference,
-    super.data,
-  ) {
+    DocumentReference reference,
+    Map<String, dynamic> data,
+  ) : super(reference, data) {
     _initializeFields();
   }
 
@@ -55,6 +57,11 @@ class SellersRecord extends FirestoreRecord {
   String get address => _address ?? '';
   bool hasAddress() => _address != null;
 
+  // "user" field.
+  DocumentReference? _user;
+  DocumentReference? get user => _user;
+  bool hasUser() => _user != null;
+
   DocumentReference get parentReference => reference.parent.parent!;
 
   void _initializeFields() {
@@ -66,6 +73,7 @@ class SellersRecord extends FirestoreRecord {
     _idImageBack = snapshotData['id_image_back'] as String?;
     _dob = snapshotData['DOB'] as DateTime?;
     _address = snapshotData['address'] as String?;
+    _user = snapshotData['user'] as DocumentReference?;
   }
 
   static Query<Map<String, dynamic>> collection([DocumentReference? parent]) =>
@@ -116,6 +124,7 @@ Map<String, dynamic> createSellersRecordData({
   String? idImageBack,
   DateTime? dob,
   String? address,
+  DocumentReference? user,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -127,6 +136,7 @@ Map<String, dynamic> createSellersRecordData({
       'id_image_back': idImageBack,
       'DOB': dob,
       'address': address,
+      'user': user,
     }.withoutNulls,
   );
 
@@ -145,7 +155,8 @@ class SellersRecordDocumentEquality implements Equality<SellersRecord> {
         e1?.idImageFront == e2?.idImageFront &&
         e1?.idImageBack == e2?.idImageBack &&
         e1?.dob == e2?.dob &&
-        e1?.address == e2?.address;
+        e1?.address == e2?.address &&
+        e1?.user == e2?.user;
   }
 
   @override
@@ -157,7 +168,8 @@ class SellersRecordDocumentEquality implements Equality<SellersRecord> {
         e?.idImageFront,
         e?.idImageBack,
         e?.dob,
-        e?.address
+        e?.address,
+        e?.user
       ]);
 
   @override

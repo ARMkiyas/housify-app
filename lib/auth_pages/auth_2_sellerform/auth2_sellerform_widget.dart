@@ -1,6 +1,10 @@
 import '/componets/seller_form/seller_form_widget.dart';
+import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'auth2_sellerform_model.dart';
 export 'auth2_sellerform_model.dart';
 
@@ -40,7 +44,7 @@ class _Auth2SellerformWidgetState extends State<Auth2SellerformWidget> {
         body: wrapWithModel(
           model: _model.sellerFormModel,
           updateCallback: () => setState(() {}),
-          child: const SellerFormWidget(),
+          child: SellerFormWidget(),
         ),
       ),
     );

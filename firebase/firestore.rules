@@ -4,8 +4,8 @@ service cloud.firestore {
     match /users/{document} {
       allow create: if true;
       allow read: if true;
-      allow write: if false;
-      allow delete: if false;
+      allow write: if true;
+      allow delete: if request.auth != null;
     }
 
     match /professons/{document} {
@@ -16,15 +16,55 @@ service cloud.firestore {
     }
 
     match /users/{parent}/sellers/{document} {
+      allow create: if request.auth.uid == parent;
+      allow read: if request.auth.uid == parent;
+      allow write: if request.auth.uid == parent;
+      allow delete: if request.auth.uid == parent;
+    }
+
+    match /orders/{document} {
       allow create: if true;
       allow read: if true;
       allow write: if true;
       allow delete: if true;
     }
 
-    match /{path=**}/sellers/{document} {
+    match /orders/{parent}/items/{document} {
+      allow create: if true;
+      allow read: if true;
+      allow write: if true;
+      allow delete: if true;
+    }
+
+    match /{path=**}/items/{document} {
       allow read: if true;
     }
 
+
+    match /serviceAll/{document} {
+      allow create: if true;
+      allow read: if true;
+      allow write: if request.auth != null;
+      allow delete: if request.auth != null;
+    }
+
+    match /serviceAll/{parent}/SellerReviews/{document} {
+      allow create: if true;
+      allow read: if true;
+      allow write: if request.auth != null;
+      allow delete: if request.auth != null;
+    }
+
+    match /{path=**}/SellerReviews/{document} {
+      allow read: if true;
+    }
+
+
+    match /specialOffers/{document} {
+      allow create: if true;
+      allow read: if true;
+      allow write: if request.auth != null;
+      allow delete: if request.auth != null;
+    }
   }
 }
