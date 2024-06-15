@@ -19,8 +19,20 @@ class ProfessonsRecord extends FirestoreRecord {
   String get professoion => _professoion ?? '';
   bool hasProfessoion() => _professoion != null;
 
+  // "category_name" field.
+  String? _categoryName;
+  String get categoryName => _categoryName ?? '';
+  bool hasCategoryName() => _categoryName != null;
+
+  // "image" field.
+  String? _image;
+  String get image => _image ?? '';
+  bool hasImage() => _image != null;
+
   void _initializeFields() {
     _professoion = snapshotData['professoion'] as String?;
+    _categoryName = snapshotData['category_name'] as String?;
+    _image = snapshotData['image'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -59,10 +71,14 @@ class ProfessonsRecord extends FirestoreRecord {
 
 Map<String, dynamic> createProfessonsRecordData({
   String? professoion,
+  String? categoryName,
+  String? image,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
       'professoion': professoion,
+      'category_name': categoryName,
+      'image': image,
     }.withoutNulls,
   );
 
@@ -74,11 +90,14 @@ class ProfessonsRecordDocumentEquality implements Equality<ProfessonsRecord> {
 
   @override
   bool equals(ProfessonsRecord? e1, ProfessonsRecord? e2) {
-    return e1?.professoion == e2?.professoion;
+    return e1?.professoion == e2?.professoion &&
+        e1?.categoryName == e2?.categoryName &&
+        e1?.image == e2?.image;
   }
 
   @override
-  int hash(ProfessonsRecord? e) => const ListEquality().hash([e?.professoion]);
+  int hash(ProfessonsRecord? e) =>
+      const ListEquality().hash([e?.professoion, e?.categoryName, e?.image]);
 
   @override
   bool isValidKey(Object? o) => o is ProfessonsRecord;

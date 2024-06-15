@@ -3,12 +3,10 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '/backend/backend.dart';
-import '/backend/schema/structs/index.dart';
 
 import '/auth/base_auth_user_provider.dart';
 
 import '/index.dart';
-import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 
 export 'package:go_router/go_router.dart';
@@ -74,21 +72,21 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
       errorBuilder: (context, state) => appStateNotifier.loggedIn
-          ? const HomepageWidget()
+          ? const LoadingWidget()
           : const AuthWelcomeScreenWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
           builder: (context, _) => appStateNotifier.loggedIn
-              ? const HomepageWidget()
+              ? const LoadingWidget()
               : const AuthWelcomeScreenWidget(),
         ),
         FFRoute(
-          name: 'homepage',
-          path: '/homepage',
+          name: 'Cus_homepage',
+          path: '/cusHomepage',
           requireAuth: true,
-          builder: (context, params) => const HomepageWidget(),
+          builder: (context, params) => const CusHomepageWidget(),
         ),
         FFRoute(
           name: 'auth_WelcomeScreen',
@@ -131,9 +129,139 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => const CategoryPageWidget(),
         ),
         FFRoute(
-          name: 'orders_page',
-          path: '/ordersPage',
-          builder: (context, params) => const OrdersPageWidget(),
+          name: 'offerpage',
+          path: '/offerpage',
+          builder: (context, params) => const OfferpageWidget(),
+        ),
+        FFRoute(
+          name: 'order_page',
+          path: '/orderPage',
+          builder: (context, params) => const OrderPageWidget(),
+        ),
+        FFRoute(
+          name: 'Loading',
+          path: '/loading',
+          builder: (context, params) => const LoadingWidget(),
+        ),
+        FFRoute(
+          name: 'seller_home_page',
+          path: '/sellerHomePage',
+          builder: (context, params) => const SellerHomePageWidget(),
+        ),
+        FFRoute(
+          name: 'Order_view_page',
+          path: '/orderViewPage',
+          asyncParams: {
+            'service': getDoc(['serviceAll'], ServiceAllRecord.fromSnapshot),
+            'seller': getDoc(['users'], UsersRecord.fromSnapshot),
+          },
+          builder: (context, params) => OrderViewPageWidget(
+            service: params.getParam(
+              'service',
+              ParamType.Document,
+            ),
+            seller: params.getParam(
+              'seller',
+              ParamType.Document,
+            ),
+            noofhours: params.getParam(
+              'noofhours',
+              ParamType.double,
+            ),
+            date: params.getParam(
+              'date',
+              ParamType.DateTime,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: 'EditProfile',
+          path: '/editProfile',
+          builder: (context, params) => const EditProfileWidget(),
+        ),
+        FFRoute(
+          name: 'Service_details_page',
+          path: '/serviceDetailsPage',
+          asyncParams: {
+            'sericeDoc': getDoc(['serviceAll'], ServiceAllRecord.fromSnapshot),
+          },
+          builder: (context, params) => ServiceDetailsPageWidget(
+            image: params.getParam(
+              'image',
+              ParamType.String,
+            ),
+            sericeDoc: params.getParam(
+              'sericeDoc',
+              ParamType.Document,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: 'AccountSetting',
+          path: '/accountSetting',
+          builder: (context, params) => const AccountSettingWidget(),
+        ),
+        FFRoute(
+          name: 'productview_page',
+          path: '/productviewPage',
+          asyncParams: {
+            'ceta': getDoc(['professons'], ProfessonsRecord.fromSnapshot),
+          },
+          builder: (context, params) => ProductviewPageWidget(
+            ceta: params.getParam(
+              'ceta',
+              ParamType.Document,
+            ),
+            search: params.getParam(
+              'search',
+              ParamType.String,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: 'ServiceEditForm',
+          path: '/serviceEditForm',
+          builder: (context, params) => ServiceEditFormWidget(
+            title: params.getParam(
+              'title',
+              ParamType.String,
+            ),
+            description: params.getParam(
+              'description',
+              ParamType.String,
+            ),
+            image: params.getParam(
+              'image',
+              ParamType.String,
+            ),
+            price: params.getParam(
+              'price',
+              ParamType.double,
+            ),
+            location: params.getParam(
+              'location',
+              ParamType.String,
+            ),
+            isnew: params.getParam(
+              'isnew',
+              ParamType.bool,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: 'Adminpage',
+          path: '/adminpage',
+          builder: (context, params) => const AdminpageWidget(),
+        ),
+        FFRoute(
+          name: 'adminage',
+          path: '/adminage',
+          builder: (context, params) => const AdminageWidget(),
+        ),
+        FFRoute(
+          name: 'ordeplaceed',
+          path: '/ordeplaceed',
+          builder: (context, params) => const OrdeplaceedWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
@@ -320,15 +448,11 @@ class FFRoute {
                 )
               : builder(context, ffParams);
           final child = appStateNotifier.loading
-              ? Center(
-                  child: SizedBox(
-                    width: 50.0,
-                    height: 50.0,
-                    child: CircularProgressIndicator(
-                      valueColor: AlwaysStoppedAnimation<Color>(
-                        FlutterFlowTheme.of(context).primary,
-                      ),
-                    ),
+              ? Container(
+                  color: Colors.transparent,
+                  child: Image.asset(
+                    'assets/images/a1f303ff-81a9-46b6-b574-a90d7b54c492.gif',
+                    fit: BoxFit.cover,
                   ),
                 )
               : page;

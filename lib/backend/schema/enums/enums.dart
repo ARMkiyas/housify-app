@@ -21,6 +21,30 @@ enum Pages {
   category,
   orders,
   profile,
+  sellerhome,
+}
+
+enum OrderStatus {
+  waiting,
+  accepted,
+  canceled,
+  completed,
+}
+
+enum PaymentMethod {
+  LankaQR,
+  Card,
+  Cash,
+}
+
+enum Ongoingorder {
+  waiting,
+  accepted,
+}
+
+enum Completedorder {
+  canceled,
+  completed,
 }
 
 extension FFEnumExtensions<T extends Enum> on T {
@@ -42,6 +66,14 @@ T? deserializeEnum<T>(String? value) {
       return IdTypes.values.deserialize(value) as T?;
     case (Pages):
       return Pages.values.deserialize(value) as T?;
+    case (OrderStatus):
+      return OrderStatus.values.deserialize(value) as T?;
+    case (PaymentMethod):
+      return PaymentMethod.values.deserialize(value) as T?;
+    case (Ongoingorder):
+      return Ongoingorder.values.deserialize(value) as T?;
+    case (Completedorder):
+      return Completedorder.values.deserialize(value) as T?;
     default:
       return null;
   }

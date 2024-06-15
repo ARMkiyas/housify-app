@@ -1,6 +1,4 @@
 import '/auth/firebase_auth/auth_util.dart';
-import '/backend/backend.dart';
-import '/backend/schema/enums/enums.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -358,7 +356,6 @@ class _Auth2LoginWidgetState extends State<Auth2LoginWidget>
                                   0.0, 0.0, 0.0, 16.0),
                               child: FFButtonWidget(
                                 onPressed: () async {
-                                  var shouldSetState = false;
                                   GoRouter.of(context).prepareAuthEvent();
 
                                   final user =
@@ -372,48 +369,11 @@ class _Auth2LoginWidgetState extends State<Auth2LoginWidget>
                                   }
 
                                   if (loggedIn) {
-                                    if (currentUserDocument?.role ==
-                                        Roles.customer) {
-                                      context.goNamedAuth(
-                                          'homepage', context.mounted);
-
-                                      if (shouldSetState) setState(() {});
-                                      return;
-                                    } else {
-                                      if (currentUserDocument?.seller != null) {
-                                        _model.sellerData =
-                                            await SellersRecord.getDocumentOnce(
-                                                currentUserDocument!.seller!);
-                                        shouldSetState = true;
-                                        if (_model.sellerData?.verified ==
-                                            true) {
-                                          context.goNamedAuth(
-                                              'homepage', context.mounted);
-
-                                          if (shouldSetState) setState(() {});
-                                          return;
-                                        } else {
-                                          context.goNamedAuth(
-                                              'Verfication_wait',
-                                              context.mounted);
-
-                                          if (shouldSetState) setState(() {});
-                                          return;
-                                        }
-                                      } else {
-                                        context.goNamedAuth('auth_2_sellerform',
-                                            context.mounted);
-
-                                        if (shouldSetState) setState(() {});
-                                        return;
-                                      }
-                                    }
+                                    context.goNamedAuth(
+                                        'Loading', context.mounted);
                                   } else {
-                                    if (shouldSetState) setState(() {});
                                     return;
                                   }
-
-                                  if (shouldSetState) setState(() {});
                                 },
                                 text: 'Sign In',
                                 options: FFButtonOptions(
@@ -469,8 +429,8 @@ class _Auth2LoginWidgetState extends State<Auth2LoginWidget>
                                     return;
                                   }
 
-                                  context.goNamedAuth(
-                                      'homepage', context.mounted);
+                                  context.pushNamedAuth(
+                                      'Loading', context.mounted);
                                 },
                                 text: 'Continue with Google',
                                 icon: const FaIcon(
@@ -529,7 +489,7 @@ class _Auth2LoginWidgetState extends State<Auth2LoginWidget>
                                           }
 
                                           context.goNamedAuth(
-                                              'homepage', context.mounted);
+                                              'Loading', context.mounted);
                                         },
                                         text: 'Continue with Apple',
                                         icon: const FaIcon(

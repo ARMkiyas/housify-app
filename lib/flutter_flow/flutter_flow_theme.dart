@@ -55,6 +55,7 @@ abstract class FlutterFlowTheme {
   late Color info;
 
   late Color colormutad;
+  late Color pageviewdot;
 
   @Deprecated('Use displaySmallFamily instead')
   String get title1Family => displaySmallFamily;
@@ -145,6 +146,7 @@ class LightModeTheme extends FlutterFlowTheme {
   late Color info = const Color(0xFFFFFFFF);
 
   late Color colormutad = const Color(0xFFBDBDBD);
+  late Color pageviewdot = const Color(0xFFE0E0E0);
 }
 
 abstract class Typography {
@@ -317,6 +319,7 @@ class DarkModeTheme extends FlutterFlowTheme {
   late Color info = const Color(0xFFFFFFFF);
 
   late Color colormutad = const Color(0xFFEFEFEF);
+  late Color pageviewdot = const Color(0xFF535353);
 }
 
 extension TextStyleHelper on TextStyle {
