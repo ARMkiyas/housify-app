@@ -1,7 +1,10 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'offerpage_model.dart';
 export 'offerpage_model.dart';
 
@@ -55,14 +58,14 @@ class _OfferpageWidgetState extends State<OfferpageWidget> {
                     children: [
                       Expanded(
                         child: Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
+                          padding: EdgeInsetsDirectional.fromSTEB(
                               40.0, 0.0, 40.0, 0.0),
                           child: TextFormField(
                             controller: _model.textController,
                             focusNode: _model.textFieldFocusNode,
                             onChanged: (_) => EasyDebounce.debounce(
                               '_model.textController',
-                              const Duration(milliseconds: 500),
+                              Duration(milliseconds: 500),
                               () => setState(() {}),
                             ),
                             autofocus: true,
@@ -129,7 +132,7 @@ class _OfferpageWidgetState extends State<OfferpageWidget> {
                     children: [
                       Expanded(
                         child: Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
+                          padding: EdgeInsetsDirectional.fromSTEB(
                               40.0, 20.0, 40.0, 10.0),
                           child: Container(
                             width: 50.0,
@@ -138,7 +141,7 @@ class _OfferpageWidgetState extends State<OfferpageWidget> {
                               color: FlutterFlowTheme.of(context)
                                   .secondaryBackground,
                             ),
-                            alignment: const AlignmentDirectional(-1.0, 0.0),
+                            alignment: AlignmentDirectional(-1.0, 0.0),
                             child: Stack(
                               children: [
                                 Row(
@@ -170,7 +173,7 @@ class _OfferpageWidgetState extends State<OfferpageWidget> {
                                         children: [
                                           Expanded(
                                             child: Align(
-                                              alignment: const AlignmentDirectional(
+                                              alignment: AlignmentDirectional(
                                                   0.0, 1.0),
                                               child: Row(
                                                 mainAxisSize: MainAxisSize.max,
@@ -178,7 +181,7 @@ class _OfferpageWidgetState extends State<OfferpageWidget> {
                                                   Expanded(
                                                     child: Padding(
                                                       padding:
-                                                          const EdgeInsetsDirectional
+                                                          EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   0.0,
                                                                   0.0,
@@ -194,7 +197,7 @@ class _OfferpageWidgetState extends State<OfferpageWidget> {
                                                             .override(
                                                               fontFamily:
                                                                   'Readex Pro',
-                                                              color: const Color(
+                                                              color: Color(
                                                                   0xFF910000),
                                                               fontSize: 40.0,
                                                               letterSpacing:
@@ -212,7 +215,7 @@ class _OfferpageWidgetState extends State<OfferpageWidget> {
                                           ),
                                           Expanded(
                                             child: Align(
-                                              alignment: const AlignmentDirectional(
+                                              alignment: AlignmentDirectional(
                                                   0.0, -1.0),
                                               child: Row(
                                                 mainAxisSize: MainAxisSize.max,
@@ -222,7 +225,7 @@ class _OfferpageWidgetState extends State<OfferpageWidget> {
                                                   Expanded(
                                                     child: Padding(
                                                       padding:
-                                                          const EdgeInsetsDirectional
+                                                          EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   0.0,
                                                                   0.0,
@@ -238,7 +241,7 @@ class _OfferpageWidgetState extends State<OfferpageWidget> {
                                                             .override(
                                                               fontFamily:
                                                                   'Readex Pro',
-                                                              color: const Color(
+                                                              color: Color(
                                                                   0xFF2FF7EA),
                                                               fontSize: 30.0,
                                                               letterSpacing:
@@ -268,14 +271,14 @@ class _OfferpageWidgetState extends State<OfferpageWidget> {
                   ),
                   Padding(
                     padding:
-                        const EdgeInsetsDirectional.fromSTEB(0.0, 15.0, 0.0, 15.0),
+                        EdgeInsetsDirectional.fromSTEB(0.0, 15.0, 0.0, 15.0),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Expanded(
                           child: Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
+                            padding: EdgeInsetsDirectional.fromSTEB(
                                 40.0, 10.0, 40.0, 10.0),
                             child: Container(
                               width: 50.0,
@@ -321,7 +324,7 @@ class _OfferpageWidgetState extends State<OfferpageWidget> {
                                                 Expanded(
                                                   child: Padding(
                                                     padding:
-                                                        const EdgeInsetsDirectional
+                                                        EdgeInsetsDirectional
                                                             .fromSTEB(0.0, 25.0,
                                                                 25.0, 0.0),
                                                     child: Text(
@@ -352,7 +355,7 @@ class _OfferpageWidgetState extends State<OfferpageWidget> {
                                                 Expanded(
                                                   child: Padding(
                                                     padding:
-                                                        const EdgeInsetsDirectional
+                                                        EdgeInsetsDirectional
                                                             .fromSTEB(0.0, 0.0,
                                                                 25.0, 0.0),
                                                     child: Text(
@@ -389,14 +392,14 @@ class _OfferpageWidgetState extends State<OfferpageWidget> {
                   ),
                   Padding(
                     padding:
-                        const EdgeInsetsDirectional.fromSTEB(0.0, 15.0, 0.0, 15.0),
+                        EdgeInsetsDirectional.fromSTEB(0.0, 15.0, 0.0, 15.0),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Expanded(
                           child: Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
+                            padding: EdgeInsetsDirectional.fromSTEB(
                                 40.0, 10.0, 40.0, 10.0),
                             child: Container(
                               width: 50.0,
@@ -440,7 +443,7 @@ class _OfferpageWidgetState extends State<OfferpageWidget> {
                                                 Expanded(
                                                   child: Padding(
                                                     padding:
-                                                        const EdgeInsetsDirectional
+                                                        EdgeInsetsDirectional
                                                             .fromSTEB(0.0, 20.0,
                                                                 25.0, 10.0),
                                                     child: Text(
@@ -452,7 +455,7 @@ class _OfferpageWidgetState extends State<OfferpageWidget> {
                                                           .override(
                                                             fontFamily:
                                                                 'Readex Pro',
-                                                            color: const Color(
+                                                            color: Color(
                                                                 0xFF910000),
                                                             fontSize: 50.0,
                                                             letterSpacing: 0.0,
@@ -470,7 +473,7 @@ class _OfferpageWidgetState extends State<OfferpageWidget> {
                                                 Expanded(
                                                   child: Padding(
                                                     padding:
-                                                        const EdgeInsetsDirectional
+                                                        EdgeInsetsDirectional
                                                             .fromSTEB(0.0, 0.0,
                                                                 25.0, 0.0),
                                                     child: Text(
@@ -482,7 +485,7 @@ class _OfferpageWidgetState extends State<OfferpageWidget> {
                                                           .override(
                                                             fontFamily:
                                                                 'Readex Pro',
-                                                            color: const Color(
+                                                            color: Color(
                                                                 0xFF910000),
                                                             fontSize: 30.0,
                                                             letterSpacing: 0.0,
@@ -500,7 +503,7 @@ class _OfferpageWidgetState extends State<OfferpageWidget> {
                                                 Expanded(
                                                   child: Padding(
                                                     padding:
-                                                        const EdgeInsetsDirectional
+                                                        EdgeInsetsDirectional
                                                             .fromSTEB(0.0, 0.0,
                                                                 25.0, 0.0),
                                                     child: Text(
@@ -512,7 +515,7 @@ class _OfferpageWidgetState extends State<OfferpageWidget> {
                                                           .override(
                                                             fontFamily:
                                                                 'Readex Pro',
-                                                            color: const Color(
+                                                            color: Color(
                                                                 0xFF910000),
                                                             fontSize: 30.0,
                                                             letterSpacing: 0.0,

@@ -4,6 +4,8 @@ import '/flutter_flow/flutter_flow_charts.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'sales_chart_model.dart';
 export 'sales_chart_model.dart';
 
@@ -44,7 +46,7 @@ class _SalesChartWidgetState extends State<SalesChartWidget> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 40.0),
+      padding: EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 40.0),
       child: StreamBuilder<List<OrdersRecord>>(
         stream: queryOrdersRecord(
           queryBuilder: (ordersRecord) => ordersRecord.where(
@@ -73,7 +75,7 @@ class _SalesChartWidgetState extends State<SalesChartWidget> {
             height: 350.0,
             decoration: BoxDecoration(
               color: FlutterFlowTheme.of(context).primaryBackground,
-              boxShadow: const [
+              boxShadow: [
                 BoxShadow(
                   blurRadius: 3.0,
                   color: Color(0x33000000),
@@ -86,13 +88,13 @@ class _SalesChartWidgetState extends State<SalesChartWidget> {
               borderRadius: BorderRadius.circular(10.0),
             ),
             child: Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 20.0),
+              padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 20.0),
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   Padding(
                     padding:
-                        const EdgeInsetsDirectional.fromSTEB(16.0, 20.0, 16.0, 10.0),
+                        EdgeInsetsDirectional.fromSTEB(16.0, 20.0, 16.0, 10.0),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -123,8 +125,8 @@ class _SalesChartWidgetState extends State<SalesChartWidget> {
                   Expanded(
                     child: Padding(
                       padding:
-                          const EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 5.0, 0.0),
-                      child: SizedBox(
+                          EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 5.0, 0.0),
+                      child: Container(
                         height: double.infinity,
                         child: FlutterFlowBarChart(
                           barData: [
@@ -134,9 +136,9 @@ class _SalesChartWidgetState extends State<SalesChartWidget> {
                                   .toList()
                                   .map((d) => d.totalPrice)
                                   .toList(),
-                              color: const Color(0xFFFFCD00),
+                              color: Color(0xFFFFCD00),
                               borderWidth: 1.0,
-                              borderColor: const Color(0xFFFFCD00),
+                              borderColor: Color(0xFFFFCD00),
                             )
                           ],
                           xLabels: containerOrdersRecordList
@@ -145,7 +147,7 @@ class _SalesChartWidgetState extends State<SalesChartWidget> {
                               .map((d) => d.orderDate)
                               .toList(),
                           barWidth: 30.0,
-                          barBorderRadius: const BorderRadius.only(
+                          barBorderRadius: BorderRadius.only(
                             bottomLeft: Radius.circular(10.0),
                             bottomRight: Radius.circular(1040.0),
                             topLeft: Radius.circular(10.0),
@@ -161,7 +163,7 @@ class _SalesChartWidgetState extends State<SalesChartWidget> {
                             showGrid: true,
                             showBorder: false,
                           ),
-                          axisBounds: const AxisBounds(
+                          axisBounds: AxisBounds(
                             minY: 100.0,
                             maxY: 5000.0,
                           ),

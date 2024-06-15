@@ -17,6 +17,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'cus_home_model.dart';
 export 'cus_home_model.dart';
@@ -44,7 +45,8 @@ class _CusHomeWidgetState extends State<CusHomeWidget> {
 
     // On component load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      if (FFAppState().DeviceCurrentLoctationAddress == '') {
+      if (FFAppState().DeviceCurrentLoctationAddress == null ||
+          FFAppState().DeviceCurrentLoctationAddress == '') {
         await action_blocks.updateCurrentLocation(context);
         return;
       } else {
@@ -67,7 +69,7 @@ class _CusHomeWidgetState extends State<CusHomeWidget> {
     return Stack(
       children: [
         Padding(
-          padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 35.0),
+          padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 35.0),
           child: SingleChildScrollView(
             child: Column(
               mainAxisSize: MainAxisSize.max,
@@ -75,7 +77,7 @@ class _CusHomeWidgetState extends State<CusHomeWidget> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 0.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 0.0),
                   child: Container(
                     height: 60.0,
                     decoration: BoxDecoration(
@@ -102,14 +104,14 @@ class _CusHomeWidgetState extends State<CusHomeWidget> {
                                     width: 48.0,
                                     height: 48.0,
                                     clipBehavior: Clip.antiAlias,
-                                    decoration: const BoxDecoration(
+                                    decoration: BoxDecoration(
                                       shape: BoxShape.circle,
                                     ),
                                     child: CachedNetworkImage(
                                       fadeInDuration:
-                                          const Duration(milliseconds: 500),
+                                          Duration(milliseconds: 500),
                                       fadeOutDuration:
-                                          const Duration(milliseconds: 500),
+                                          Duration(milliseconds: 500),
                                       imageUrl: valueOrDefault<String>(
                                         currentUserPhoto,
                                         'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/netron-e-com-mobile-6rhojr/assets/l260dcr57pr2/user-default.png',
@@ -121,7 +123,7 @@ class _CusHomeWidgetState extends State<CusHomeWidget> {
                               ),
                               Expanded(
                                 child: Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       16.0, 0.0, 0.0, 0.0),
                                   child: Column(
                                     mainAxisSize: MainAxisSize.min,
@@ -185,7 +187,7 @@ class _CusHomeWidgetState extends State<CusHomeWidget> {
                                           ),
                                         ],
                                       ),
-                                    ].divide(const SizedBox(height: 4.0)),
+                                    ].divide(SizedBox(height: 4.0)),
                                   ),
                                 ),
                               ),
@@ -195,11 +197,11 @@ class _CusHomeWidgetState extends State<CusHomeWidget> {
                         Row(
                           mainAxisSize: MainAxisSize.max,
                           children: [
-                            SizedBox(
+                            Container(
                               width: 40.0,
                               height: 40.0,
                               child: Stack(
-                                alignment: const AlignmentDirectional(0.0, 0.0),
+                                alignment: AlignmentDirectional(0.0, 0.0),
                                 children: [
                                   FlutterFlowIconButton(
                                     borderColor: Colors.transparent,
@@ -216,9 +218,9 @@ class _CusHomeWidgetState extends State<CusHomeWidget> {
                                     },
                                   ),
                                   Align(
-                                    alignment: const AlignmentDirectional(1.0, -1.0),
+                                    alignment: AlignmentDirectional(1.0, -1.0),
                                     child: Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
                                           0.0, 7.0, 9.0, 0.0),
                                       child: Container(
                                         width: 9.0,
@@ -243,7 +245,7 @@ class _CusHomeWidgetState extends State<CusHomeWidget> {
                 if (false)
                   Padding(
                     padding:
-                        const EdgeInsetsDirectional.fromSTEB(20.0, 5.0, 20.0, 0.0),
+                        EdgeInsetsDirectional.fromSTEB(20.0, 5.0, 20.0, 0.0),
                     child: InkWell(
                       splashColor: Colors.transparent,
                       focusColor: Colors.transparent,
@@ -253,7 +255,7 @@ class _CusHomeWidgetState extends State<CusHomeWidget> {
                         context.pushNamed(
                           'category_page',
                           extra: <String, dynamic>{
-                            kTransitionInfoKey: const TransitionInfo(
+                            kTransitionInfoKey: TransitionInfo(
                               hasTransition: true,
                               transitionType: PageTransitionType.topToBottom,
                               duration: Duration(milliseconds: 200),
@@ -265,7 +267,7 @@ class _CusHomeWidgetState extends State<CusHomeWidget> {
                         width: double.infinity,
                         height: 48.0,
                         decoration: BoxDecoration(
-                          color: const Color(0xFFFAFAFA),
+                          color: Color(0xFFFAFAFA),
                           borderRadius: BorderRadius.circular(12.0),
                         ),
                         child: Visibility(
@@ -275,7 +277,7 @@ class _CusHomeWidgetState extends State<CusHomeWidget> {
                             children: [
                               Expanded(
                                 child: Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       12.0, 0.0, 0.0, 0.0),
                                   child: Row(
                                     mainAxisSize: MainAxisSize.max,
@@ -298,12 +300,12 @@ class _CusHomeWidgetState extends State<CusHomeWidget> {
                                               letterSpacing: 0.0,
                                             ),
                                       ),
-                                    ].divide(const SizedBox(width: 8.0)),
+                                    ].divide(SizedBox(width: 8.0)),
                                   ),
                                 ),
                               ),
                               Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                padding: EdgeInsetsDirectional.fromSTEB(
                                     0.0, 0.0, 12.0, 0.0),
                                 child: Icon(
                                   Icons.filter_list,
@@ -328,7 +330,7 @@ class _CusHomeWidgetState extends State<CusHomeWidget> {
                     ),
                     child: Padding(
                       padding:
-                          const EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 0.0),
+                          EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 0.0),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -352,9 +354,9 @@ class _CusHomeWidgetState extends State<CusHomeWidget> {
                               color: FlutterFlowTheme.of(context)
                                   .secondaryBackground,
                             ),
-                            alignment: const AlignmentDirectional(0.0, 0.0),
+                            alignment: AlignmentDirectional(0.0, 0.0),
                             child: Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
+                              padding: EdgeInsetsDirectional.fromSTEB(
                                   5.0, 0.0, 0.0, 0.0),
                               child: InkWell(
                                 splashColor: Colors.transparent,
@@ -386,7 +388,7 @@ class _CusHomeWidgetState extends State<CusHomeWidget> {
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       Padding(
-                        padding: const EdgeInsetsDirectional.fromSTEB(
+                        padding: EdgeInsetsDirectional.fromSTEB(
                             20.0, 0.0, 20.0, 0.0),
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(9.0),
@@ -398,7 +400,7 @@ class _CusHomeWidgetState extends State<CusHomeWidget> {
                               borderRadius: BorderRadius.circular(9.0),
                             ),
                             child: Align(
-                              alignment: const AlignmentDirectional(0.0, 0.0),
+                              alignment: AlignmentDirectional(0.0, 0.0),
                               child: StreamBuilder<List<SpecialOffersRecord>>(
                                 stream: querySpecialOffersRecord(),
                                 builder: (context, snapshot) {
@@ -421,7 +423,7 @@ class _CusHomeWidgetState extends State<CusHomeWidget> {
                                   List<SpecialOffersRecord>
                                       pageViewSpecialOffersRecordList =
                                       snapshot.data!;
-                                  return SizedBox(
+                                  return Container(
                                     width: double.infinity,
                                     child: Stack(
                                       children: [
@@ -446,7 +448,7 @@ class _CusHomeWidgetState extends State<CusHomeWidget> {
                                                 pageViewSpecialOffersRecordList[
                                                     pageViewIndex];
                                             return Align(
-                                              alignment: const AlignmentDirectional(
+                                              alignment: AlignmentDirectional(
                                                   0.0, 0.0),
                                               child: InkWell(
                                                 splashColor: Colors.transparent,
@@ -477,10 +479,10 @@ class _CusHomeWidgetState extends State<CusHomeWidget> {
                                         ),
                                         Align(
                                           alignment:
-                                              const AlignmentDirectional(-1.0, 1.0),
+                                              AlignmentDirectional(-1.0, 1.0),
                                           child: Padding(
                                             padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
+                                                EdgeInsetsDirectional.fromSTEB(
                                                     20.0, 0.0, 0.0, 10.0),
                                             child: smooth_page_indicator
                                                 .SmoothPageIndicator(
@@ -502,7 +504,7 @@ class _CusHomeWidgetState extends State<CusHomeWidget> {
                                                 await _model.pageViewController!
                                                     .animateToPage(
                                                   i,
-                                                  duration: const Duration(
+                                                  duration: Duration(
                                                       milliseconds: 500),
                                                   curve: Curves.ease,
                                                 );
@@ -547,7 +549,7 @@ class _CusHomeWidgetState extends State<CusHomeWidget> {
                             mainAxisSize: MainAxisSize.max,
                             children: [
                               Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                padding: EdgeInsetsDirectional.fromSTEB(
                                     20.0, 0.0, 0.0, 0.0),
                                 child: Row(
                                   mainAxisSize: MainAxisSize.max,
@@ -577,7 +579,7 @@ class _CusHomeWidgetState extends State<CusHomeWidget> {
                                                         .pageviewdot,
                                                 shape: BoxShape.circle,
                                               ),
-                                              alignment: const AlignmentDirectional(
+                                              alignment: AlignmentDirectional(
                                                   0.0, 0.0),
                                               child: Icon(
                                                 Icons
@@ -589,7 +591,7 @@ class _CusHomeWidgetState extends State<CusHomeWidget> {
                                               ),
                                             ),
                                             Padding(
-                                              padding: const EdgeInsetsDirectional
+                                              padding: EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       0.0, 12.0, 0.0, 0.0),
                                               child: Row(
@@ -637,7 +639,7 @@ class _CusHomeWidgetState extends State<CusHomeWidget> {
                                               shape: BoxShape.circle,
                                             ),
                                             alignment:
-                                                const AlignmentDirectional(0.0, 0.0),
+                                                AlignmentDirectional(0.0, 0.0),
                                             child: Icon(
                                               Icons.plumbing,
                                               color:
@@ -648,7 +650,7 @@ class _CusHomeWidgetState extends State<CusHomeWidget> {
                                           ),
                                           Padding(
                                             padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
+                                                EdgeInsetsDirectional.fromSTEB(
                                                     0.0, 12.0, 0.0, 0.0),
                                             child: Row(
                                               mainAxisSize: MainAxisSize.max,
@@ -695,7 +697,7 @@ class _CusHomeWidgetState extends State<CusHomeWidget> {
                                               shape: BoxShape.circle,
                                             ),
                                             alignment:
-                                                const AlignmentDirectional(0.0, 0.0),
+                                                AlignmentDirectional(0.0, 0.0),
                                             child: FaIcon(
                                               FontAwesomeIcons.sprayCan,
                                               color:
@@ -706,7 +708,7 @@ class _CusHomeWidgetState extends State<CusHomeWidget> {
                                           ),
                                           Padding(
                                             padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
+                                                EdgeInsetsDirectional.fromSTEB(
                                                     0.0, 12.0, 0.0, 0.0),
                                             child: Row(
                                               mainAxisSize: MainAxisSize.max,
@@ -753,7 +755,7 @@ class _CusHomeWidgetState extends State<CusHomeWidget> {
                                               shape: BoxShape.circle,
                                             ),
                                             alignment:
-                                                const AlignmentDirectional(0.0, 0.0),
+                                                AlignmentDirectional(0.0, 0.0),
                                             child: Icon(
                                               Icons.severe_cold,
                                               color:
@@ -764,7 +766,7 @@ class _CusHomeWidgetState extends State<CusHomeWidget> {
                                           ),
                                           Padding(
                                             padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
+                                                EdgeInsetsDirectional.fromSTEB(
                                                     0.0, 12.0, 0.0, 0.0),
                                             child: Row(
                                               mainAxisSize: MainAxisSize.max,
@@ -793,7 +795,7 @@ class _CusHomeWidgetState extends State<CusHomeWidget> {
                                         ],
                                       ),
                                     ),
-                                  ].divide(const SizedBox(width: 16.0)),
+                                  ].divide(SizedBox(width: 16.0)),
                                 ),
                               ),
                             ],
@@ -801,9 +803,9 @@ class _CusHomeWidgetState extends State<CusHomeWidget> {
                         ),
                       ),
                     ]
-                        .divide(const SizedBox(height: 24.0))
-                        .addToStart(const SizedBox(height: 24.0))
-                        .addToEnd(const SizedBox(height: 24.0)),
+                        .divide(SizedBox(height: 24.0))
+                        .addToStart(SizedBox(height: 24.0))
+                        .addToEnd(SizedBox(height: 24.0)),
                   ),
                 ),
                 StickyHeader(
@@ -816,7 +818,7 @@ class _CusHomeWidgetState extends State<CusHomeWidget> {
                     ),
                     child: Padding(
                       padding:
-                          const EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 0.0),
+                          EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 0.0),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -840,9 +842,9 @@ class _CusHomeWidgetState extends State<CusHomeWidget> {
                               color: FlutterFlowTheme.of(context)
                                   .secondaryBackground,
                             ),
-                            alignment: const AlignmentDirectional(0.0, 0.0),
+                            alignment: AlignmentDirectional(0.0, 0.0),
                             child: Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
+                              padding: EdgeInsetsDirectional.fromSTEB(
                                   5.0, 0.0, 0.0, 0.0),
                               child: Text(
                                 'See All',
@@ -867,20 +869,20 @@ class _CusHomeWidgetState extends State<CusHomeWidget> {
                       if (!true)
                         Container(
                           width: double.infinity,
-                          decoration: const BoxDecoration(),
+                          decoration: BoxDecoration(),
                           child: SingleChildScrollView(
                             scrollDirection: Axis.horizontal,
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
                               children: [
                                 Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       20.0, 0.0, 0.0, 0.0),
                                   child: Row(
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
                                       FlutterFlowChoiceChips(
-                                        options: const [
+                                        options: [
                                           ChipData('All'),
                                           ChipData('pumber'),
                                           ChipData('Shoes'),
@@ -998,9 +1000,9 @@ class _CusHomeWidgetState extends State<CusHomeWidget> {
                                   .secondaryBackground,
                             ),
                             child: Align(
-                              alignment: const AlignmentDirectional(0.0, 0.0),
+                              alignment: AlignmentDirectional(0.0, 0.0),
                               child: Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                padding: EdgeInsetsDirectional.fromSTEB(
                                     20.0, 0.0, 20.0, 0.0),
                                 child: Builder(
                                   builder: (context) {
@@ -1011,12 +1013,12 @@ class _CusHomeWidgetState extends State<CusHomeWidget> {
                                             .take(4)
                                             .toList();
                                     if (product.isEmpty) {
-                                      return const TempPageWidget();
+                                      return TempPageWidget();
                                     }
                                     return GridView.builder(
                                       padding: EdgeInsets.zero,
                                       gridDelegate:
-                                          const SliverGridDelegateWithFixedCrossAxisCount(
+                                          SliverGridDelegateWithFixedCrossAxisCount(
                                         crossAxisCount: 2,
                                         crossAxisSpacing: 10.0,
                                         mainAxisSpacing: 10.0,
@@ -1046,7 +1048,7 @@ class _CusHomeWidgetState extends State<CusHomeWidget> {
                     ],
                   ),
                 ),
-              ].addToEnd(const SizedBox(height: 24.0)),
+              ].addToEnd(SizedBox(height: 24.0)),
             ),
           ),
         ),

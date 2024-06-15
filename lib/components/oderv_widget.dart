@@ -1,6 +1,9 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'oderv_model.dart';
 export 'oderv_model.dart';
 
@@ -41,7 +44,7 @@ class _OdervWidgetState extends State<OdervWidget> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 0.0, 0.0),
+            padding: EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 0.0, 0.0),
             child: Text(
               'Recent Orders',
               style: FlutterFlowTheme.of(context).headlineMedium.override(
@@ -51,7 +54,7 @@ class _OdervWidgetState extends State<OdervWidget> {
             ),
           ),
           Padding(
-            padding: const EdgeInsetsDirectional.fromSTEB(24.0, 4.0, 0.0, 0.0),
+            padding: EdgeInsetsDirectional.fromSTEB(24.0, 4.0, 0.0, 0.0),
             child: Text(
               'Below are your most recent orders',
               textAlign: TextAlign.start,
@@ -62,15 +65,15 @@ class _OdervWidgetState extends State<OdervWidget> {
             ),
           ),
           Padding(
-            padding: const EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 24.0),
+            padding: EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 24.0),
             child: Column(
               mainAxisSize: MainAxisSize.max,
               children: [
                 Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
                   child: Container(
                     width: double.infinity,
-                    constraints: const BoxConstraints(
+                    constraints: BoxConstraints(
                       maxWidth: 570.0,
                     ),
                     decoration: BoxDecoration(
@@ -82,14 +85,14 @@ class _OdervWidgetState extends State<OdervWidget> {
                       ),
                     ),
                     child: Padding(
-                      padding: const EdgeInsetsDirectional.fromSTEB(
+                      padding: EdgeInsetsDirectional.fromSTEB(
                           16.0, 12.0, 16.0, 12.0),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
+                            padding: EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 12.0, 0.0),
                             child: Column(
                               mainAxisSize: MainAxisSize.max,
@@ -100,7 +103,7 @@ class _OdervWidgetState extends State<OdervWidget> {
                                   textScaler: MediaQuery.of(context).textScaler,
                                   text: TextSpan(
                                     children: [
-                                      const TextSpan(
+                                      TextSpan(
                                         text: 'Order #: ',
                                         style: TextStyle(),
                                       ),
@@ -122,7 +125,7 @@ class _OdervWidgetState extends State<OdervWidget> {
                                   ),
                                 ),
                                 Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 4.0, 0.0, 0.0),
                                   child: Text(
                                     'Mon. July 3rd',
@@ -135,7 +138,7 @@ class _OdervWidgetState extends State<OdervWidget> {
                                   ),
                                 ),
                                 Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 12.0, 0.0, 0.0),
                                   child: Container(
                                     height: 32.0,
@@ -150,9 +153,9 @@ class _OdervWidgetState extends State<OdervWidget> {
                                       ),
                                     ),
                                     child: Align(
-                                      alignment: const AlignmentDirectional(0.0, 0.0),
+                                      alignment: AlignmentDirectional(0.0, 0.0),
                                       child: Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
                                             7.0, 0.0, 7.0, 0.0),
                                         child: Text(
                                           '2.5 lbs',
@@ -175,7 +178,7 @@ class _OdervWidgetState extends State<OdervWidget> {
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
                               Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                padding: EdgeInsetsDirectional.fromSTEB(
                                     0.0, 0.0, 0.0, 12.0),
                                 child: Text(
                                   'Rs : 1500',
@@ -189,7 +192,7 @@ class _OdervWidgetState extends State<OdervWidget> {
                                 ),
                               ),
                               Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                padding: EdgeInsetsDirectional.fromSTEB(
                                     0.0, 12.0, 0.0, 0.0),
                                 child: Container(
                                   height: 32.0,
@@ -203,9 +206,9 @@ class _OdervWidgetState extends State<OdervWidget> {
                                     ),
                                   ),
                                   child: Align(
-                                    alignment: const AlignmentDirectional(0.0, 0.0),
+                                    alignment: AlignmentDirectional(0.0, 0.0),
                                     child: Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
                                           12.0, 0.0, 12.0, 0.0),
                                       child: Text(
                                         'Shipped',
@@ -231,10 +234,10 @@ class _OdervWidgetState extends State<OdervWidget> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
                   child: Container(
                     width: double.infinity,
-                    constraints: const BoxConstraints(
+                    constraints: BoxConstraints(
                       maxWidth: 570.0,
                     ),
                     decoration: BoxDecoration(
@@ -246,14 +249,14 @@ class _OdervWidgetState extends State<OdervWidget> {
                       ),
                     ),
                     child: Padding(
-                      padding: const EdgeInsetsDirectional.fromSTEB(
+                      padding: EdgeInsetsDirectional.fromSTEB(
                           16.0, 12.0, 16.0, 12.0),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
+                            padding: EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 12.0, 0.0),
                             child: Column(
                               mainAxisSize: MainAxisSize.max,
@@ -264,7 +267,7 @@ class _OdervWidgetState extends State<OdervWidget> {
                                   textScaler: MediaQuery.of(context).textScaler,
                                   text: TextSpan(
                                     children: [
-                                      const TextSpan(
+                                      TextSpan(
                                         text: 'Order #: ',
                                         style: TextStyle(),
                                       ),
@@ -286,7 +289,7 @@ class _OdervWidgetState extends State<OdervWidget> {
                                   ),
                                 ),
                                 Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 4.0, 0.0, 0.0),
                                   child: Text(
                                     'Mon. July 3rd',
@@ -299,7 +302,7 @@ class _OdervWidgetState extends State<OdervWidget> {
                                   ),
                                 ),
                                 Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 12.0, 0.0, 0.0),
                                   child: Container(
                                     height: 32.0,
@@ -314,9 +317,9 @@ class _OdervWidgetState extends State<OdervWidget> {
                                       ),
                                     ),
                                     child: Align(
-                                      alignment: const AlignmentDirectional(0.0, 0.0),
+                                      alignment: AlignmentDirectional(0.0, 0.0),
                                       child: Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
                                             7.0, 0.0, 7.0, 0.0),
                                         child: Text(
                                           '2.5 lbs',
@@ -339,7 +342,7 @@ class _OdervWidgetState extends State<OdervWidget> {
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
                               Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                padding: EdgeInsetsDirectional.fromSTEB(
                                     0.0, 0.0, 0.0, 12.0),
                                 child: Text(
                                   'Rs : 2500',
@@ -353,7 +356,7 @@ class _OdervWidgetState extends State<OdervWidget> {
                                 ),
                               ),
                               Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                padding: EdgeInsetsDirectional.fromSTEB(
                                     0.0, 12.0, 0.0, 0.0),
                                 child: Container(
                                   height: 32.0,
@@ -367,9 +370,9 @@ class _OdervWidgetState extends State<OdervWidget> {
                                     ),
                                   ),
                                   child: Align(
-                                    alignment: const AlignmentDirectional(0.0, 0.0),
+                                    alignment: AlignmentDirectional(0.0, 0.0),
                                     child: Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
                                           12.0, 0.0, 12.0, 0.0),
                                       child: Text(
                                         'Shipped',
@@ -395,10 +398,10 @@ class _OdervWidgetState extends State<OdervWidget> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
                   child: Container(
                     width: double.infinity,
-                    constraints: const BoxConstraints(
+                    constraints: BoxConstraints(
                       maxWidth: 570.0,
                     ),
                     decoration: BoxDecoration(
@@ -410,14 +413,14 @@ class _OdervWidgetState extends State<OdervWidget> {
                       ),
                     ),
                     child: Padding(
-                      padding: const EdgeInsetsDirectional.fromSTEB(
+                      padding: EdgeInsetsDirectional.fromSTEB(
                           16.0, 12.0, 16.0, 12.0),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
+                            padding: EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 12.0, 0.0),
                             child: Column(
                               mainAxisSize: MainAxisSize.max,
@@ -428,7 +431,7 @@ class _OdervWidgetState extends State<OdervWidget> {
                                   textScaler: MediaQuery.of(context).textScaler,
                                   text: TextSpan(
                                     children: [
-                                      const TextSpan(
+                                      TextSpan(
                                         text: 'Order #: ',
                                         style: TextStyle(),
                                       ),
@@ -450,7 +453,7 @@ class _OdervWidgetState extends State<OdervWidget> {
                                   ),
                                 ),
                                 Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 4.0, 0.0, 0.0),
                                   child: Text(
                                     'Mon. July 3rd',
@@ -463,7 +466,7 @@ class _OdervWidgetState extends State<OdervWidget> {
                                   ),
                                 ),
                                 Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 12.0, 0.0, 0.0),
                                   child: Container(
                                     height: 32.0,
@@ -478,9 +481,9 @@ class _OdervWidgetState extends State<OdervWidget> {
                                       ),
                                     ),
                                     child: Align(
-                                      alignment: const AlignmentDirectional(0.0, 0.0),
+                                      alignment: AlignmentDirectional(0.0, 0.0),
                                       child: Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
                                             7.0, 0.0, 7.0, 0.0),
                                         child: Text(
                                           '2.5 lbs',
@@ -503,7 +506,7 @@ class _OdervWidgetState extends State<OdervWidget> {
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
                               Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                padding: EdgeInsetsDirectional.fromSTEB(
                                     0.0, 0.0, 0.0, 12.0),
                                 child: Text(
                                   'Rs : 1500',
@@ -517,7 +520,7 @@ class _OdervWidgetState extends State<OdervWidget> {
                                 ),
                               ),
                               Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                padding: EdgeInsetsDirectional.fromSTEB(
                                     0.0, 12.0, 0.0, 0.0),
                                 child: Container(
                                   height: 32.0,
@@ -531,9 +534,9 @@ class _OdervWidgetState extends State<OdervWidget> {
                                     ),
                                   ),
                                   child: Align(
-                                    alignment: const AlignmentDirectional(0.0, 0.0),
+                                    alignment: AlignmentDirectional(0.0, 0.0),
                                     child: Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
                                           12.0, 0.0, 12.0, 0.0),
                                       child: Text(
                                         'Accepted',
@@ -559,10 +562,10 @@ class _OdervWidgetState extends State<OdervWidget> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
                   child: Container(
                     width: double.infinity,
-                    constraints: const BoxConstraints(
+                    constraints: BoxConstraints(
                       maxWidth: 570.0,
                     ),
                     decoration: BoxDecoration(
@@ -574,14 +577,14 @@ class _OdervWidgetState extends State<OdervWidget> {
                       ),
                     ),
                     child: Padding(
-                      padding: const EdgeInsetsDirectional.fromSTEB(
+                      padding: EdgeInsetsDirectional.fromSTEB(
                           16.0, 12.0, 16.0, 12.0),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
+                            padding: EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 12.0, 0.0),
                             child: Column(
                               mainAxisSize: MainAxisSize.max,
@@ -592,7 +595,7 @@ class _OdervWidgetState extends State<OdervWidget> {
                                   textScaler: MediaQuery.of(context).textScaler,
                                   text: TextSpan(
                                     children: [
-                                      const TextSpan(
+                                      TextSpan(
                                         text: 'Order #: ',
                                         style: TextStyle(),
                                       ),
@@ -614,7 +617,7 @@ class _OdervWidgetState extends State<OdervWidget> {
                                   ),
                                 ),
                                 Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 4.0, 0.0, 0.0),
                                   child: Text(
                                     'Mon. July 3rd',
@@ -627,7 +630,7 @@ class _OdervWidgetState extends State<OdervWidget> {
                                   ),
                                 ),
                                 Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 12.0, 0.0, 0.0),
                                   child: Container(
                                     height: 32.0,
@@ -642,9 +645,9 @@ class _OdervWidgetState extends State<OdervWidget> {
                                       ),
                                     ),
                                     child: Align(
-                                      alignment: const AlignmentDirectional(0.0, 0.0),
+                                      alignment: AlignmentDirectional(0.0, 0.0),
                                       child: Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
                                             7.0, 0.0, 7.0, 0.0),
                                         child: Text(
                                           '2.5 lbs',
@@ -667,7 +670,7 @@ class _OdervWidgetState extends State<OdervWidget> {
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
                               Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                padding: EdgeInsetsDirectional.fromSTEB(
                                     0.0, 0.0, 0.0, 12.0),
                                 child: Text(
                                   'Rs : 2000',
@@ -681,7 +684,7 @@ class _OdervWidgetState extends State<OdervWidget> {
                                 ),
                               ),
                               Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                padding: EdgeInsetsDirectional.fromSTEB(
                                     0.0, 12.0, 0.0, 0.0),
                                 child: Container(
                                   height: 32.0,
@@ -695,9 +698,9 @@ class _OdervWidgetState extends State<OdervWidget> {
                                     ),
                                   ),
                                   child: Align(
-                                    alignment: const AlignmentDirectional(0.0, 0.0),
+                                    alignment: AlignmentDirectional(0.0, 0.0),
                                     child: Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
                                           12.0, 0.0, 12.0, 0.0),
                                       child: Text(
                                         'Accepted',
@@ -722,7 +725,7 @@ class _OdervWidgetState extends State<OdervWidget> {
                     ),
                   ),
                 ),
-              ].divide(const SizedBox(height: 12.0)),
+              ].divide(SizedBox(height: 12.0)),
             ),
           ),
         ],

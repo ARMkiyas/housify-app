@@ -3,6 +3,8 @@ import '/flutter_flow/flutter_flow_util.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'reviews_model.dart';
 export 'reviews_model.dart';
 
@@ -52,7 +54,7 @@ class _ReviewsWidgetState extends State<ReviewsWidget> {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      decoration: const BoxDecoration(),
+      decoration: BoxDecoration(),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -63,19 +65,19 @@ class _ReviewsWidgetState extends State<ReviewsWidget> {
                 width: 38.0,
                 height: 38.0,
                 clipBehavior: Clip.antiAlias,
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                   shape: BoxShape.circle,
                 ),
                 child: CachedNetworkImage(
-                  fadeInDuration: const Duration(milliseconds: 500),
-                  fadeOutDuration: const Duration(milliseconds: 500),
+                  fadeInDuration: Duration(milliseconds: 500),
+                  fadeOutDuration: Duration(milliseconds: 500),
                   imageUrl: widget.userAvatar!,
                   fit: BoxFit.cover,
                 ),
               ),
               Expanded(
                 child: Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 8.0, 0.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 8.0, 0.0),
                   child: Text(
                     widget.userName!,
                     maxLines: 1,
@@ -102,7 +104,7 @@ class _ReviewsWidgetState extends State<ReviewsWidget> {
                     ),
                     child: Padding(
                       padding:
-                          const EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 0.0),
+                          EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 0.0),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         children: [
@@ -132,7 +134,7 @@ class _ReviewsWidgetState extends State<ReviewsWidget> {
                                   fontWeight: FontWeight.w800,
                                 ),
                           ),
-                        ].divide(const SizedBox(width: 8.0)),
+                        ].divide(SizedBox(width: 8.0)),
                       ),
                     ),
                   ),
@@ -181,9 +183,9 @@ class _ReviewsWidgetState extends State<ReviewsWidget> {
                   ),
                 ],
               ),
-            ].divide(const SizedBox(height: 5.0)),
+            ].divide(SizedBox(height: 5.0)),
           ),
-        ].divide(const SizedBox(height: 16.0)),
+        ].divide(SizedBox(height: 16.0)),
       ),
     );
   }

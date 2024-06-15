@@ -3,8 +3,11 @@ import '/componets/productitem/productitem_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'productview_page_model.dart';
 export 'productview_page_model.dart';
 
@@ -89,11 +92,11 @@ class _ProductviewPageWidgetState extends State<ProductviewPageWidget> {
                     children: [
                       Padding(
                         padding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
+                            EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
                         child: Container(
                           width: double.infinity,
                           height: 60.0,
-                          decoration: const BoxDecoration(
+                          decoration: BoxDecoration(
                             borderRadius: BorderRadius.only(
                               bottomLeft: Radius.circular(10.0),
                               bottomRight: Radius.circular(10.0),
@@ -105,13 +108,13 @@ class _ProductviewPageWidgetState extends State<ProductviewPageWidget> {
                             mainAxisSize: MainAxisSize.max,
                             children: [
                               Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                padding: EdgeInsetsDirectional.fromSTEB(
                                     20.0, 0.0, 0.0, 0.0),
                                 child: FlutterFlowIconButton(
                                   borderColor: Colors.transparent,
                                   borderRadius: 99.0,
                                   buttonSize: 48.0,
-                                  fillColor: const Color(0x7DB6B3B3),
+                                  fillColor: Color(0x7DB6B3B3),
                                   icon: FaIcon(
                                     FontAwesomeIcons.angleLeft,
                                     color: FlutterFlowTheme.of(context)
@@ -125,7 +128,7 @@ class _ProductviewPageWidgetState extends State<ProductviewPageWidget> {
                               ),
                               Expanded(
                                 child: Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       8.0, 0.0, 8.0, 0.0),
                                   child: TextFormField(
                                     controller: _model.textController,
@@ -200,7 +203,7 @@ class _ProductviewPageWidgetState extends State<ProductviewPageWidget> {
                       ),
                       Expanded(
                         child: Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
+                          padding: EdgeInsetsDirectional.fromSTEB(
                               20.0, 30.0, 20.0, 0.0),
                           child: Builder(
                             builder: (context) {
@@ -209,7 +212,7 @@ class _ProductviewPageWidgetState extends State<ProductviewPageWidget> {
                               return GridView.builder(
                                 padding: EdgeInsets.zero,
                                 gridDelegate:
-                                    const SliverGridDelegateWithFixedCrossAxisCount(
+                                    SliverGridDelegateWithFixedCrossAxisCount(
                                   crossAxisCount: 2,
                                   crossAxisSpacing: 10.0,
                                   mainAxisSpacing: 1.0,

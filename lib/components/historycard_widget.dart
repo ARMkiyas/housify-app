@@ -4,7 +4,10 @@ import '/components/review_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'historycard_model.dart';
 export 'historycard_model.dart';
 
@@ -13,7 +16,7 @@ class HistorycardWidget extends StatefulWidget {
     super.key,
     required this.data,
     bool? iscompletd,
-  }) : iscompletd = iscompletd ?? false;
+  }) : this.iscompletd = iscompletd ?? false;
 
   final OrdersRecord? data;
   final bool iscompletd;
@@ -71,7 +74,7 @@ class _HistorycardWidgetState extends State<HistorycardWidget> {
             borderRadius: BorderRadius.circular(8.0),
           ),
           child: Padding(
-            padding: const EdgeInsets.all(12.0),
+            padding: EdgeInsets.all(12.0),
             child: Row(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -95,7 +98,7 @@ class _HistorycardWidgetState extends State<HistorycardWidget> {
                 Expanded(
                   child: Padding(
                     padding:
-                        const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
+                        EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -155,7 +158,7 @@ class _HistorycardWidgetState extends State<HistorycardWidget> {
                                             letterSpacing: 0.0,
                                           ),
                                     ),
-                                  ].divide(const SizedBox(width: 8.0)),
+                                  ].divide(SizedBox(width: 8.0)),
                                 ),
                               ),
                               Row(
@@ -203,7 +206,7 @@ class _HistorycardWidgetState extends State<HistorycardWidget> {
                                   ),
                                 ],
                               ),
-                            ].divide(const SizedBox(width: 8.0)),
+                            ].divide(SizedBox(width: 8.0)),
                           ),
                         ),
                         Row(
@@ -227,7 +230,7 @@ class _HistorycardWidgetState extends State<HistorycardWidget> {
                                   ),
                                   TextSpan(
                                     text: valueOrDefault<String>(
-                                      widget.data?.totalPrice.toString(),
+                                      widget.data?.totalPrice?.toString(),
                                       '0.0',
                                     ),
                                     style: FlutterFlowTheme.of(context)
@@ -255,9 +258,9 @@ class _HistorycardWidgetState extends State<HistorycardWidget> {
                                 },
                                 text: 'Leave Review',
                                 options: FFButtonOptions(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       20.0, 8.0, 20.0, 8.0),
-                                  iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                                  iconPadding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 0.0, 0.0, 0.0),
                                   color:
                                       FlutterFlowTheme.of(context).primaryText,
@@ -271,7 +274,7 @@ class _HistorycardWidgetState extends State<HistorycardWidget> {
                                         letterSpacing: 0.0,
                                       ),
                                   elevation: 0.0,
-                                  borderSide: const BorderSide(
+                                  borderSide: BorderSide(
                                     color: Colors.transparent,
                                     width: 1.0,
                                   ),
@@ -303,9 +306,9 @@ class _HistorycardWidgetState extends State<HistorycardWidget> {
                                   'wating',
                                 ),
                                 options: FFButtonOptions(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       20.0, 8.0, 20.0, 8.0),
-                                  iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                                  iconPadding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 0.0, 0.0, 0.0),
                                   color: () {
                                     if (widget.data?.status ==
@@ -330,7 +333,7 @@ class _HistorycardWidgetState extends State<HistorycardWidget> {
                                         letterSpacing: 0.0,
                                       ),
                                   elevation: 0.0,
-                                  borderSide: const BorderSide(
+                                  borderSide: BorderSide(
                                     color: Colors.transparent,
                                     width: 1.0,
                                   ),
@@ -339,7 +342,7 @@ class _HistorycardWidgetState extends State<HistorycardWidget> {
                               ),
                           ],
                         ),
-                      ].divide(const SizedBox(height: 8.0)),
+                      ].divide(SizedBox(height: 8.0)),
                     ),
                   ),
                 ),

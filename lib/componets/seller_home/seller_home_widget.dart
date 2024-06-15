@@ -1,10 +1,16 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
+import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import 'dart:math';
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:flutter_animate/flutter_animate.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'seller_home_model.dart';
 export 'seller_home_model.dart';
 
@@ -41,12 +47,12 @@ class _SellerHomeWidgetState extends State<SellerHomeWidget>
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsetsDirectional.fromSTEB(0.0, 14.0, 0.0, 0.0),
+      padding: EdgeInsetsDirectional.fromSTEB(0.0, 14.0, 0.0, 0.0),
       child: Column(
         mainAxisSize: MainAxisSize.max,
         children: [
           Padding(
-            padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+            padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
             child: Row(
               mainAxisSize: MainAxisSize.max,
               children: [
@@ -58,11 +64,11 @@ class _SellerHomeWidgetState extends State<SellerHomeWidget>
                         width: 80.0,
                         height: 80.0,
                         clipBehavior: Clip.antiAlias,
-                        decoration: const BoxDecoration(
+                        decoration: BoxDecoration(
                           shape: BoxShape.circle,
                         ),
                         child: Image.network(
-                          currentUserPhoto != ''
+                          currentUserPhoto != null && currentUserPhoto != ''
                               ? currentUserPhoto
                               : 'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/housify-ujjxfr/assets/52u2ht71nn25/default_profile_photo.png',
                           fit: BoxFit.fitHeight,
@@ -72,21 +78,21 @@ class _SellerHomeWidgetState extends State<SellerHomeWidget>
                   ],
                 ),
                 Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
                         padding:
-                            const EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
+                            EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
                         child: AuthUserStreamWidget(
                           builder: (context) => Text(
                             currentUserDisplayName,
                             style:
                                 FlutterFlowTheme.of(context).bodySmall.override(
                                       fontFamily: 'Outfit',
-                                      color: const Color(0xFF57636C),
+                                      color: Color(0xFF57636C),
                                       fontSize: 18.0,
                                       letterSpacing: 0.0,
                                       fontWeight: FontWeight.normal,
@@ -105,7 +111,7 @@ class _SellerHomeWidgetState extends State<SellerHomeWidget>
                             size: 14.0,
                           ),
                           Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
+                            padding: EdgeInsetsDirectional.fromSTEB(
                                 5.0, 0.0, 0.0, 0.0),
                             child: Text(
                               'Sri Lanka',
@@ -113,7 +119,7 @@ class _SellerHomeWidgetState extends State<SellerHomeWidget>
                                   .bodySmall
                                   .override(
                                     fontFamily: 'Outfit',
-                                    color: const Color(0xFF57636C),
+                                    color: Color(0xFF57636C),
                                     fontSize: 14.0,
                                     letterSpacing: 0.0,
                                     fontWeight: FontWeight.normal,
@@ -129,7 +135,7 @@ class _SellerHomeWidgetState extends State<SellerHomeWidget>
             ),
           ),
           Padding(
-            padding: const EdgeInsetsDirectional.fromSTEB(10.0, 16.0, 10.0, 0.0),
+            padding: EdgeInsetsDirectional.fromSTEB(10.0, 16.0, 10.0, 0.0),
             child: Row(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -145,7 +151,7 @@ class _SellerHomeWidgetState extends State<SellerHomeWidget>
                     width: 100.0,
                     height: 100.0,
                     decoration: BoxDecoration(
-                      color: const Color(0x0014181B),
+                      color: Color(0x0014181B),
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                     child: Column(
@@ -153,7 +159,7 @@ class _SellerHomeWidgetState extends State<SellerHomeWidget>
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
+                          padding: EdgeInsetsDirectional.fromSTEB(
                               5.0, 0.0, 0.0, 0.0),
                           child: Text(
                             '150',
@@ -170,7 +176,7 @@ class _SellerHomeWidgetState extends State<SellerHomeWidget>
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
+                          padding: EdgeInsetsDirectional.fromSTEB(
                               5.0, 0.0, 0.0, 0.0),
                           child: Text(
                             'Orders',
@@ -196,7 +202,7 @@ class _SellerHomeWidgetState extends State<SellerHomeWidget>
                   child: Container(
                     width: 100.0,
                     height: 100.0,
-                    decoration: const BoxDecoration(
+                    decoration: BoxDecoration(
                       color: Color(0x0014181B),
                     ),
                     child: Column(
@@ -204,7 +210,7 @@ class _SellerHomeWidgetState extends State<SellerHomeWidget>
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
+                          padding: EdgeInsetsDirectional.fromSTEB(
                               5.0, 0.0, 0.0, 0.0),
                           child: Text(
                             '30',
@@ -221,7 +227,7 @@ class _SellerHomeWidgetState extends State<SellerHomeWidget>
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
+                          padding: EdgeInsetsDirectional.fromSTEB(
                               5.0, 0.0, 0.0, 0.0),
                           child: Text(
                             'Rating',
@@ -247,14 +253,14 @@ class _SellerHomeWidgetState extends State<SellerHomeWidget>
                   child: Container(
                     width: 100.0,
                     height: 100.0,
-                    decoration: const BoxDecoration(
+                    decoration: BoxDecoration(
                       color: Colors.transparent,
                     ),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Padding(
+                        Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 5.0),
                           child: Icon(
@@ -264,7 +270,7 @@ class _SellerHomeWidgetState extends State<SellerHomeWidget>
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
+                          padding: EdgeInsetsDirectional.fromSTEB(
                               5.0, 0.0, 0.0, 0.0),
                           child: Text(
                             'SellerVerified',
@@ -289,7 +295,7 @@ class _SellerHomeWidgetState extends State<SellerHomeWidget>
           ),
           Flexible(
             child: Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(10.0, 16.0, 10.0, 0.0),
+              padding: EdgeInsetsDirectional.fromSTEB(10.0, 16.0, 10.0, 0.0),
               child: Row(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -338,7 +344,7 @@ class _SellerHomeWidgetState extends State<SellerHomeWidget>
                                 color: Colors.transparent,
                               ),
                             ),
-                            alignment: const AlignmentDirectional(0.0, -1.0),
+                            alignment: AlignmentDirectional(0.0, -1.0),
                             child: Column(
                               mainAxisSize: MainAxisSize.min,
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -349,7 +355,7 @@ class _SellerHomeWidgetState extends State<SellerHomeWidget>
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
                                           10.0, 0.0, 0.0, 0.0),
                                       child: Text(
                                         'Service',
@@ -370,7 +376,7 @@ class _SellerHomeWidgetState extends State<SellerHomeWidget>
                                     Expanded(
                                       child: Align(
                                         alignment:
-                                            const AlignmentDirectional(1.0, 0.0),
+                                            AlignmentDirectional(1.0, 0.0),
                                         child: FlutterFlowIconButton(
                                           borderColor: Colors.transparent,
                                           borderRadius: 7.0,
@@ -395,7 +401,7 @@ class _SellerHomeWidgetState extends State<SellerHomeWidget>
                                               }.withoutNulls,
                                               extra: <String, dynamic>{
                                                 kTransitionInfoKey:
-                                                    const TransitionInfo(
+                                                    TransitionInfo(
                                                   hasTransition: true,
                                                   transitionType:
                                                       PageTransitionType.fade,
@@ -430,7 +436,7 @@ class _SellerHomeWidgetState extends State<SellerHomeWidget>
                                         if (containerCount <= 0)
                                           Padding(
                                             padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
+                                                EdgeInsetsDirectional.fromSTEB(
                                                     10.0, 0.0, 0.0, 0.0),
                                             child: Text(
                                               containerCount.toString(),
@@ -449,12 +455,12 @@ class _SellerHomeWidgetState extends State<SellerHomeWidget>
                                                   ),
                                             ),
                                           ),
-                                      ].divide(const SizedBox(height: 4.0)),
+                                      ].divide(SizedBox(height: 4.0)),
                                     ),
                                   ),
                                 ),
                                 Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       12.0, 4.0, 12.0, 0.0),
                                   child: StreamBuilder<List<ServiceAllRecord>>(
                                     stream: queryServiceAllRecord(
@@ -528,7 +534,7 @@ class _SellerHomeWidgetState extends State<SellerHomeWidget>
                                               ),
                                             ),
                                             Padding(
-                                              padding: const EdgeInsetsDirectional
+                                              padding: EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       4.0, 10.0, 4.0, 0.0),
                                               child: Text(
@@ -550,7 +556,7 @@ class _SellerHomeWidgetState extends State<SellerHomeWidget>
                                               ),
                                             ),
                                             Padding(
-                                              padding: const EdgeInsetsDirectional
+                                              padding: EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       4.0, 14.0, 4.0, 0.0),
                                               child: Text(
@@ -574,7 +580,7 @@ class _SellerHomeWidgetState extends State<SellerHomeWidget>
                                               ),
                                             ),
                                             Padding(
-                                              padding: const EdgeInsetsDirectional
+                                              padding: EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       0.0, 10.0, 0.0, 0.0),
                                               child: Column(
@@ -614,11 +620,11 @@ class _SellerHomeWidgetState extends State<SellerHomeWidget>
                                                             ),
                                                       ),
                                                     ].divide(
-                                                        const SizedBox(width: 2.0)),
+                                                        SizedBox(width: 2.0)),
                                                   ),
                                                   Padding(
                                                     padding:
-                                                        const EdgeInsetsDirectional
+                                                        EdgeInsetsDirectional
                                                             .fromSTEB(0.0, 20.0,
                                                                 0.0, 0.0),
                                                     child: Text(

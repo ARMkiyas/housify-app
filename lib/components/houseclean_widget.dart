@@ -1,6 +1,8 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'houseclean_model.dart';
 export 'houseclean_model.dart';
 
@@ -70,7 +72,7 @@ class _HousecleanWidgetState extends State<HousecleanWidget> {
                       children: [
                         Expanded(
                           child: Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
+                            padding: EdgeInsetsDirectional.fromSTEB(
                                 25.0, 25.0, 25.0, 0.0),
                             child: Text(
                               '25%',
@@ -79,7 +81,7 @@ class _HousecleanWidgetState extends State<HousecleanWidget> {
                                   .bodyMedium
                                   .override(
                                     fontFamily: 'Readex Pro',
-                                    color: const Color(0xFF910000),
+                                    color: Color(0xFF910000),
                                     fontSize: 60.0,
                                     letterSpacing: 0.0,
                                     fontWeight: FontWeight.w900,
@@ -94,7 +96,7 @@ class _HousecleanWidgetState extends State<HousecleanWidget> {
                       children: [
                         Expanded(
                           child: Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
+                            padding: EdgeInsetsDirectional.fromSTEB(
                                 25.0, 0.0, 25.0, 0.0),
                             child: Text(
                               'OFF',
@@ -103,7 +105,7 @@ class _HousecleanWidgetState extends State<HousecleanWidget> {
                                   .bodyMedium
                                   .override(
                                     fontFamily: 'Readex Pro',
-                                    color: const Color(0xFF910000),
+                                    color: Color(0xFF910000),
                                     fontSize: 30.0,
                                     letterSpacing: 0.0,
                                     fontWeight: FontWeight.w600,
@@ -118,7 +120,7 @@ class _HousecleanWidgetState extends State<HousecleanWidget> {
                       children: [
                         Expanded(
                           child: Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
+                            padding: EdgeInsetsDirectional.fromSTEB(
                                 25.0, 0.0, 25.0, 0.0),
                             child: Text(
                               'House Cleaning!',
@@ -127,7 +129,7 @@ class _HousecleanWidgetState extends State<HousecleanWidget> {
                                   .bodyMedium
                                   .override(
                                     fontFamily: 'Readex Pro',
-                                    color: const Color(0xFF910000),
+                                    color: Color(0xFF910000),
                                     fontSize: 30.0,
                                     letterSpacing: 0.0,
                                     fontWeight: FontWeight.w600,

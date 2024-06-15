@@ -8,11 +8,15 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/upload_data.dart';
+import 'dart:math';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:collection/collection.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'service_edit_form_model.dart';
 export 'service_edit_form_model.dart';
 
@@ -146,8 +150,8 @@ class _ServiceEditFormWidgetState extends State<ServiceEditFormWidget>
             curve: Curves.easeInOut,
             delay: 0.0.ms,
             duration: 600.0.ms,
-            begin: const Offset(0.0, 110.0),
-            end: const Offset(0.0, 0.0),
+            begin: Offset(0.0, 110.0),
+            end: Offset(0.0, 0.0),
           ),
         ],
       ),
@@ -159,8 +163,8 @@ class _ServiceEditFormWidgetState extends State<ServiceEditFormWidget>
             curve: Curves.easeInOut,
             delay: 0.0.ms,
             duration: 600.0.ms,
-            begin: const Offset(0.0, 0.0),
-            end: const Offset(0.0, 0.0),
+            begin: Offset(0.0, 0.0),
+            end: Offset(0.0, 0.0),
           ),
         ],
       ),
@@ -213,7 +217,7 @@ class _ServiceEditFormWidgetState extends State<ServiceEditFormWidget>
                   letterSpacing: 0.0,
                 ),
           ),
-          actions: const [],
+          actions: [],
           centerTitle: false,
           elevation: 0.0,
         ),
@@ -228,7 +232,7 @@ class _ServiceEditFormWidgetState extends State<ServiceEditFormWidget>
                     autovalidateMode: AutovalidateMode.disabled,
                     child: Padding(
                       padding:
-                          const EdgeInsetsDirectional.fromSTEB(16.0, 12.0, 16.0, 0.0),
+                          EdgeInsetsDirectional.fromSTEB(16.0, 12.0, 16.0, 0.0),
                       child: SingleChildScrollView(
                         child: Column(
                           mainAxisSize: MainAxisSize.max,
@@ -239,11 +243,11 @@ class _ServiceEditFormWidgetState extends State<ServiceEditFormWidget>
                               children: [
                                 Expanded(
                                   child: Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
                                         0.0, 16.0, 0.0, 0.0),
                                     child: Container(
                                       width: 120.0,
-                                      constraints: const BoxConstraints(
+                                      constraints: BoxConstraints(
                                         maxWidth: 500.0,
                                       ),
                                       decoration: BoxDecoration(
@@ -337,7 +341,10 @@ class _ServiceEditFormWidgetState extends State<ServiceEditFormWidget>
                                                 if (widget.image != null &&
                                                     widget.image != '') {
                                                   return widget.image;
-                                                } else if (_model.uploadedFileUrl !=
+                                                } else if (_model
+                                                            .uploadedFileUrl !=
+                                                        null &&
+                                                    _model.uploadedFileUrl !=
                                                         '') {
                                                   return _model.uploadedFileUrl;
                                                 } else if (_model.existingData
@@ -364,10 +371,10 @@ class _ServiceEditFormWidgetState extends State<ServiceEditFormWidget>
                                         'containerOnPageLoadAnimation']!),
                                   ),
                                 ),
-                              ].divide(const SizedBox(width: 12.0)),
+                              ].divide(SizedBox(width: 12.0)),
                             ),
                             Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
+                              padding: EdgeInsetsDirectional.fromSTEB(
                                   0.0, 16.0, 0.0, 0.0),
                               child: Column(
                                 mainAxisSize: MainAxisSize.max,
@@ -428,7 +435,7 @@ class _ServiceEditFormWidgetState extends State<ServiceEditFormWidget>
                                             BorderRadius.circular(12.0),
                                       ),
                                       contentPadding:
-                                          const EdgeInsetsDirectional.fromSTEB(
+                                          EdgeInsetsDirectional.fromSTEB(
                                               16.0, 12.0, 16.0, 12.0),
                                     ),
                                     style: FlutterFlowTheme.of(context)
@@ -501,7 +508,7 @@ class _ServiceEditFormWidgetState extends State<ServiceEditFormWidget>
                                             BorderRadius.circular(12.0),
                                       ),
                                       contentPadding:
-                                          const EdgeInsetsDirectional.fromSTEB(
+                                          EdgeInsetsDirectional.fromSTEB(
                                               16.0, 24.0, 16.0, 12.0),
                                     ),
                                     style: FlutterFlowTheme.of(context)
@@ -574,7 +581,7 @@ class _ServiceEditFormWidgetState extends State<ServiceEditFormWidget>
                                             BorderRadius.circular(12.0),
                                       ),
                                       contentPadding:
-                                          const EdgeInsetsDirectional.fromSTEB(
+                                          EdgeInsetsDirectional.fromSTEB(
                                               16.0, 12.0, 16.0, 12.0),
                                     ),
                                     style: FlutterFlowTheme.of(context)
@@ -646,9 +653,9 @@ class _ServiceEditFormWidgetState extends State<ServiceEditFormWidget>
                                             BorderRadius.circular(12.0),
                                       ),
                                       contentPadding:
-                                          const EdgeInsetsDirectional.fromSTEB(
+                                          EdgeInsetsDirectional.fromSTEB(
                                               16.0, 12.0, 16.0, 12.0),
-                                      prefixIcon: const Icon(
+                                      prefixIcon: Icon(
                                         Icons.location_pin,
                                       ),
                                     ),
@@ -664,11 +671,11 @@ class _ServiceEditFormWidgetState extends State<ServiceEditFormWidget>
                                         .locationTextControllerValidator
                                         .asValidator(context),
                                   ),
-                                ].divide(const SizedBox(height: 12.0)),
+                                ].divide(SizedBox(height: 12.0)),
                               ),
                             ),
                             Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
+                              padding: EdgeInsetsDirectional.fromSTEB(
                                   0.0, 24.0, 0.0, 12.0),
                               child: FFButtonWidget(
                                 onPressed: () async {
@@ -733,7 +740,8 @@ class _ServiceEditFormWidgetState extends State<ServiceEditFormWidget>
                                           _model.priceTextController.text),
                                       description:
                                           _model.descriptionTextController.text,
-                                      image: _model.uploadedFileUrl != ''
+                                      image: _model.uploadedFileUrl != null &&
+                                              _model.uploadedFileUrl != ''
                                           ? _model.uploadedFileUrl
                                           : widget.image,
                                       available: true,
@@ -748,15 +756,15 @@ class _ServiceEditFormWidgetState extends State<ServiceEditFormWidget>
                                   setState(() {});
                                 },
                                 text: 'Edit and Publish',
-                                icon: const Icon(
+                                icon: Icon(
                                   Icons.receipt_long,
                                   size: 15.0,
                                 ),
                                 options: FFButtonOptions(
                                   width: double.infinity,
                                   height: 48.0,
-                                  padding: const EdgeInsets.all(0.0),
-                                  iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsets.all(0.0),
+                                  iconPadding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 0.0, 0.0, 0.0),
                                   color: FlutterFlowTheme.of(context).secondary,
                                   textStyle: FlutterFlowTheme.of(context)
@@ -767,7 +775,7 @@ class _ServiceEditFormWidgetState extends State<ServiceEditFormWidget>
                                         letterSpacing: 0.0,
                                       ),
                                   elevation: 4.0,
-                                  borderSide: const BorderSide(
+                                  borderSide: BorderSide(
                                     color: Colors.transparent,
                                     width: 1.0,
                                   ),
@@ -782,14 +790,14 @@ class _ServiceEditFormWidgetState extends State<ServiceEditFormWidget>
                   ),
                   if (_model.displayplacepicker)
                     Padding(
-                      padding: const EdgeInsets.all(12.0),
+                      padding: EdgeInsets.all(12.0),
                       child: Container(
                         width: double.infinity,
                         height: 400.0,
                         decoration: BoxDecoration(
                           color:
                               FlutterFlowTheme.of(context).secondaryBackground,
-                          boxShadow: const [
+                          boxShadow: [
                             BoxShadow(
                               blurRadius: 4.0,
                               color: Color(0x33000000),
@@ -804,14 +812,14 @@ class _ServiceEditFormWidgetState extends State<ServiceEditFormWidget>
                           mainAxisSize: MainAxisSize.max,
                           children: [
                             Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
+                              padding: EdgeInsetsDirectional.fromSTEB(
                                   0.0, 20.0, 0.0, 0.0),
                               child: TextFormField(
                                 controller: _model.textController5,
                                 focusNode: _model.textFieldFocusNode,
                                 onChanged: (_) => EasyDebounce.debounce(
                                   '_model.textController5',
-                                  const Duration(milliseconds: 200),
+                                  Duration(milliseconds: 200),
                                   () async {
                                     _model.geoListforward = await MapBoxGroup
                                         .forwareGeoLocationEncordingCall
@@ -876,7 +884,7 @@ class _ServiceEditFormWidgetState extends State<ServiceEditFormWidget>
                                     ),
                                     borderRadius: BorderRadius.circular(8.0),
                                   ),
-                                  prefixIcon: const Icon(
+                                  prefixIcon: Icon(
                                     Icons.search,
                                   ),
                                 ),
@@ -897,7 +905,7 @@ class _ServiceEditFormWidgetState extends State<ServiceEditFormWidget>
                                 decoration: BoxDecoration(
                                   color: FlutterFlowTheme.of(context)
                                       .secondaryBackground,
-                                  boxShadow: const [
+                                  boxShadow: [
                                     BoxShadow(
                                       blurRadius: 4.0,
                                       color: Color(0x33000000),
@@ -909,9 +917,9 @@ class _ServiceEditFormWidgetState extends State<ServiceEditFormWidget>
                                   ],
                                 ),
                                 child: Align(
-                                  alignment: const AlignmentDirectional(0.0, 0.0),
+                                  alignment: AlignmentDirectional(0.0, 0.0),
                                   child: Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
                                         10.0, 0.0, 0.0, 0.0),
                                     child: Builder(
                                       builder: (context) {
@@ -925,7 +933,7 @@ class _ServiceEditFormWidgetState extends State<ServiceEditFormWidget>
                                                 ?.toList() ??
                                             [];
                                         return ListView.separated(
-                                          padding: const EdgeInsets.fromLTRB(
+                                          padding: EdgeInsets.fromLTRB(
                                             0,
                                             5.0,
                                             0,
@@ -934,7 +942,7 @@ class _ServiceEditFormWidgetState extends State<ServiceEditFormWidget>
                                           scrollDirection: Axis.vertical,
                                           itemCount: placesFound.length,
                                           separatorBuilder: (_, __) =>
-                                              const SizedBox(height: 10.0),
+                                              SizedBox(height: 10.0),
                                           itemBuilder:
                                               (context, placesFoundIndex) {
                                             final placesFoundItem =
@@ -988,7 +996,7 @@ class _ServiceEditFormWidgetState extends State<ServiceEditFormWidget>
                                                       .secondaryBackground,
                                                 ),
                                                 child: Padding(
-                                                  padding: const EdgeInsets.all(4.0),
+                                                  padding: EdgeInsets.all(4.0),
                                                   child: Text(
                                                     getJsonField(
                                                       placesFoundItem,

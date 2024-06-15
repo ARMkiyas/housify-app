@@ -4,6 +4,8 @@ import '/flutter_flow/flutter_flow_util.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'productitem_model.dart';
 export 'productitem_model.dart';
 
@@ -12,7 +14,7 @@ class ProductitemWidget extends StatefulWidget {
     super.key,
     this.servicedoc,
     bool? pupuler,
-  }) : pupuler = pupuler ?? false;
+  }) : this.pupuler = pupuler ?? false;
 
   final ServiceAllRecord? servicedoc;
   final bool pupuler;
@@ -66,7 +68,7 @@ class _ProductitemWidgetState extends State<ProductitemWidget> {
       },
       child: Container(
         width: 165.0,
-        decoration: const BoxDecoration(),
+        decoration: BoxDecoration(),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -82,8 +84,8 @@ class _ProductitemWidgetState extends State<ProductitemWidget> {
                   ClipRRect(
                     borderRadius: BorderRadius.circular(8.0),
                     child: CachedNetworkImage(
-                      fadeInDuration: const Duration(milliseconds: 500),
-                      fadeOutDuration: const Duration(milliseconds: 500),
+                      fadeInDuration: Duration(milliseconds: 500),
+                      fadeOutDuration: Duration(milliseconds: 500),
                       imageUrl:
                           'https://th.bing.com/th/id/OIP.uSpy4CzuMiX5D_r9wRacJQHaE8?rs=1&pid=ImgDetMain',
                       width: double.infinity,
@@ -93,9 +95,9 @@ class _ProductitemWidgetState extends State<ProductitemWidget> {
                   ),
                   if (widget.pupuler)
                     Align(
-                      alignment: const AlignmentDirectional(1.0, -1.0),
+                      alignment: AlignmentDirectional(1.0, -1.0),
                       child: Padding(
-                        padding: const EdgeInsetsDirectional.fromSTEB(
+                        padding: EdgeInsetsDirectional.fromSTEB(
                             0.0, 12.0, 12.0, 0.0),
                         child: Container(
                           width: 32.0,
@@ -105,7 +107,7 @@ class _ProductitemWidgetState extends State<ProductitemWidget> {
                             borderRadius: BorderRadius.circular(8.0),
                           ),
                           child: Align(
-                            alignment: const AlignmentDirectional(0.0, 0.0),
+                            alignment: AlignmentDirectional(0.0, 0.0),
                             child: Icon(
                               Icons.whatshot_outlined,
                               color: FlutterFlowTheme.of(context)
@@ -154,10 +156,10 @@ class _ProductitemWidgetState extends State<ProductitemWidget> {
                     ),
                     Padding(
                       padding:
-                          const EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 5.0, 0.0),
+                          EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 5.0, 0.0),
                       child: Text(
                         valueOrDefault<String>(
-                          widget.servicedoc?.overallRating.toString(),
+                          widget.servicedoc?.overallRating?.toString(),
                           '0.0',
                         ),
                         style: FlutterFlowTheme.of(context).bodyMedium.override(
@@ -177,7 +179,7 @@ class _ProductitemWidgetState extends State<ProductitemWidget> {
                     ),
                     Padding(
                       padding:
-                          const EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 5.0, 0.0),
+                          EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 5.0, 0.0),
                       child: Text(
                         valueOrDefault<String>(
                           formatNumber(
@@ -224,9 +226,9 @@ class _ProductitemWidgetState extends State<ProductitemWidget> {
                     ),
                   ],
                 ),
-              ].divide(const SizedBox(height: 6.0)),
+              ].divide(SizedBox(height: 6.0)),
             ),
-          ].divide(const SizedBox(height: 12.0)),
+          ].divide(SizedBox(height: 12.0)),
         ),
       ),
     );

@@ -4,7 +4,10 @@ import '/components/ceta_comp_widget.dart';
 import '/componets/nav/nav_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'category_page_model.dart';
 export 'category_page_model.dart';
 
@@ -79,7 +82,7 @@ class _CategoryPageWidgetState extends State<CategoryPageWidget> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
+                          padding: EdgeInsetsDirectional.fromSTEB(
                               16.0, 12.0, 0.0, 4.0),
                           child: Text(
                             'Popular Categories',
@@ -93,7 +96,7 @@ class _CategoryPageWidgetState extends State<CategoryPageWidget> {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
+                          padding: EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 100.0),
                           child: Builder(
                             builder: (context) {
@@ -139,11 +142,11 @@ class _CategoryPageWidgetState extends State<CategoryPageWidget> {
                     ),
                   ),
                   Align(
-                    alignment: const AlignmentDirectional(0.0, 1.0),
+                    alignment: AlignmentDirectional(0.0, 1.0),
                     child: wrapWithModel(
                       model: _model.navModel,
                       updateCallback: () => setState(() {}),
-                      child: const NavWidget(
+                      child: NavWidget(
                         pageseletcted: Pages.category,
                       ),
                     ),
