@@ -1,3 +1,4 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/schema/enums/enums.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
@@ -169,19 +170,13 @@ class _NavWidgetState extends State<NavWidget> with TickerProviderStateMixin {
                         size: 24.0,
                       ),
                       onPressed: () async {
-                        if (Navigator.of(context).canPop()) {
-                          context.pop();
+                        if (currentUserDocument?.role == Roles.seller
+                            ? true
+                            : false) {
+                          context.pushNamed('seller_home_page');
+                        } else {
+                          context.pushNamed('Cus_homepage');
                         }
-                        context.pushNamed(
-                          'homepage',
-                          extra: <String, dynamic>{
-                            kTransitionInfoKey: const TransitionInfo(
-                              hasTransition: true,
-                              transitionType: PageTransitionType.fade,
-                              duration: Duration(milliseconds: 0),
-                            ),
-                          },
-                        );
                       },
                     ),
                     if (widget.pageseletcted == Pages.home)
@@ -202,63 +197,67 @@ class _NavWidgetState extends State<NavWidget> with TickerProviderStateMixin {
                   ],
                 ),
               ),
-              Container(
-                width: 50.0,
-                height: 50.0,
-                decoration: const BoxDecoration(),
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    FlutterFlowIconButton(
-                      borderColor: Colors.transparent,
-                      borderRadius: 20.0,
-                      borderWidth: 1.0,
-                      buttonSize: 48.0,
-                      icon: Icon(
-                        Icons.grid_view_rounded,
-                        color: valueOrDefault<Color>(
-                          widget.pageseletcted == Pages.category
-                              ? FlutterFlowTheme.of(context).primary
-                              : FlutterFlowTheme.of(context).colormutad,
-                          FlutterFlowTheme.of(context).colormutad,
-                        ),
-                        size: 24.0,
-                      ),
-                      onPressed: () async {
-                        if (Navigator.of(context).canPop()) {
-                          context.pop();
-                        }
-                        context.pushNamed(
-                          'category_page',
-                          extra: <String, dynamic>{
-                            kTransitionInfoKey: const TransitionInfo(
-                              hasTransition: true,
-                              transitionType: PageTransitionType.fade,
-                              duration: Duration(milliseconds: 0),
+              if (currentUserDocument?.role == Roles.customer ? true : false)
+                AuthUserStreamWidget(
+                  builder: (context) => Container(
+                    width: 50.0,
+                    height: 50.0,
+                    decoration: const BoxDecoration(),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        FlutterFlowIconButton(
+                          borderColor: Colors.transparent,
+                          borderRadius: 20.0,
+                          borderWidth: 1.0,
+                          buttonSize: 48.0,
+                          icon: Icon(
+                            Icons.grid_view_rounded,
+                            color: valueOrDefault<Color>(
+                              widget.pageseletcted == Pages.category
+                                  ? FlutterFlowTheme.of(context).primary
+                                  : FlutterFlowTheme.of(context).colormutad,
+                              FlutterFlowTheme.of(context).colormutad,
                             ),
-                          },
-                        );
-                      },
-                    ),
-                    if (widget.pageseletcted == Pages.category)
-                      Container(
-                        width: 20.0,
-                        height: 2.0,
-                        decoration: BoxDecoration(
-                          color: valueOrDefault<Color>(
-                            widget.pageseletcted == Pages.category
-                                ? FlutterFlowTheme.of(context).primary
-                                : FlutterFlowTheme.of(context).secondaryText,
-                            FlutterFlowTheme.of(context).colormutad,
+                            size: 24.0,
                           ),
-                          borderRadius: BorderRadius.circular(2.0),
+                          onPressed: () async {
+                            if (Navigator.of(context).canPop()) {
+                              context.pop();
+                            }
+                            context.pushNamed(
+                              'category_page',
+                              extra: <String, dynamic>{
+                                kTransitionInfoKey: const TransitionInfo(
+                                  hasTransition: true,
+                                  transitionType: PageTransitionType.fade,
+                                  duration: Duration(milliseconds: 0),
+                                ),
+                              },
+                            );
+                          },
                         ),
-                      ).animateOnPageLoad(
-                          animationsMap['containerOnPageLoadAnimation2']!),
-                  ],
+                        if (widget.pageseletcted == Pages.category)
+                          Container(
+                            width: 20.0,
+                            height: 2.0,
+                            decoration: BoxDecoration(
+                              color: valueOrDefault<Color>(
+                                widget.pageseletcted == Pages.category
+                                    ? FlutterFlowTheme.of(context).primary
+                                    : FlutterFlowTheme.of(context)
+                                        .secondaryText,
+                                FlutterFlowTheme.of(context).colormutad,
+                              ),
+                              borderRadius: BorderRadius.circular(2.0),
+                            ),
+                          ).animateOnPageLoad(
+                              animationsMap['containerOnPageLoadAnimation2']!),
+                      ],
+                    ),
+                  ),
                 ),
-              ),
               Container(
                 width: 50.0,
                 height: 50.0,
@@ -287,7 +286,7 @@ class _NavWidgetState extends State<NavWidget> with TickerProviderStateMixin {
                           context.pop();
                         }
                         context.pushNamed(
-                          'orders_page',
+                          'order_page',
                           extra: <String, dynamic>{
                             kTransitionInfoKey: const TransitionInfo(
                               hasTransition: true,

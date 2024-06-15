@@ -243,7 +243,7 @@ class _Auth2CreateWidgetState extends State<Auth2CreateWidget>
                             if (_model.isSellerValue ?? true)
                               Padding(
                                 padding: const EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 0.0, 0.0, 16.0),
+                                    0.0, 0.0, 0.0, 10.0),
                                 child: StreamBuilder<List<ProfessonsRecord>>(
                                   stream: queryProfessonsRecord(),
                                   builder: (context, snapshot) {
@@ -269,17 +269,10 @@ class _Auth2CreateWidgetState extends State<Auth2CreateWidget>
                                     return FlutterFlowDropDown<String>(
                                       controller:
                                           _model.proDropdownValueController ??=
-                                              FormFieldController<String>(
-                                        _model.proDropdownValue ??= '',
-                                      ),
-                                      options: List<String>.from(
-                                          proDropdownProfessonsRecordList
-                                              .map((e) => e.professoion)
-                                              .toList()),
-                                      optionLabels:
-                                          proDropdownProfessonsRecordList
-                                              .map((e) => e.professoion)
-                                              .toList(),
+                                              FormFieldController<String>(null),
+                                      options: proDropdownProfessonsRecordList
+                                          .map((e) => e.professoion)
+                                          .toList(),
                                       onChanged: (val) => setState(
                                           () => _model.proDropdownValue = val),
                                       width: 300.0,
@@ -330,9 +323,13 @@ class _Auth2CreateWidgetState extends State<Auth2CreateWidget>
                                   },
                                 ),
                               ),
+                            const Divider(
+                              thickness: 0.6,
+                              color: Color(0xFFBFBFBF),
+                            ),
                             Padding(
                               padding: const EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 0.0, 0.0, 16.0),
+                                  0.0, 10.0, 0.0, 16.0),
                               child: SizedBox(
                                 width: double.infinity,
                                 child: TextFormField(
@@ -572,27 +569,47 @@ class _Auth2CreateWidgetState extends State<Auth2CreateWidget>
                                   await UsersRecord.collection
                                       .doc(user.uid)
                                       .update(createUsersRecordData(
-                                        displayName:
-                                            _model.nameTextController.text,
                                         email: _model
                                             .emailAddressTextController.text,
+                                        displayName:
+                                            _model.nameTextController.text,
                                         role: _model.isSellerValue!
                                             ? Roles.seller
                                             : Roles.customer,
-                                        professon: functions.getReference(
-                                            _model.proDropdownValue!),
-                                        photoUrl: '',
+                                        professon: _model.isSellerValue!
+                                            ? functions.getReference(
+                                                _model.proDropdownValue!)
+                                            : null,
                                       ));
 
-                                  if (currentUserDocument?.role ==
-                                      Roles.seller) {
+                                  if (_model.isSellerValue == true) {
                                     context.goNamedAuth(
-                                        'auth_2_sellerform', context.mounted);
+                                      'auth_2_sellerform',
+                                      context.mounted,
+                                      extra: <String, dynamic>{
+                                        kTransitionInfoKey: const TransitionInfo(
+                                          hasTransition: true,
+                                          transitionType:
+                                              PageTransitionType.fade,
+                                          duration: Duration(milliseconds: 0),
+                                        ),
+                                      },
+                                    );
 
                                     return;
                                   } else {
                                     context.goNamedAuth(
-                                        'homepage', context.mounted);
+                                      'Loading',
+                                      context.mounted,
+                                      extra: <String, dynamic>{
+                                        kTransitionInfoKey: const TransitionInfo(
+                                          hasTransition: true,
+                                          transitionType:
+                                              PageTransitionType.fade,
+                                          duration: Duration(milliseconds: 0),
+                                        ),
+                                      },
+                                    );
 
                                     return;
                                   }
@@ -650,9 +667,45 @@ class _Auth2CreateWidgetState extends State<Auth2CreateWidget>
                                   if (user == null) {
                                     return;
                                   }
+                                  if (_model.isSellerValue == true) {
+                                    await currentUserReference!
+                                        .update(createUsersRecordData(
+                                      professon: functions.getReference(
+                                          _model.proDropdownValue!),
+                                      role: Roles.seller,
+                                    ));
 
-                                  context.goNamedAuth(
-                                      'homepage', context.mounted);
+                                    context.pushNamedAuth(
+                                      'auth_2_sellerform',
+                                      context.mounted,
+                                      extra: <String, dynamic>{
+                                        kTransitionInfoKey: const TransitionInfo(
+                                          hasTransition: true,
+                                          transitionType:
+                                              PageTransitionType.fade,
+                                          duration: Duration(milliseconds: 0),
+                                        ),
+                                      },
+                                    );
+                                  } else {
+                                    await currentUserReference!
+                                        .update(createUsersRecordData(
+                                      role: Roles.customer,
+                                    ));
+
+                                    context.pushNamedAuth(
+                                      'Cus_homepage',
+                                      context.mounted,
+                                      extra: <String, dynamic>{
+                                        kTransitionInfoKey: const TransitionInfo(
+                                          hasTransition: true,
+                                          transitionType:
+                                              PageTransitionType.fade,
+                                          duration: Duration(milliseconds: 0),
+                                        ),
+                                      },
+                                    );
+                                  }
                                 },
                                 text: 'Continue with Google',
                                 icon: const FaIcon(
@@ -711,7 +764,7 @@ class _Auth2CreateWidgetState extends State<Auth2CreateWidget>
                                           }
 
                                           context.goNamedAuth(
-                                              'homepage', context.mounted);
+                                              'Loading', context.mounted);
                                         },
                                         text: 'Continue with Apple',
                                         icon: const FaIcon(

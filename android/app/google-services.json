@@ -12,7 +12,20 @@
           "package_name": "com.kiyascloud.housify"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "626917610268-4u9jq7i7bt8e6tdm803d2lo7jgcvktad.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.kiyascloud.housify",
+            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
+          }
+        },
+        {
+          "client_id": "626917610268-sl1o0o454c5un2cf64o74v3jgu8o22tk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyCLfV32A22ZvTeOA2ENiVRvXOnm8oepjC0"
@@ -20,7 +33,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "626917610268-sl1o0o454c5un2cf64o74v3jgu8o22tk.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "626917610268-hv0c1c7lml8a4e44mvm0e29e6vfhotia.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.kiyascloud.housify"
+              }
+            }
+          ]
         }
       }
     }
