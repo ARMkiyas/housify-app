@@ -1,4 +1,3 @@
-import '/auth/base_auth_user_provider.dart';
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/backend/firebase_storage/storage.dart';
@@ -11,16 +10,9 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
 import '/flutter_flow/upload_data.dart';
-import 'dart:math';
 import '/flutter_flow/random_data_util.dart' as random_data;
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
-import 'package:provider/provider.dart';
 import 'seller_form_model.dart';
 export 'seller_form_model.dart';
 
@@ -76,22 +68,22 @@ class _SellerFormWidgetState extends State<SellerFormWidget>
             curve: Curves.easeInOut,
             delay: 0.0.ms,
             duration: 300.0.ms,
-            begin: Offset(0.0, -140.0),
-            end: Offset(0.0, 0.0),
+            begin: const Offset(0.0, -140.0),
+            end: const Offset(0.0, 0.0),
           ),
           ScaleEffect(
             curve: Curves.easeInOut,
             delay: 0.0.ms,
             duration: 300.0.ms,
-            begin: Offset(0.9, 0.9),
-            end: Offset(1.0, 1.0),
+            begin: const Offset(0.9, 0.9),
+            end: const Offset(1.0, 1.0),
           ),
           TiltEffect(
             curve: Curves.easeInOut,
             delay: 0.0.ms,
             duration: 300.0.ms,
-            begin: Offset(0.349, 0),
-            end: Offset(0, 0),
+            begin: const Offset(0.349, 0),
+            end: const Offset(0, 0),
           ),
         ],
       ),
@@ -116,47 +108,47 @@ class _SellerFormWidgetState extends State<SellerFormWidget>
             FlutterFlowTheme.of(context).primary,
             FlutterFlowTheme.of(context).tertiary
           ],
-          stops: [0.0, 1.0],
-          begin: AlignmentDirectional(0.87, -1.0),
-          end: AlignmentDirectional(-0.87, 1.0),
+          stops: const [0.0, 1.0],
+          begin: const AlignmentDirectional(0.87, -1.0),
+          end: const AlignmentDirectional(-0.87, 1.0),
         ),
       ),
-      alignment: AlignmentDirectional(0.0, -1.0),
+      alignment: const AlignmentDirectional(0.0, -1.0),
       child: SingleChildScrollView(
         child: Column(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0.0, 28.0, 0.0, 0.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 28.0, 0.0, 0.0),
               child: Container(
                 width: 200.0,
                 height: 70.0,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(16.0),
                 ),
-                alignment: AlignmentDirectional(0.0, 0.0),
+                alignment: const AlignmentDirectional(0.0, 0.0),
                 child: wrapWithModel(
                   model: _model.logoModel,
                   updateCallback: () => setState(() {}),
-                  child: LogoWidget(),
+                  child: const LogoWidget(),
                 ),
               ),
             ),
-            Container(
+            SizedBox(
               width: double.infinity,
               child: Stack(
                 children: [
                   Padding(
-                    padding: EdgeInsets.all(16.0),
+                    padding: const EdgeInsets.all(16.0),
                     child: Container(
                       width: double.infinity,
-                      constraints: BoxConstraints(
+                      constraints: const BoxConstraints(
                         maxWidth: 570.0,
                       ),
                       decoration: BoxDecoration(
                         color: FlutterFlowTheme.of(context).secondaryBackground,
-                        boxShadow: [
+                        boxShadow: const [
                           BoxShadow(
                             blurRadius: 4.0,
                             color: Color(0x33000000),
@@ -169,12 +161,12 @@ class _SellerFormWidgetState extends State<SellerFormWidget>
                         borderRadius: BorderRadius.circular(12.0),
                       ),
                       child: Align(
-                        alignment: AlignmentDirectional(0.0, 0.0),
+                        alignment: const AlignmentDirectional(0.0, 0.0),
                         child: Form(
                           key: _model.formKey,
                           autovalidateMode: AutovalidateMode.always,
                           child: Padding(
-                            padding: EdgeInsets.all(32.0),
+                            padding: const EdgeInsets.all(32.0),
                             child: Column(
                               mainAxisSize: MainAxisSize.max,
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -190,7 +182,7 @@ class _SellerFormWidgetState extends State<SellerFormWidget>
                                       ),
                                 ),
                                 Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       0.0, 8.0, 0.0, 24.0),
                                   child: Text(
                                     'Please Provide below information for Identity verfication ',
@@ -204,15 +196,15 @@ class _SellerFormWidgetState extends State<SellerFormWidget>
                                   ),
                                 ),
                                 Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       0.0, 0.0, 0.0, 16.0),
-                                  child: Container(
+                                  child: SizedBox(
                                     width: double.infinity,
                                     child: TextFormField(
                                       controller: _model.nameTextController,
                                       focusNode: _model.nameFocusNode,
                                       autofocus: true,
-                                      autofillHints: [AutofillHints.name],
+                                      autofillHints: const [AutofillHints.name],
                                       textInputAction: TextInputAction.next,
                                       obscureText: false,
                                       decoration: InputDecoration(
@@ -278,15 +270,15 @@ class _SellerFormWidgetState extends State<SellerFormWidget>
                                   ),
                                 ),
                                 Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       0.0, 0.0, 0.0, 16.0),
-                                  child: Container(
+                                  child: SizedBox(
                                     width: double.infinity,
                                     child: TextFormField(
                                       controller: _model.dobTextController,
                                       focusNode: _model.dobFocusNode,
                                       onFieldSubmitted: (_) async {
-                                        final _datePickedDate =
+                                        final datePickedDate =
                                             await showDatePicker(
                                           context: context,
                                           initialDate: random_data.randomDate(),
@@ -332,18 +324,18 @@ class _SellerFormWidgetState extends State<SellerFormWidget>
                                           },
                                         );
 
-                                        if (_datePickedDate != null) {
+                                        if (datePickedDate != null) {
                                           safeSetState(() {
                                             _model.datePicked = DateTime(
-                                              _datePickedDate.year,
-                                              _datePickedDate.month,
-                                              _datePickedDate.day,
+                                              datePickedDate.year,
+                                              datePickedDate.month,
+                                              datePickedDate.day,
                                             );
                                           });
                                         }
                                       },
                                       autofocus: true,
-                                      autofillHints: [AutofillHints.birthday],
+                                      autofillHints: const [AutofillHints.birthday],
                                       textCapitalization:
                                           TextCapitalization.none,
                                       textInputAction: TextInputAction.next,
@@ -413,15 +405,15 @@ class _SellerFormWidgetState extends State<SellerFormWidget>
                                   ),
                                 ),
                                 Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       0.0, 0.0, 0.0, 16.0),
-                                  child: Container(
+                                  child: SizedBox(
                                     width: double.infinity,
                                     child: TextFormField(
                                       controller: _model.addressTextController,
                                       focusNode: _model.addressFocusNode,
                                       autofocus: true,
-                                      autofillHints: [
+                                      autofillHints: const [
                                         AutofillHints.streetAddressLine1
                                       ],
                                       textInputAction: TextInputAction.next,
@@ -490,7 +482,7 @@ class _SellerFormWidgetState extends State<SellerFormWidget>
                                   ),
                                 ),
                                 Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       0.0, 0.0, 0.0, 16.0),
                                   child: StreamBuilder<List<ProfessonsRecord>>(
                                     stream: queryProfessonsRecord(),
@@ -567,7 +559,7 @@ class _SellerFormWidgetState extends State<SellerFormWidget>
                                                 .alternate,
                                         borderWidth: 2.0,
                                         borderRadius: 12.0,
-                                        margin: EdgeInsetsDirectional.fromSTEB(
+                                        margin: const EdgeInsetsDirectional.fromSTEB(
                                             16.0, 4.0, 16.0, 4.0),
                                         hidesUnderline: true,
                                         isOverButton: true,
@@ -578,15 +570,15 @@ class _SellerFormWidgetState extends State<SellerFormWidget>
                                   ),
                                 ),
                                 Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       0.0, 0.0, 0.0, 16.0),
-                                  child: Container(
+                                  child: SizedBox(
                                     width: double.infinity,
                                     child: TextFormField(
                                       controller: _model.idNumberTextController,
                                       focusNode: _model.idNumberFocusNode,
                                       autofocus: true,
-                                      autofillHints: [
+                                      autofillHints: const [
                                         AutofillHints.telephoneNumber
                                       ],
                                       textInputAction: TextInputAction.next,
@@ -661,7 +653,7 @@ class _SellerFormWidgetState extends State<SellerFormWidget>
                                   true,
                                 ))
                                   Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         0.0, 0.0, 0.0, 16.0),
                                     child: Row(
                                       mainAxisSize: MainAxisSize.max,
@@ -753,8 +745,6 @@ class _SellerFormWidgetState extends State<SellerFormWidget>
                                             child: Image.network(
                                               valueOrDefault<String>(
                                                 _model.uploadedFileUrl1 !=
-                                                            null &&
-                                                        _model.uploadedFileUrl1 !=
                                                             ''
                                                     ? _model.uploadedFileUrl1
                                                     : 'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/housify-ujjxfr/assets/u43a49g8rlpt/id_front_illustration.png',
@@ -850,8 +840,6 @@ class _SellerFormWidgetState extends State<SellerFormWidget>
                                             child: Image.network(
                                               valueOrDefault<String>(
                                                 _model.uploadedFileUrl2 !=
-                                                            null &&
-                                                        _model.uploadedFileUrl2 !=
                                                             ''
                                                     ? _model.uploadedFileUrl2
                                                     : 'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/housify-ujjxfr/assets/1u7e7jqytcge/id_back_illustration.png',
@@ -869,7 +857,7 @@ class _SellerFormWidgetState extends State<SellerFormWidget>
                                   ),
                                 if (_model.idTypeValue == IdTypes.PassPort)
                                   Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         0.0, 0.0, 0.0, 16.0),
                                     child: InkWell(
                                       splashColor: Colors.transparent,
@@ -942,8 +930,7 @@ class _SellerFormWidgetState extends State<SellerFormWidget>
                                             BorderRadius.circular(8.0),
                                         child: Image.network(
                                           valueOrDefault<String>(
-                                            _model.uploadedFileUrl3 != null &&
-                                                    _model.uploadedFileUrl3 !=
+                                            _model.uploadedFileUrl3 !=
                                                         ''
                                                 ? _model.uploadedFileUrl3
                                                 : 'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/housify-ujjxfr/assets/usw0nfxlugy6/passport_illustration.png',
@@ -957,7 +944,7 @@ class _SellerFormWidgetState extends State<SellerFormWidget>
                                     ),
                                   ),
                                 Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       0.0, 0.0, 0.0, 8.0),
                                   child: FFButtonWidget(
                                     onPressed: () async {
@@ -968,18 +955,7 @@ class _SellerFormWidgetState extends State<SellerFormWidget>
                                                 .validate()) {
                                           return;
                                         }
-                                        if (_model.datePicked == null) {
-                                          return;
-                                        }
                                         if (_model.idTypeValue == null) {
-                                          return;
-                                        }
-                                        if (_model.uploadedFileUrl2 == null ||
-                                            _model.uploadedFileUrl2.isEmpty) {
-                                          return;
-                                        }
-                                        if (_model.uploadedFileUrl3 == null ||
-                                            _model.uploadedFileUrl3.isEmpty) {
                                           return;
                                         }
 
@@ -993,8 +969,7 @@ class _SellerFormWidgetState extends State<SellerFormWidget>
                                           idType: _model.idTypeValue,
                                           verified: true,
                                           idImageFront:
-                                              _model.uploadedFileUrl3 != null &&
-                                                      _model.uploadedFileUrl3 !=
+                                              _model.uploadedFileUrl3 !=
                                                           ''
                                                   ? _model.uploadedFileUrl3
                                                   : _model.uploadedFileUrl1,
@@ -1013,10 +988,10 @@ class _SellerFormWidgetState extends State<SellerFormWidget>
                                     options: FFButtonOptions(
                                       width: double.infinity,
                                       height: 44.0,
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           0.0, 0.0, 0.0, 0.0),
                                       iconPadding:
-                                          EdgeInsetsDirectional.fromSTEB(
+                                          const EdgeInsetsDirectional.fromSTEB(
                                               0.0, 0.0, 0.0, 0.0),
                                       color:
                                           FlutterFlowTheme.of(context).primary,
@@ -1028,7 +1003,7 @@ class _SellerFormWidgetState extends State<SellerFormWidget>
                                             letterSpacing: 0.0,
                                           ),
                                       elevation: 3.0,
-                                      borderSide: BorderSide(
+                                      borderSide: const BorderSide(
                                         color: Colors.transparent,
                                         width: 1.0,
                                       ),
@@ -1037,7 +1012,7 @@ class _SellerFormWidgetState extends State<SellerFormWidget>
                                   ),
                                 ),
                                 Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       0.0, 0.0, 0.0, 16.0),
                                   child: FFButtonWidget(
                                     onPressed: () async {
@@ -1053,10 +1028,10 @@ class _SellerFormWidgetState extends State<SellerFormWidget>
                                     options: FFButtonOptions(
                                       width: double.infinity,
                                       height: 44.0,
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           0.0, 0.0, 0.0, 0.0),
                                       iconPadding:
-                                          EdgeInsetsDirectional.fromSTEB(
+                                          const EdgeInsetsDirectional.fromSTEB(
                                               0.0, 0.0, 0.0, 0.0),
                                       color: FlutterFlowTheme.of(context).error,
                                       textStyle: FlutterFlowTheme.of(context)
@@ -1067,7 +1042,7 @@ class _SellerFormWidgetState extends State<SellerFormWidget>
                                             letterSpacing: 0.0,
                                           ),
                                       elevation: 3.0,
-                                      borderSide: BorderSide(
+                                      borderSide: const BorderSide(
                                         color: Colors.transparent,
                                         width: 1.0,
                                       ),

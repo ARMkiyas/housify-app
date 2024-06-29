@@ -1,22 +1,13 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 import '/backend/backend.dart';
-import '/backend/schema/structs/index.dart';
-import '/backend/schema/enums/enums.dart';
 
 import '/auth/base_auth_user_provider.dart';
 
 import '/index.dart';
-import '/main.dart';
-import '/flutter_flow/flutter_flow_theme.dart';
-import '/flutter_flow/lat_lng.dart';
-import '/flutter_flow/place.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import 'serialization_util.dart';
 
 export 'package:go_router/go_router.dart';
 export 'serialization_util.dart';
@@ -81,81 +72,81 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
       errorBuilder: (context, state) => appStateNotifier.loggedIn
-          ? LoadingWidget()
-          : AuthWelcomeScreenWidget(),
+          ? const LoadingWidget()
+          : const AuthWelcomeScreenWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
           builder: (context, _) => appStateNotifier.loggedIn
-              ? LoadingWidget()
-              : AuthWelcomeScreenWidget(),
+              ? const LoadingWidget()
+              : const AuthWelcomeScreenWidget(),
         ),
         FFRoute(
           name: 'Cus_homepage',
           path: '/cusHomepage',
           requireAuth: true,
-          builder: (context, params) => CusHomepageWidget(),
+          builder: (context, params) => const CusHomepageWidget(),
         ),
         FFRoute(
           name: 'auth_WelcomeScreen',
           path: '/authWelcomeScreen',
-          builder: (context, params) => AuthWelcomeScreenWidget(),
+          builder: (context, params) => const AuthWelcomeScreenWidget(),
         ),
         FFRoute(
           name: 'auth_2_Create',
           path: '/auth2Create',
-          builder: (context, params) => Auth2CreateWidget(),
+          builder: (context, params) => const Auth2CreateWidget(),
         ),
         FFRoute(
           name: 'auth_2_Login',
           path: '/auth2Login',
-          builder: (context, params) => Auth2LoginWidget(),
+          builder: (context, params) => const Auth2LoginWidget(),
         ),
         FFRoute(
           name: 'auth_2_ForgotPassword',
           path: '/auth2ForgotPassword',
-          builder: (context, params) => Auth2ForgotPasswordWidget(),
+          builder: (context, params) => const Auth2ForgotPasswordWidget(),
         ),
         FFRoute(
           name: 'ProfilePage',
           path: '/profilePage',
-          builder: (context, params) => ProfilePageWidget(),
+          builder: (context, params) => const ProfilePageWidget(),
         ),
         FFRoute(
           name: 'auth_2_sellerform',
           path: '/auth2Sellerform',
-          builder: (context, params) => Auth2SellerformWidget(),
+          builder: (context, params) => const Auth2SellerformWidget(),
         ),
         FFRoute(
           name: 'Verfication_wait',
           path: '/verficationWait',
-          builder: (context, params) => VerficationWaitWidget(),
+          builder: (context, params) => const VerficationWaitWidget(),
         ),
         FFRoute(
           name: 'category_page',
           path: '/categoryPage',
-          builder: (context, params) => CategoryPageWidget(),
+          builder: (context, params) => const CategoryPageWidget(),
         ),
         FFRoute(
           name: 'offerpage',
           path: '/offerpage',
-          builder: (context, params) => OfferpageWidget(),
+          builder: (context, params) => const OfferpageWidget(),
         ),
         FFRoute(
           name: 'order_page',
           path: '/orderPage',
-          builder: (context, params) => OrderPageWidget(),
+          builder: (context, params) => const OrderPageWidget(),
         ),
         FFRoute(
           name: 'Loading',
           path: '/loading',
-          builder: (context, params) => LoadingWidget(),
+          builder: (context, params) => const LoadingWidget(),
         ),
         FFRoute(
           name: 'seller_home_page',
           path: '/sellerHomePage',
-          builder: (context, params) => SellerHomePageWidget(),
+          builder: (context, params) => const SellerHomePageWidget(),
         ),
         FFRoute(
           name: 'Order_view_page',
@@ -186,7 +177,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'EditProfile',
           path: '/editProfile',
-          builder: (context, params) => EditProfileWidget(),
+          builder: (context, params) => const EditProfileWidget(),
         ),
         FFRoute(
           name: 'Service_details_page',
@@ -208,7 +199,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'AccountSetting',
           path: '/accountSetting',
-          builder: (context, params) => AccountSettingWidget(),
+          builder: (context, params) => const AccountSettingWidget(),
         ),
         FFRoute(
           name: 'productview_page',
@@ -224,6 +215,10 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
             search: params.getParam(
               'search',
               ParamType.String,
+            ),
+            isSearch: params.getParam(
+              'isSearch',
+              ParamType.bool,
             ),
           ),
         ),
@@ -260,17 +255,17 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'Adminpage',
           path: '/adminpage',
-          builder: (context, params) => AdminpageWidget(),
+          builder: (context, params) => const AdminpageWidget(),
         ),
         FFRoute(
           name: 'adminage',
           path: '/adminage',
-          builder: (context, params) => AdminageWidget(),
+          builder: (context, params) => const AdminageWidget(),
         ),
         FFRoute(
           name: 'ordeplaceed',
           path: '/ordeplaceed',
-          builder: (context, params) => OrdeplaceedWidget(),
+          builder: (context, params) => const OrdeplaceedWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
@@ -506,7 +501,7 @@ class TransitionInfo {
   final Duration duration;
   final Alignment? alignment;
 
-  static TransitionInfo appDefault() => TransitionInfo(hasTransition: false);
+  static TransitionInfo appDefault() => const TransitionInfo(hasTransition: false);
 }
 
 class RootPageContext {
