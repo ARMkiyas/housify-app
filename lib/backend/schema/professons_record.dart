@@ -3,17 +3,15 @@ import 'dart:async';
 import 'package:collection/collection.dart';
 
 import '/backend/schema/util/firestore_util.dart';
-import '/backend/schema/util/schema_util.dart';
-import '/backend/schema/enums/enums.dart';
 
 import 'index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 
 class ProfessonsRecord extends FirestoreRecord {
   ProfessonsRecord._(
-    DocumentReference reference,
-    Map<String, dynamic> data,
-  ) : super(reference, data) {
+    super.reference,
+    super.data,
+  ) {
     _initializeFields();
   }
 
@@ -32,10 +30,16 @@ class ProfessonsRecord extends FirestoreRecord {
   String get image => _image ?? '';
   bool hasImage() => _image != null;
 
+  // "serviceRef" field.
+  List<DocumentReference>? _serviceRef;
+  List<DocumentReference> get serviceRef => _serviceRef ?? const [];
+  bool hasServiceRef() => _serviceRef != null;
+
   void _initializeFields() {
     _professoion = snapshotData['professoion'] as String?;
     _categoryName = snapshotData['category_name'] as String?;
     _image = snapshotData['image'] as String?;
+    _serviceRef = getDataList(snapshotData['serviceRef']);
   }
 
   static CollectionReference get collection =>
@@ -93,14 +97,16 @@ class ProfessonsRecordDocumentEquality implements Equality<ProfessonsRecord> {
 
   @override
   bool equals(ProfessonsRecord? e1, ProfessonsRecord? e2) {
+    const listEquality = ListEquality();
     return e1?.professoion == e2?.professoion &&
         e1?.categoryName == e2?.categoryName &&
-        e1?.image == e2?.image;
+        e1?.image == e2?.image &&
+        listEquality.equals(e1?.serviceRef, e2?.serviceRef);
   }
 
   @override
-  int hash(ProfessonsRecord? e) =>
-      const ListEquality().hash([e?.professoion, e?.categoryName, e?.image]);
+  int hash(ProfessonsRecord? e) => const ListEquality()
+      .hash([e?.professoion, e?.categoryName, e?.image, e?.serviceRef]);
 
   @override
   bool isValidKey(Object? o) => o is ProfessonsRecord;

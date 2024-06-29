@@ -4,8 +4,6 @@ import '/flutter_flow/flutter_flow_charts.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'order_chart_model.dart';
 export 'order_chart_model.dart';
 
@@ -48,7 +46,7 @@ class _OrderChartWidgetState extends State<OrderChartWidget> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 40.0),
+      padding: const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 40.0),
       child: StreamBuilder<List<ServiceAllRecord>>(
         stream: queryServiceAllRecord(
           queryBuilder: (serviceAllRecord) => serviceAllRecord.where(
@@ -77,7 +75,7 @@ class _OrderChartWidgetState extends State<OrderChartWidget> {
             height: 350.0,
             decoration: BoxDecoration(
               color: FlutterFlowTheme.of(context).primaryBackground,
-              boxShadow: [
+              boxShadow: const [
                 BoxShadow(
                   blurRadius: 3.0,
                   color: Color(0x33000000),
@@ -90,13 +88,13 @@ class _OrderChartWidgetState extends State<OrderChartWidget> {
               borderRadius: BorderRadius.circular(10.0),
             ),
             child: Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 20.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 20.0),
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(16.0, 20.0, 16.0, 10.0),
+                        const EdgeInsetsDirectional.fromSTEB(16.0, 20.0, 16.0, 10.0),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -117,8 +115,8 @@ class _OrderChartWidgetState extends State<OrderChartWidget> {
                   Expanded(
                     child: Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 5.0, 0.0),
-                      child: Container(
+                          const EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 5.0, 0.0),
+                      child: SizedBox(
                         height: double.infinity,
                         child: FlutterFlowBarChart(
                           barData: [
@@ -126,9 +124,9 @@ class _OrderChartWidgetState extends State<OrderChartWidget> {
                               yData: containerServiceAllRecordList
                                   .map((e) => e.orders.length)
                                   .toList(),
-                              color: Color(0xFF0094FF),
+                              color: const Color(0xFF0094FF),
                               borderWidth: 1.0,
-                              borderColor: Color(0xFF0094FF),
+                              borderColor: const Color(0xFF0094FF),
                             )
                           ],
                           xLabels: containerServiceAllRecordList
@@ -137,7 +135,7 @@ class _OrderChartWidgetState extends State<OrderChartWidget> {
                               .map((e) => e.toString())
                               .toList(),
                           barWidth: 30.0,
-                          barBorderRadius: BorderRadius.only(
+                          barBorderRadius: const BorderRadius.only(
                             bottomLeft: Radius.circular(10.0),
                             bottomRight: Radius.circular(1040.0),
                             topLeft: Radius.circular(10.0),
@@ -153,7 +151,7 @@ class _OrderChartWidgetState extends State<OrderChartWidget> {
                             showGrid: true,
                             showBorder: false,
                           ),
-                          axisBounds: AxisBounds(
+                          axisBounds: const AxisBounds(
                             minY: 100.0,
                             maxY: 5000.0,
                           ),

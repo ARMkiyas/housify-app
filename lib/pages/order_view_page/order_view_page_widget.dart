@@ -1,17 +1,13 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/backend/schema/enums/enums.dart';
-import '/components/back_header_widget.dart';
+import '/componets/back_header/back_header_widget.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
-import 'package:provider/provider.dart';
 import 'order_view_page_model.dart';
 export 'order_view_page_model.dart';
 
@@ -75,14 +71,14 @@ class _OrderViewPageWidgetState extends State<OrderViewPageWidget> {
           child: Stack(
             children: [
               Align(
-                alignment: AlignmentDirectional(0.0, 0.0),
+                alignment: const AlignmentDirectional(0.0, 0.0),
                 child: SingleChildScrollView(
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
+                        padding: const EdgeInsetsDirectional.fromSTEB(
                             20.0, 0.0, 20.0, 0.0),
                         child: Container(
                           width: double.infinity,
@@ -92,7 +88,7 @@ class _OrderViewPageWidgetState extends State<OrderViewPageWidget> {
                             borderRadius: BorderRadius.circular(8.0),
                           ),
                           child: Padding(
-                            padding: EdgeInsets.all(20.0),
+                            padding: const EdgeInsets.all(20.0),
                             child: Column(
                               mainAxisSize: MainAxisSize.max,
                               children: [
@@ -208,7 +204,7 @@ class _OrderViewPageWidgetState extends State<OrderViewPageWidget> {
                                           ),
                                         ],
                                       ),
-                                  ].divide(SizedBox(height: 16.0)),
+                                  ].divide(const SizedBox(height: 16.0)),
                                 ),
                                 Divider(
                                   height: 32.0,
@@ -265,11 +261,11 @@ class _OrderViewPageWidgetState extends State<OrderViewPageWidget> {
                           mainAxisSize: MainAxisSize.max,
                           children: [
                             Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   25.0, 0.0, 25.0, 0.0),
                               child: Container(
                                 width: 100.0,
-                                constraints: BoxConstraints(
+                                constraints: const BoxConstraints(
                                   minWidth: double.infinity,
                                 ),
                                 decoration: BoxDecoration(
@@ -279,7 +275,7 @@ class _OrderViewPageWidgetState extends State<OrderViewPageWidget> {
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   25.0, 20.0, 25.0, 0.0),
                               child: Container(
                                 width: double.infinity,
@@ -288,7 +284,7 @@ class _OrderViewPageWidgetState extends State<OrderViewPageWidget> {
                                       .secondaryBackground,
                                 ),
                                 child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       0.0, 0.0, 8.0, 0.0),
                                   child: TextFormField(
                                     controller: _model.addressTextController,
@@ -361,7 +357,7 @@ class _OrderViewPageWidgetState extends State<OrderViewPageWidget> {
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   25.0, 20.0, 25.0, 0.0),
                               child: Container(
                                 width: double.infinity,
@@ -370,7 +366,7 @@ class _OrderViewPageWidgetState extends State<OrderViewPageWidget> {
                                       .secondaryBackground,
                                 ),
                                 child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       0.0, 0.0, 8.0, 0.0),
                                   child: TextFormField(
                                     controller: _model.phoneTextController,
@@ -444,7 +440,7 @@ class _OrderViewPageWidgetState extends State<OrderViewPageWidget> {
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   25.0, 20.0, 25.0, 0.0),
                               child: Container(
                                 width: double.infinity,
@@ -453,7 +449,7 @@ class _OrderViewPageWidgetState extends State<OrderViewPageWidget> {
                                       .secondaryBackground,
                                 ),
                                 child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       8.0, 0.0, 8.0, 0.0),
                                   child: TextFormField(
                                     controller: _model.notesTextController,
@@ -528,7 +524,7 @@ class _OrderViewPageWidgetState extends State<OrderViewPageWidget> {
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   25.0, 20.0, 25.0, 0.0),
                               child: Container(
                                 width: double.infinity,
@@ -572,7 +568,7 @@ class _OrderViewPageWidgetState extends State<OrderViewPageWidget> {
                                       FlutterFlowTheme.of(context).alternate,
                                   borderWidth: 2.0,
                                   borderRadius: 8.0,
-                                  margin: EdgeInsetsDirectional.fromSTEB(
+                                  margin: const EdgeInsetsDirectional.fromSTEB(
                                       16.0, 4.0, 16.0, 4.0),
                                   hidesUnderline: true,
                                   isOverButton: true,
@@ -592,19 +588,19 @@ class _OrderViewPageWidgetState extends State<OrderViewPageWidget> {
                               FlutterFlowTheme.of(context).secondaryBackground,
                         ),
                         child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 20.0, 0.0, 0.0),
                           child: Container(
                             width: double.infinity,
-                            decoration: BoxDecoration(),
+                            decoration: const BoxDecoration(),
                             child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   24.0, 0.0, 24.0, 0.0),
                               child: FFButtonWidget(
                                 onPressed: () async {
                                   currentUserLocationValue =
                                       await getCurrentUserLocation(
-                                          defaultLocation: LatLng(0.0, 0.0));
+                                          defaultLocation: const LatLng(0.0, 0.0));
                                   if (_model.formKey.currentState == null ||
                                       !_model.formKey.currentState!
                                           .validate()) {
@@ -640,15 +636,15 @@ class _OrderViewPageWidgetState extends State<OrderViewPageWidget> {
                                   context.goNamed('ordeplaceed');
                                 },
                                 text: 'Continue to Payment',
-                                icon: Icon(
+                                icon: const Icon(
                                   Icons.arrow_forward,
                                   size: 20.0,
                                 ),
                                 options: FFButtonOptions(
                                   height: 58.0,
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       20.0, 0.0, 20.0, 0.0),
-                                  iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                  iconPadding: const EdgeInsetsDirectional.fromSTEB(
                                       0.0, 0.0, 0.0, 0.0),
                                   color:
                                       FlutterFlowTheme.of(context).primaryText,
@@ -661,7 +657,7 @@ class _OrderViewPageWidgetState extends State<OrderViewPageWidget> {
                                         letterSpacing: 0.0,
                                       ),
                                   elevation: 10.0,
-                                  borderSide: BorderSide(
+                                  borderSide: const BorderSide(
                                     color: Colors.transparent,
                                     width: 1.0,
                                   ),
@@ -679,7 +675,7 @@ class _OrderViewPageWidgetState extends State<OrderViewPageWidget> {
               wrapWithModel(
                 model: _model.backHeaderModel,
                 updateCallback: () => setState(() {}),
-                child: BackHeaderWidget(
+                child: const BackHeaderWidget(
                   title: 'Checkout',
                 ),
               ),

@@ -2,8 +2,6 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'offer_card_model.dart';
 export 'offer_card_model.dart';
 
@@ -54,7 +52,7 @@ class _OfferCardWidgetState extends State<OfferCardWidget> {
         color: FlutterFlowTheme.of(context).pageviewdot,
         borderRadius: BorderRadius.circular(8.0),
       ),
-      child: Container(
+      child: SizedBox(
         width: double.infinity,
         height: double.infinity,
         child: Stack(
@@ -67,8 +65,8 @@ class _OfferCardWidgetState extends State<OfferCardWidget> {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(8.0),
                     child: CachedNetworkImage(
-                      fadeInDuration: Duration(milliseconds: 500),
-                      fadeOutDuration: Duration(milliseconds: 500),
+                      fadeInDuration: const Duration(milliseconds: 500),
+                      fadeOutDuration: const Duration(milliseconds: 500),
                       imageUrl: valueOrDefault<String>(
                         widget.image,
                         'https://th.bing.com/th/id/OIP.wXnbPEm4jPnCcu7Xl9NzOAHaE8?rs=1&pid=ImgDetMain',
@@ -82,16 +80,16 @@ class _OfferCardWidgetState extends State<OfferCardWidget> {
               ],
             ),
             Align(
-              alignment: AlignmentDirectional(0.0, -0.01),
+              alignment: const AlignmentDirectional(0.0, -0.01),
               child: Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 120.0, 0.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 120.0, 0.0),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Expanded(
                       child: Padding(
-                        padding: EdgeInsets.all(20.0),
+                        padding: const EdgeInsets.all(20.0),
                         child: SingleChildScrollView(
                           child: Column(
                             mainAxisSize: MainAxisSize.max,
@@ -99,7 +97,7 @@ class _OfferCardWidgetState extends State<OfferCardWidget> {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Align(
-                                alignment: AlignmentDirectional(-1.0, 0.0),
+                                alignment: const AlignmentDirectional(-1.0, 0.0),
                                 child: Row(
                                   mainAxisSize: MainAxisSize.max,
                                   mainAxisAlignment: MainAxisAlignment.center,
@@ -108,7 +106,7 @@ class _OfferCardWidgetState extends State<OfferCardWidget> {
                                     Expanded(
                                       child: Align(
                                         alignment:
-                                            AlignmentDirectional(-1.0, 0.0),
+                                            const AlignmentDirectional(-1.0, 0.0),
                                         child: Text(
                                           valueOrDefault<String>(
                                             widget.title,
@@ -139,7 +137,7 @@ class _OfferCardWidgetState extends State<OfferCardWidget> {
                                   Expanded(
                                     child: Align(
                                       alignment:
-                                          AlignmentDirectional(-1.0, 0.0),
+                                          const AlignmentDirectional(-1.0, 0.0),
                                       child: Text(
                                         'First Service',
                                         textAlign: TextAlign.start,
@@ -156,7 +154,7 @@ class _OfferCardWidgetState extends State<OfferCardWidget> {
                                   ),
                                 ],
                               ),
-                            ].divide(SizedBox(height: 20.0)),
+                            ].divide(const SizedBox(height: 20.0)),
                           ),
                         ),
                       ),

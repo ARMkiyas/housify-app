@@ -3,10 +3,7 @@ import '/componets/nav/nav_widget.dart';
 import '/componets/seller_home/seller_home_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'seller_home_page_model.dart';
 export 'seller_home_page_model.dart';
 
@@ -46,23 +43,23 @@ class _SellerHomePageWidgetState extends State<SellerHomePageWidget> {
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         body: SafeArea(
           top: true,
-          child: Container(
+          child: SizedBox(
             height: double.infinity,
             child: Stack(
-              alignment: AlignmentDirectional(0.0, 1.0),
+              alignment: const AlignmentDirectional(0.0, 1.0),
               children: [
                 Align(
-                  alignment: AlignmentDirectional(0.0, -1.0),
+                  alignment: const AlignmentDirectional(0.0, -1.0),
                   child: wrapWithModel(
                     model: _model.sellerHomeModel,
                     updateCallback: () => setState(() {}),
-                    child: SellerHomeWidget(),
+                    child: const SellerHomeWidget(),
                   ),
                 ),
                 wrapWithModel(
                   model: _model.navModel,
                   updateCallback: () => setState(() {}),
-                  child: NavWidget(
+                  child: const NavWidget(
                     pageseletcted: Pages.home,
                   ),
                 ),
