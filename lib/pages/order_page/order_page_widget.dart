@@ -201,7 +201,7 @@ class _OrderPageWidgetState extends State<OrderPageWidget>
                                                       isScrollControlled: true,
                                                       backgroundColor:
                                                           Colors.transparent,
-                                                      enableDrag: false,
+                                                      useSafeArea: true,
                                                       context: context,
                                                       builder: (context) {
                                                         return GestureDetector(
@@ -220,10 +220,17 @@ class _OrderPageWidgetState extends State<OrderPageWidget>
                                                             padding: MediaQuery
                                                                 .viewInsetsOf(
                                                                     context),
-                                                            child:
-                                                                CustomerAcceptWidget(
-                                                              data:
-                                                                  listViewOrdersRecord,
+                                                            child: SizedBox(
+                                                              height: MediaQuery
+                                                                          .sizeOf(
+                                                                              context)
+                                                                      .height *
+                                                                  0.75,
+                                                              child:
+                                                                  CustomerAcceptWidget(
+                                                                data:
+                                                                    listViewOrdersRecord,
+                                                              ),
                                                             ),
                                                           ),
                                                         );
@@ -367,7 +374,7 @@ class _OrderPageWidgetState extends State<OrderPageWidget>
                                                       isScrollControlled: true,
                                                       backgroundColor:
                                                           Colors.transparent,
-                                                      enableDrag: false,
+                                                      useSafeArea: true,
                                                       context: context,
                                                       builder: (context) {
                                                         return GestureDetector(
@@ -386,10 +393,17 @@ class _OrderPageWidgetState extends State<OrderPageWidget>
                                                             padding: MediaQuery
                                                                 .viewInsetsOf(
                                                                     context),
-                                                            child:
-                                                                CustomerAcceptWidget(
-                                                              data:
-                                                                  listViewOrdersRecord,
+                                                            child: SizedBox(
+                                                              height: MediaQuery
+                                                                          .sizeOf(
+                                                                              context)
+                                                                      .height *
+                                                                  0.75,
+                                                              child:
+                                                                  CustomerAcceptWidget(
+                                                                data:
+                                                                    listViewOrdersRecord,
+                                                              ),
                                                             ),
                                                           ),
                                                         );

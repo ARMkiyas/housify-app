@@ -93,8 +93,8 @@ class _OrdeplaceedWidgetState extends State<OrdeplaceedWidget> {
                           padding: const EdgeInsetsDirectional.fromSTEB(
                               16.0, 0.0, 16.0, 0.0),
                           child: FFButtonWidget(
-                            onPressed: () {
-                              print('Button pressed ...');
+                            onPressed: () async {
+                              context.goNamed('order_page');
                             },
                             text: 'View Order',
                             options: FFButtonOptions(

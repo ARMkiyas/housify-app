@@ -114,7 +114,8 @@ class _ReviewsWidgetState extends State<ReviewsWidget> {
                               color: FlutterFlowTheme.of(context).primaryText,
                             ),
                             direction: Axis.horizontal,
-                            initialRating: _model.ratingBarValue ??= 3.0,
+                            initialRating: _model.ratingBarValue ??=
+                                widget.reviewNumber!,
                             unratedColor:
                                 FlutterFlowTheme.of(context).secondaryText,
                             itemCount: 5,
@@ -122,11 +123,16 @@ class _ReviewsWidgetState extends State<ReviewsWidget> {
                             glowColor: FlutterFlowTheme.of(context).primaryText,
                           ),
                           Text(
-                            '4.4',
+                            valueOrDefault<String>(
+                              widget.reviewNumber?.toString(),
+                              '5.0',
+                            ),
                             style: FlutterFlowTheme.of(context)
                                 .titleMedium
                                 .override(
                                   fontFamily: 'Readex Pro',
+                                  color:
+                                      FlutterFlowTheme.of(context).primaryText,
                                   fontSize: 16.0,
                                   letterSpacing: 0.0,
                                   fontWeight: FontWeight.w800,
