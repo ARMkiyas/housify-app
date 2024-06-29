@@ -1,3 +1,4 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/backend/schema/enums/enums.dart';
 import '/componets/review/review_widget.dart';
@@ -5,6 +6,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'historycard_model.dart';
 export 'historycard_model.dart';
 
@@ -248,55 +250,128 @@ class _HistorycardWidgetState extends State<HistorycardWidget> {
                                     ),
                               ),
                             ),
-                            if (widget.iscompletd)
+                            if (valueOrDefault<bool>(
+                              widget.iscompletd &&
+                                      (currentUserDocument?.role ==
+                                          Roles.customer) &&
+                                      (widget.data?.status ==
+                                          OrderStatus.completed)
+                                  ? true
+                                  : false,
+                              false,
+                            ))
+                              AuthUserStreamWidget(
+                                builder: (context) =>
+                                    FutureBuilder<List<SellerReviewsRecord>>(
+                                  future: querySellerReviewsRecordOnce(
+                                    queryBuilder: (sellerReviewsRecord) =>
+                                        sellerReviewsRecord.where(
+                                      'order',
+                                      isEqualTo: widget.data?.reference,
+                                    ),
+                                    singleRecord: true,
+                                  ),
+                                  builder: (context, snapshot) {
+                                    // Customize what your widget looks like when it's loading.
+                                    if (!snapshot.hasData) {
+                                      return Center(
+                                        child: SizedBox(
+                                          width: 40.0,
+                                          height: 40.0,
+                                          child: SpinKitThreeBounce(
+                                            color: FlutterFlowTheme.of(context)
+                                                .primary,
+                                            size: 40.0,
+                                          ),
+                                        ),
+                                      );
+                                    }
+                                    List<SellerReviewsRecord>
+                                        buttonSellerReviewsRecordList =
+                                        snapshot.data!;
+                                    final buttonSellerReviewsRecord =
+                                        buttonSellerReviewsRecordList.isNotEmpty
+                                            ? buttonSellerReviewsRecordList
+                                                .first
+                                            : null;
+                                    return FFButtonWidget(
+                                      onPressed: (buttonSellerReviewsRecord !=
+                                              null)
+                                          ? null
+                                          : () async {
+                                              await showModalBottomSheet(
+                                                isScrollControlled: true,
+                                                backgroundColor:
+                                                    Colors.transparent,
+                                                useSafeArea: true,
+                                                context: context,
+                                                builder: (context) {
+                                                  return Padding(
+                                                    padding:
+                                                        MediaQuery.viewInsetsOf(
+                                                            context),
+                                                    child: SizedBox(
+                                                      height: MediaQuery.sizeOf(
+                                                                  context)
+                                                              .height *
+                                                          0.6,
+                                                      child: ReviewWidget(
+                                                        serviceref:
+                                                            containerServiceAllRecord
+                                                                .reference,
+                                                        orderref: widget
+                                                            .data!.reference,
+                                                      ),
+                                                    ),
+                                                  );
+                                                },
+                                              ).then((value) =>
+                                                  safeSetState(() {}));
+                                            },
+                                      text: buttonSellerReviewsRecord != null
+                                          ? 'Reviewed'
+                                          : 'Leave Review',
+                                      options: FFButtonOptions(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                            20.0, 8.0, 20.0, 8.0),
+                                        iconPadding:
+                                            const EdgeInsetsDirectional.fromSTEB(
+                                                0.0, 0.0, 0.0, 0.0),
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryText,
+                                        textStyle: FlutterFlowTheme.of(context)
+                                            .titleSmall
+                                            .override(
+                                              fontFamily: 'Readex Pro',
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryBackground,
+                                              fontSize: 12.0,
+                                              letterSpacing: 0.0,
+                                            ),
+                                        elevation: 0.0,
+                                        borderSide: const BorderSide(
+                                          color: Colors.transparent,
+                                          width: 1.0,
+                                        ),
+                                        borderRadius:
+                                            BorderRadius.circular(100.0),
+                                        disabledColor:
+                                            FlutterFlowTheme.of(context)
+                                                .secondaryText,
+                                        disabledTextColor:
+                                            FlutterFlowTheme.of(context)
+                                                .primaryBackground,
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ),
+                            if (!widget.iscompletd ||
+                                (widget.data?.status == OrderStatus.canceled))
                               FFButtonWidget(
                                 onPressed: () {
                                   print('Button pressed ...');
-                                },
-                                text: 'Leave Review',
-                                options: FFButtonOptions(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
-                                      20.0, 8.0, 20.0, 8.0),
-                                  iconPadding: const EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 0.0, 0.0, 0.0),
-                                  color:
-                                      FlutterFlowTheme.of(context).primaryText,
-                                  textStyle: FlutterFlowTheme.of(context)
-                                      .titleSmall
-                                      .override(
-                                        fontFamily: 'Readex Pro',
-                                        color: FlutterFlowTheme.of(context)
-                                            .secondaryBackground,
-                                        fontSize: 12.0,
-                                        letterSpacing: 0.0,
-                                      ),
-                                  elevation: 0.0,
-                                  borderSide: const BorderSide(
-                                    color: Colors.transparent,
-                                    width: 1.0,
-                                  ),
-                                  borderRadius: BorderRadius.circular(100.0),
-                                ),
-                              ),
-                            if (!widget.iscompletd)
-                              FFButtonWidget(
-                                onPressed: () async {
-                                  await showModalBottomSheet(
-                                    isScrollControlled: true,
-                                    backgroundColor: Colors.transparent,
-                                    enableDrag: false,
-                                    context: context,
-                                    builder: (context) {
-                                      return Padding(
-                                        padding:
-                                            MediaQuery.viewInsetsOf(context),
-                                        child: ReviewWidget(
-                                          ref: containerServiceAllRecord
-                                              .reference,
-                                        ),
-                                      );
-                                    },
-                                  ).then((value) => safeSetState(() {}));
                                 },
                                 text: valueOrDefault<String>(
                                   widget.data?.status?.name,
