@@ -14,9 +14,10 @@ import '/backend/schema/structs/index.dart';
 import '/backend/schema/enums/enums.dart';
 import '/auth/firebase_auth/auth_util.dart';
 
-DocumentReference getReference(String docID) {
+DocumentReference getProReference(String docID) {
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
-  String documentPath = "/members/" + "$docID"; //collection you want to query
+  String documentPath =
+      "/professons/" + "$docID"; //collection you want to query
   DocumentReference documentReference = firestore.doc(documentPath);
   return documentReference;
 }

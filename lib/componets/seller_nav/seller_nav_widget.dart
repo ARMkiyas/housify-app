@@ -3,13 +3,9 @@ import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'seller_nav_model.dart';
 export 'seller_nav_model.dart';
 
@@ -50,8 +46,8 @@ class _SellerNavWidgetState extends State<SellerNavWidget>
             curve: Curves.easeInOut,
             delay: 0.0.ms,
             duration: 200.0.ms,
-            begin: Offset(0.5, 1.0),
-            end: Offset(1.0, 1.0),
+            begin: const Offset(0.5, 1.0),
+            end: const Offset(1.0, 1.0),
           ),
           FadeEffect(
             curve: Curves.easeInOut,
@@ -69,8 +65,8 @@ class _SellerNavWidgetState extends State<SellerNavWidget>
             curve: Curves.easeInOut,
             delay: 0.0.ms,
             duration: 200.0.ms,
-            begin: Offset(0.5, 1.0),
-            end: Offset(1.0, 1.0),
+            begin: const Offset(0.5, 1.0),
+            end: const Offset(1.0, 1.0),
           ),
           FadeEffect(
             curve: Curves.easeInOut,
@@ -88,8 +84,8 @@ class _SellerNavWidgetState extends State<SellerNavWidget>
             curve: Curves.easeInOut,
             delay: 0.0.ms,
             duration: 200.0.ms,
-            begin: Offset(0.5, 1.0),
-            end: Offset(1.0, 1.0),
+            begin: const Offset(0.5, 1.0),
+            end: const Offset(1.0, 1.0),
           ),
           FadeEffect(
             curve: Curves.easeInOut,
@@ -125,7 +121,7 @@ class _SellerNavWidgetState extends State<SellerNavWidget>
           color: FlutterFlowTheme.of(context).secondaryBackground,
         ),
         child: Padding(
-          padding: EdgeInsetsDirectional.fromSTEB(30.0, 0.0, 30.0, 0.0),
+          padding: const EdgeInsetsDirectional.fromSTEB(30.0, 0.0, 30.0, 0.0),
           child: Row(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -134,7 +130,7 @@ class _SellerNavWidgetState extends State<SellerNavWidget>
               Container(
                 width: 50.0,
                 height: 50.0,
-                decoration: BoxDecoration(),
+                decoration: const BoxDecoration(),
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -161,7 +157,7 @@ class _SellerNavWidgetState extends State<SellerNavWidget>
                         context.pushNamed(
                           'seller_home_page',
                           extra: <String, dynamic>{
-                            kTransitionInfoKey: TransitionInfo(
+                            kTransitionInfoKey: const TransitionInfo(
                               hasTransition: true,
                               transitionType: PageTransitionType.fade,
                               duration: Duration(milliseconds: 0),
@@ -191,7 +187,7 @@ class _SellerNavWidgetState extends State<SellerNavWidget>
               Container(
                 width: 50.0,
                 height: 50.0,
-                decoration: BoxDecoration(),
+                decoration: const BoxDecoration(),
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -218,7 +214,7 @@ class _SellerNavWidgetState extends State<SellerNavWidget>
                         context.pushNamed(
                           'order_page',
                           extra: <String, dynamic>{
-                            kTransitionInfoKey: TransitionInfo(
+                            kTransitionInfoKey: const TransitionInfo(
                               hasTransition: true,
                               transitionType: PageTransitionType.fade,
                               duration: Duration(milliseconds: 0),
@@ -256,7 +252,7 @@ class _SellerNavWidgetState extends State<SellerNavWidget>
                 child: Container(
                   width: 50.0,
                   height: 50.0,
-                  decoration: BoxDecoration(),
+                  decoration: const BoxDecoration(),
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -284,7 +280,7 @@ class _SellerNavWidgetState extends State<SellerNavWidget>
                           context.pushNamed(
                             'ProfilePage',
                             extra: <String, dynamic>{
-                              kTransitionInfoKey: TransitionInfo(
+                              kTransitionInfoKey: const TransitionInfo(
                                 hasTransition: true,
                                 transitionType: PageTransitionType.fade,
                                 duration: Duration(milliseconds: 0),

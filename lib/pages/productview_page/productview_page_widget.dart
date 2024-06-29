@@ -1,13 +1,10 @@
 import '/backend/backend.dart';
+import '/componets/back_header/back_header_widget.dart';
 import '/componets/productitem/productitem_widget.dart';
-import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'productview_page_model.dart';
 export 'productview_page_model.dart';
 
@@ -16,10 +13,12 @@ class ProductviewPageWidget extends StatefulWidget {
     super.key,
     this.ceta,
     this.search,
-  });
+    bool? isSearch,
+  }) : isSearch = isSearch ?? false;
 
   final ProfessonsRecord? ceta;
   final String? search;
+  final bool isSearch;
 
   @override
   State<ProductviewPageWidget> createState() => _ProductviewPageWidgetState();
@@ -35,8 +34,8 @@ class _ProductviewPageWidgetState extends State<ProductviewPageWidget> {
     super.initState();
     _model = createModel(context, () => ProductviewPageModel());
 
-    _model.textController ??= TextEditingController();
-    _model.textFieldFocusNode ??= FocusNode();
+    _model.tfSearchTextController ??= TextEditingController();
+    _model.tfSearchFocusNode ??= FocusNode();
   }
 
   @override
@@ -48,200 +47,285 @@ class _ProductviewPageWidgetState extends State<ProductviewPageWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<List<ServiceAllRecord>>(
-      stream: queryServiceAllRecord(
-        queryBuilder: (serviceAllRecord) => serviceAllRecord.where(
-          'category',
-          isEqualTo: widget.ceta?.reference,
-        ),
-      ),
-      builder: (context, snapshot) {
-        // Customize what your widget looks like when it's loading.
-        if (!snapshot.hasData) {
-          return Scaffold(
-            backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-            body: Center(
-              child: SizedBox(
-                width: 50.0,
-                height: 50.0,
-                child: CircularProgressIndicator(
-                  valueColor: AlwaysStoppedAnimation<Color>(
-                    FlutterFlowTheme.of(context).primary,
-                  ),
-                ),
-              ),
-            ),
-          );
-        }
-        List<ServiceAllRecord> productviewPageServiceAllRecordList =
-            snapshot.data!;
-        return GestureDetector(
-          onTap: () => _model.unfocusNode.canRequestFocus
-              ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-              : FocusScope.of(context).unfocus(),
-          child: Scaffold(
-            key: scaffoldKey,
-            backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-            body: SafeArea(
-              top: true,
-              child: Stack(
-                children: [
-                  Column(
-                    mainAxisSize: MainAxisSize.max,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Padding(
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
-                        child: Container(
-                          width: double.infinity,
-                          height: 60.0,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.only(
-                              bottomLeft: Radius.circular(10.0),
-                              bottomRight: Radius.circular(10.0),
-                              topLeft: Radius.circular(10.0),
-                              topRight: Radius.circular(10.0),
-                            ),
-                          ),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    20.0, 0.0, 0.0, 0.0),
-                                child: FlutterFlowIconButton(
-                                  borderColor: Colors.transparent,
-                                  borderRadius: 99.0,
-                                  buttonSize: 48.0,
-                                  fillColor: Color(0x7DB6B3B3),
-                                  icon: FaIcon(
-                                    FontAwesomeIcons.angleLeft,
-                                    color: FlutterFlowTheme.of(context)
-                                        .primaryText,
-                                    size: 24.0,
-                                  ),
-                                  onPressed: () async {
-                                    context.safePop();
-                                  },
+    return GestureDetector(
+      onTap: () => _model.unfocusNode.canRequestFocus
+          ? FocusScope.of(context).requestFocus(_model.unfocusNode)
+          : FocusScope.of(context).unfocus(),
+      child: Scaffold(
+        key: scaffoldKey,
+        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+        body: SafeArea(
+          top: true,
+          child: Stack(
+            children: [
+              Container(
+                decoration: const BoxDecoration(),
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    wrapWithModel(
+                      model: _model.backHeaderModel,
+                      updateCallback: () => setState(() {}),
+                      child: const BackHeaderWidget(
+                        title: 'services',
+                      ),
+                    ),
+                    Column(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
+                                  20.0, 5.0, 20.0, 0.0),
+                              child: Container(
+                                width: double.infinity,
+                                height: 48.0,
+                                decoration: BoxDecoration(
+                                  color:
+                                      FlutterFlowTheme.of(context).pageviewdot,
+                                  borderRadius: BorderRadius.circular(12.0),
                                 ),
-                              ),
-                              Expanded(
-                                child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      8.0, 0.0, 8.0, 0.0),
-                                  child: TextFormField(
-                                    controller: _model.textController,
-                                    focusNode: _model.textFieldFocusNode,
-                                    autofocus: true,
-                                    obscureText: false,
-                                    decoration: InputDecoration(
-                                      labelText: 'Label here...',
-                                      labelStyle: FlutterFlowTheme.of(context)
-                                          .labelMedium
-                                          .override(
-                                            fontFamily: 'Readex Pro',
-                                            letterSpacing: 0.0,
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    Expanded(
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: [
+                                          Expanded(
+                                            child: SizedBox(
+                                              width: 100.0,
+                                              child: TextFormField(
+                                                controller: _model
+                                                    .tfSearchTextController,
+                                                focusNode:
+                                                    _model.tfSearchFocusNode,
+                                                autofocus: true,
+                                                textInputAction:
+                                                    TextInputAction.search,
+                                                obscureText: false,
+                                                decoration: InputDecoration(
+                                                  isDense: false,
+                                                  labelStyle: FlutterFlowTheme
+                                                          .of(context)
+                                                      .labelMedium
+                                                      .override(
+                                                        fontFamily: 'Roboto',
+                                                        letterSpacing: 0.0,
+                                                      ),
+                                                  hintText: 'Search',
+                                                  hintStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .labelMedium
+                                                          .override(
+                                                            fontFamily:
+                                                                'Readex Pro',
+                                                            letterSpacing: 0.0,
+                                                          ),
+                                                  enabledBorder:
+                                                      OutlineInputBorder(
+                                                    borderSide: const BorderSide(
+                                                      color: Color(0x00000000),
+                                                      width: 1.0,
+                                                    ),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8.0),
+                                                  ),
+                                                  focusedBorder:
+                                                      OutlineInputBorder(
+                                                    borderSide: const BorderSide(
+                                                      color: Color(0x00000000),
+                                                      width: 1.0,
+                                                    ),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8.0),
+                                                  ),
+                                                  errorBorder:
+                                                      OutlineInputBorder(
+                                                    borderSide: BorderSide(
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .error,
+                                                      width: 1.0,
+                                                    ),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8.0),
+                                                  ),
+                                                  focusedErrorBorder:
+                                                      OutlineInputBorder(
+                                                    borderSide: BorderSide(
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .error,
+                                                      width: 1.0,
+                                                    ),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8.0),
+                                                  ),
+                                                  contentPadding:
+                                                      const EdgeInsetsDirectional
+                                                          .fromSTEB(20.0, 0.0,
+                                                              8.0, 0.0),
+                                                  prefixIcon: Icon(
+                                                    Icons.search_sharp,
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .secondaryText,
+                                                    size: 18.0,
+                                                  ),
+                                                ),
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily:
+                                                              'Readex Pro',
+                                                          letterSpacing: 0.0,
+                                                        ),
+                                                validator: _model
+                                                    .tfSearchTextControllerValidator
+                                                    .asValidator(context),
+                                              ),
+                                            ),
                                           ),
-                                      hintStyle: FlutterFlowTheme.of(context)
-                                          .labelMedium
-                                          .override(
-                                            fontFamily: 'Readex Pro',
-                                            letterSpacing: 0.0,
-                                          ),
-                                      enabledBorder: UnderlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: FlutterFlowTheme.of(context)
-                                              .alternate,
-                                          width: 2.0,
-                                        ),
-                                        borderRadius:
-                                            BorderRadius.circular(8.0),
-                                      ),
-                                      focusedBorder: UnderlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: FlutterFlowTheme.of(context)
-                                              .primary,
-                                          width: 2.0,
-                                        ),
-                                        borderRadius:
-                                            BorderRadius.circular(8.0),
-                                      ),
-                                      errorBorder: UnderlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: FlutterFlowTheme.of(context)
-                                              .error,
-                                          width: 2.0,
-                                        ),
-                                        borderRadius:
-                                            BorderRadius.circular(8.0),
-                                      ),
-                                      focusedErrorBorder: UnderlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: FlutterFlowTheme.of(context)
-                                              .error,
-                                          width: 2.0,
-                                        ),
-                                        borderRadius:
-                                            BorderRadius.circular(8.0),
+                                        ].divide(const SizedBox(width: 8.0)),
                                       ),
                                     ),
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .override(
-                                          fontFamily: 'Readex Pro',
-                                          letterSpacing: 0.0,
-                                        ),
-                                    validator: _model.textControllerValidator
-                                        .asValidator(context),
+                                    Container(
+                                      width: 40.0,
+                                      height: 40.0,
+                                      decoration: const BoxDecoration(),
+                                      child: Icon(
+                                        Icons.manage_search_sharp,
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryText,
+                                        size: 20.0,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
+                                  20.0, 0.0, 20.0, 0.0),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  Container(
+                                    decoration: const BoxDecoration(),
+                                    child: Padding(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                          5.0, 5.0, 0.0, 5.0),
+                                      child: Text(
+                                        'Clear',
+                                        style: FlutterFlowTheme.of(context)
+                                            .labelMedium
+                                            .override(
+                                              fontFamily: 'Readex Pro',
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryText,
+                                              letterSpacing: 0.0,
+                                            ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsetsDirectional.fromSTEB(
+                            20.0, 30.0, 20.0, 0.0),
+                        child: PagedGridView<DocumentSnapshot<Object?>?,
+                            ServiceAllRecord>(
+                          pagingController: _model.setGridViewController(
+                            ServiceAllRecord.collection.where(
+                              'category',
+                              isEqualTo: widget.ceta?.reference,
+                            ),
+                          ),
+                          padding: EdgeInsets.zero,
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            crossAxisSpacing: 10.0,
+                            mainAxisSpacing: 1.0,
+                            childAspectRatio: 0.55,
+                          ),
+                          scrollDirection: Axis.vertical,
+                          builderDelegate:
+                              PagedChildBuilderDelegate<ServiceAllRecord>(
+                            // Customize what your widget looks like when it's loading the first page.
+                            firstPageProgressIndicatorBuilder: (_) => Center(
+                              child: SizedBox(
+                                width: 50.0,
+                                height: 50.0,
+                                child: CircularProgressIndicator(
+                                  valueColor: AlwaysStoppedAnimation<Color>(
+                                    FlutterFlowTheme.of(context).primary,
                                   ),
                                 ),
                               ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              20.0, 30.0, 20.0, 0.0),
-                          child: Builder(
-                            builder: (context) {
-                              final items =
-                                  productviewPageServiceAllRecordList.toList();
-                              return GridView.builder(
-                                padding: EdgeInsets.zero,
-                                gridDelegate:
-                                    SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 2,
-                                  crossAxisSpacing: 10.0,
-                                  mainAxisSpacing: 1.0,
-                                  childAspectRatio: 0.55,
+                            ),
+                            // Customize what your widget looks like when it's loading another page.
+                            newPageProgressIndicatorBuilder: (_) => Center(
+                              child: SizedBox(
+                                width: 50.0,
+                                height: 50.0,
+                                child: CircularProgressIndicator(
+                                  valueColor: AlwaysStoppedAnimation<Color>(
+                                    FlutterFlowTheme.of(context).primary,
+                                  ),
                                 ),
-                                scrollDirection: Axis.vertical,
-                                itemCount: items.length,
-                                itemBuilder: (context, itemsIndex) {
-                                  final itemsItem = items[itemsIndex];
-                                  return ProductitemWidget(
+                              ),
+                            ),
+
+                            itemBuilder: (context, _, gridViewIndex) {
+                              final gridViewServiceAllRecord = _model
+                                  .gridViewPagingController!
+                                  .itemList![gridViewIndex];
+                              return Hero(
+                                tag: 'productListView',
+                                transitionOnUserGestures: true,
+                                child: Material(
+                                  color: Colors.transparent,
+                                  child: ProductitemWidget(
                                     key: Key(
-                                        'Keyneb_${itemsIndex}_of_${items.length}'),
+                                        'Keyneb_${gridViewIndex}_of_${_model.gridViewPagingController!.itemList!.length}'),
                                     pupuler: false,
-                                    servicedoc: itemsItem,
-                                  );
-                                },
+                                    servicedoc: gridViewServiceAllRecord,
+                                  ),
+                                ),
                               );
                             },
                           ),
                         ),
                       ),
-                    ],
-                  ),
-                ],
+                    ),
+                  ],
+                ),
               ),
-            ),
+            ],
           ),
-        );
-      },
+        ),
+      ),
     );
   }
 }

@@ -1,13 +1,10 @@
 import '/backend/backend.dart';
 import '/backend/schema/enums/enums.dart';
-import '/components/ceta_comp_widget.dart';
+import '/componets/ceta_comp/ceta_comp_widget.dart';
 import '/componets/nav/nav_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'category_page_model.dart';
 export 'category_page_model.dart';
 
@@ -82,7 +79,7 @@ class _CategoryPageWidgetState extends State<CategoryPageWidget> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               16.0, 12.0, 0.0, 4.0),
                           child: Text(
                             'Popular Categories',
@@ -96,7 +93,7 @@ class _CategoryPageWidgetState extends State<CategoryPageWidget> {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 100.0),
                           child: Builder(
                             builder: (context) {
@@ -131,9 +128,11 @@ class _CategoryPageWidgetState extends State<CategoryPageWidget> {
                                       key: Key(
                                           'Keyhh4_${cetagoriesIndex}_of_${cetagories.length}'),
                                       pros: cetagoriesItem,
+                                      count: cetagoriesItem.serviceRef.length
+                                          .toString(),
                                     ),
                                   );
-                                }),
+                                }).divide(const SizedBox(height: 8.0)),
                               );
                             },
                           ),
@@ -142,11 +141,11 @@ class _CategoryPageWidgetState extends State<CategoryPageWidget> {
                     ),
                   ),
                   Align(
-                    alignment: AlignmentDirectional(0.0, 1.0),
+                    alignment: const AlignmentDirectional(0.0, 1.0),
                     child: wrapWithModel(
                       model: _model.navModel,
                       updateCallback: () => setState(() {}),
-                      child: NavWidget(
+                      child: const NavWidget(
                         pageseletcted: Pages.category,
                       ),
                     ),

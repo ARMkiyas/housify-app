@@ -27,8 +27,8 @@ export '/pages/account_setting/account_setting_widget.dart'
     show AccountSettingWidget;
 export '/pages/productview_page/productview_page_widget.dart'
     show ProductviewPageWidget;
-export '/pages/service_edit_form/service_edit_form_widget.dart'
+export '/seller_pages/service_edit_form/service_edit_form_widget.dart'
     show ServiceEditFormWidget;
 export '/adminpage/adminpage_widget.dart' show AdminpageWidget;
 export '/pages/adminage/adminage_widget.dart' show AdminageWidget;
-export '/ordeplaceed/ordeplaceed_widget.dart' show OrdeplaceedWidget;
+export '/componets/ordeplaceed/ordeplaceed_widget.dart' show OrdeplaceedWidget;

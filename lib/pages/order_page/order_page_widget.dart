@@ -1,16 +1,13 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/backend/schema/enums/enums.dart';
-import '/components/customer_accept_widget.dart';
-import '/components/historycard_widget.dart';
+import '/componets/customer_accept/customer_accept_widget.dart';
+import '/componets/historycard/historycard_widget.dart';
 import '/componets/nav/nav_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'order_page_model.dart';
 export 'order_page_model.dart';
 
@@ -62,7 +59,7 @@ class _OrderPageWidgetState extends State<OrderPageWidget>
               Column(
                 children: [
                   Align(
-                    alignment: Alignment(0.0, 0),
+                    alignment: const Alignment(0.0, 0),
                     child: TabBar(
                       isScrollable: true,
                       labelColor: FlutterFlowTheme.of(context).primaryText,
@@ -73,10 +70,10 @@ class _OrderPageWidgetState extends State<OrderPageWidget>
                                 fontFamily: 'Readex Pro',
                                 letterSpacing: 0.0,
                               ),
-                      unselectedLabelStyle: TextStyle(),
+                      unselectedLabelStyle: const TextStyle(),
                       indicatorColor: FlutterFlowTheme.of(context).primaryText,
-                      padding: EdgeInsets.all(4.0),
-                      tabs: [
+                      padding: const EdgeInsets.all(4.0),
+                      tabs: const [
                         Tab(
                           text: 'Ongoing',
                         ),
@@ -95,242 +92,553 @@ class _OrderPageWidgetState extends State<OrderPageWidget>
                       controller: _model.tabBarController,
                       children: [
                         KeepAliveWidgetWrapper(
-                          builder: (context) =>
-                              FutureBuilder<List<OrdersRecord>>(
-                            future: (_model.firestoreRequestCompleter ??=
-                                    Completer<List<OrdersRecord>>()
-                                      ..complete(queryOrdersRecordOnce(
-                                        queryBuilder: (ordersRecord) =>
-                                            ordersRecord
-                                                .where(
-                                                  'customer',
-                                                  isEqualTo:
-                                                      currentUserReference,
-                                                )
-                                                .whereIn(
-                                                    'status',
-                                                    OrderStatus.values
-                                                        .where((e) =>
-                                                            valueOrDefault<
-                                                                bool>(
-                                                              () {
-                                                                if (e ==
-                                                                    OrderStatus
-                                                                        .waiting) {
-                                                                  return true;
-                                                                } else if (e ==
-                                                                    OrderStatus
-                                                                        .accepted) {
-                                                                  return true;
-                                                                } else {
-                                                                  return false;
-                                                                }
-                                                              }()
-                                                                  ? true
-                                                                  : false,
-                                                              false,
-                                                            ))
-                                                        .toList()
-                                                        .map((e) =>
-                                                            e.serialize())
-                                                        .toList())
-                                                .orderBy('orderDate'),
-                                      )))
-                                .future,
-                            builder: (context, snapshot) {
-                              // Customize what your widget looks like when it's loading.
-                              if (!snapshot.hasData) {
-                                return Center(
-                                  child: SizedBox(
-                                    width: 50.0,
-                                    height: 50.0,
-                                    child: CircularProgressIndicator(
-                                      valueColor: AlwaysStoppedAnimation<Color>(
-                                        FlutterFlowTheme.of(context).primary,
-                                      ),
-                                    ),
-                                  ),
-                                );
-                              }
-                              List<OrdersRecord> listViewOrdersRecordList =
-                                  snapshot.data!;
-                              return RefreshIndicator(
-                                onRefresh: () async {
-                                  setState(() =>
-                                      _model.firestoreRequestCompleter = null);
-                                  await _model
-                                      .waitForFirestoreRequestCompleted();
-                                },
-                                child: ListView.separated(
-                                  padding: EdgeInsets.fromLTRB(
-                                    0,
-                                    24.0,
-                                    0,
-                                    48.0,
-                                  ),
-                                  shrinkWrap: true,
-                                  scrollDirection: Axis.vertical,
-                                  itemCount: listViewOrdersRecordList.length,
-                                  separatorBuilder: (_, __) =>
-                                      SizedBox(height: 24.0),
-                                  itemBuilder: (context, listViewIndex) {
-                                    final listViewOrdersRecord =
-                                        listViewOrdersRecordList[listViewIndex];
-                                    return Column(
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        InkWell(
-                                          splashColor: Colors.transparent,
-                                          focusColor: Colors.transparent,
-                                          hoverColor: Colors.transparent,
-                                          highlightColor: Colors.transparent,
-                                          onTap: () async {
-                                            await showModalBottomSheet(
-                                              isScrollControlled: true,
-                                              backgroundColor:
-                                                  Colors.transparent,
-                                              enableDrag: false,
-                                              context: context,
-                                              builder: (context) {
-                                                return GestureDetector(
-                                                  onTap: () => _model
-                                                          .unfocusNode
-                                                          .canRequestFocus
-                                                      ? FocusScope.of(context)
-                                                          .requestFocus(_model
-                                                              .unfocusNode)
-                                                      : FocusScope.of(context)
-                                                          .unfocus(),
-                                                  child: Padding(
-                                                    padding:
-                                                        MediaQuery.viewInsetsOf(
-                                                            context),
-                                                    child: CustomerAcceptWidget(
+                          builder: (context) => Stack(
+                            children: [
+                              if (currentUserDocument?.role == Roles.customer)
+                                AuthUserStreamWidget(
+                                  builder: (context) =>
+                                      FutureBuilder<List<OrdersRecord>>(
+                                    future: (_model
+                                                .firestoreRequestCompleter1 ??=
+                                            Completer<List<OrdersRecord>>()
+                                              ..complete(queryOrdersRecordOnce(
+                                                queryBuilder: (ordersRecord) =>
+                                                    ordersRecord
+                                                        .where(
+                                                          'customer',
+                                                          isEqualTo:
+                                                              currentUserReference,
+                                                        )
+                                                        .whereIn(
+                                                            'status',
+                                                            OrderStatus.values
+                                                                .where((e) =>
+                                                                    valueOrDefault<
+                                                                        bool>(
+                                                                      () {
+                                                                        if (e ==
+                                                                            OrderStatus
+                                                                                .waiting) {
+                                                                          return true;
+                                                                        } else if (e ==
+                                                                            OrderStatus.accepted) {
+                                                                          return true;
+                                                                        } else {
+                                                                          return false;
+                                                                        }
+                                                                      }()
+                                                                          ? true
+                                                                          : false,
+                                                                      false,
+                                                                    ))
+                                                                .toList()
+                                                                .map((e) => e
+                                                                    .serialize())
+                                                                .toList())
+                                                        .orderBy('orderDate'),
+                                              )))
+                                        .future,
+                                    builder: (context, snapshot) {
+                                      // Customize what your widget looks like when it's loading.
+                                      if (!snapshot.hasData) {
+                                        return Center(
+                                          child: SizedBox(
+                                            width: 50.0,
+                                            height: 50.0,
+                                            child: CircularProgressIndicator(
+                                              valueColor:
+                                                  AlwaysStoppedAnimation<Color>(
+                                                FlutterFlowTheme.of(context)
+                                                    .primary,
+                                              ),
+                                            ),
+                                          ),
+                                        );
+                                      }
+                                      List<OrdersRecord>
+                                          listViewOrdersRecordList =
+                                          snapshot.data!;
+                                      return RefreshIndicator(
+                                        onRefresh: () async {
+                                          setState(() => _model
+                                                  .firestoreRequestCompleter1 =
+                                              null);
+                                          await _model
+                                              .waitForFirestoreRequestCompleted1();
+                                        },
+                                        child: ListView.separated(
+                                          padding: const EdgeInsets.fromLTRB(
+                                            0,
+                                            24.0,
+                                            0,
+                                            48.0,
+                                          ),
+                                          shrinkWrap: true,
+                                          scrollDirection: Axis.vertical,
+                                          itemCount:
+                                              listViewOrdersRecordList.length,
+                                          separatorBuilder: (_, __) =>
+                                              const SizedBox(height: 24.0),
+                                          itemBuilder:
+                                              (context, listViewIndex) {
+                                            final listViewOrdersRecord =
+                                                listViewOrdersRecordList[
+                                                    listViewIndex];
+                                            return Column(
+                                              mainAxisSize: MainAxisSize.max,
+                                              children: [
+                                                InkWell(
+                                                  splashColor:
+                                                      Colors.transparent,
+                                                  focusColor:
+                                                      Colors.transparent,
+                                                  hoverColor:
+                                                      Colors.transparent,
+                                                  highlightColor:
+                                                      Colors.transparent,
+                                                  onTap: () async {
+                                                    await showModalBottomSheet(
+                                                      isScrollControlled: true,
+                                                      backgroundColor:
+                                                          Colors.transparent,
+                                                      enableDrag: false,
+                                                      context: context,
+                                                      builder: (context) {
+                                                        return GestureDetector(
+                                                          onTap: () => _model
+                                                                  .unfocusNode
+                                                                  .canRequestFocus
+                                                              ? FocusScope.of(
+                                                                      context)
+                                                                  .requestFocus(
+                                                                      _model
+                                                                          .unfocusNode)
+                                                              : FocusScope.of(
+                                                                      context)
+                                                                  .unfocus(),
+                                                          child: Padding(
+                                                            padding: MediaQuery
+                                                                .viewInsetsOf(
+                                                                    context),
+                                                            child:
+                                                                CustomerAcceptWidget(
+                                                              data:
+                                                                  listViewOrdersRecord,
+                                                            ),
+                                                          ),
+                                                        );
+                                                      },
+                                                    ).then((value) =>
+                                                        safeSetState(() {}));
+                                                  },
+                                                  child: Container(
+                                                    width: double.infinity,
+                                                    decoration: const BoxDecoration(),
+                                                    child: HistorycardWidget(
+                                                      key: Key(
+                                                          'Keyy0w_${listViewIndex}_of_${listViewOrdersRecordList.length}'),
+                                                      iscompletd: false,
                                                       data:
                                                           listViewOrdersRecord,
                                                     ),
                                                   ),
-                                                );
-                                              },
-                                            ).then(
-                                                (value) => safeSetState(() {}));
+                                                ),
+                                                Divider(
+                                                  height: 24.0,
+                                                  thickness: 1.0,
+                                                  indent: 20.0,
+                                                  endIndent: 20.0,
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primaryText,
+                                                ),
+                                              ].divide(const SizedBox(height: 16.0)),
+                                            );
                                           },
-                                          child: Container(
-                                            width: double.infinity,
-                                            decoration: BoxDecoration(),
-                                            child: HistorycardWidget(
-                                              key: Key(
-                                                  'Keyy0w_${listViewIndex}_of_${listViewOrdersRecordList.length}'),
-                                              iscompletd: false,
-                                              data: listViewOrdersRecord,
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                ),
+                              if (currentUserDocument?.role == Roles.seller)
+                                AuthUserStreamWidget(
+                                  builder: (context) =>
+                                      FutureBuilder<List<OrdersRecord>>(
+                                    future: (_model
+                                                .firestoreRequestCompleter2 ??=
+                                            Completer<List<OrdersRecord>>()
+                                              ..complete(queryOrdersRecordOnce(
+                                                queryBuilder: (ordersRecord) =>
+                                                    ordersRecord
+                                                        .where(
+                                                          'seller',
+                                                          isEqualTo:
+                                                              currentUserReference,
+                                                        )
+                                                        .whereIn(
+                                                            'status',
+                                                            OrderStatus.values
+                                                                .where((e) =>
+                                                                    valueOrDefault<
+                                                                        bool>(
+                                                                      () {
+                                                                        if (e ==
+                                                                            OrderStatus
+                                                                                .waiting) {
+                                                                          return true;
+                                                                        } else if (e ==
+                                                                            OrderStatus.accepted) {
+                                                                          return true;
+                                                                        } else {
+                                                                          return false;
+                                                                        }
+                                                                      }()
+                                                                          ? true
+                                                                          : false,
+                                                                      false,
+                                                                    ))
+                                                                .toList()
+                                                                .map((e) => e
+                                                                    .serialize())
+                                                                .toList())
+                                                        .orderBy('orderDate'),
+                                              )))
+                                        .future,
+                                    builder: (context, snapshot) {
+                                      // Customize what your widget looks like when it's loading.
+                                      if (!snapshot.hasData) {
+                                        return Center(
+                                          child: SizedBox(
+                                            width: 50.0,
+                                            height: 50.0,
+                                            child: CircularProgressIndicator(
+                                              valueColor:
+                                                  AlwaysStoppedAnimation<Color>(
+                                                FlutterFlowTheme.of(context)
+                                                    .primary,
+                                              ),
                                             ),
                                           ),
+                                        );
+                                      }
+                                      List<OrdersRecord>
+                                          listViewOrdersRecordList =
+                                          snapshot.data!;
+                                      return RefreshIndicator(
+                                        onRefresh: () async {
+                                          setState(() => _model
+                                                  .firestoreRequestCompleter2 =
+                                              null);
+                                          await _model
+                                              .waitForFirestoreRequestCompleted2();
+                                        },
+                                        child: ListView.separated(
+                                          padding: const EdgeInsets.fromLTRB(
+                                            0,
+                                            24.0,
+                                            0,
+                                            48.0,
+                                          ),
+                                          shrinkWrap: true,
+                                          scrollDirection: Axis.vertical,
+                                          itemCount:
+                                              listViewOrdersRecordList.length,
+                                          separatorBuilder: (_, __) =>
+                                              const SizedBox(height: 24.0),
+                                          itemBuilder:
+                                              (context, listViewIndex) {
+                                            final listViewOrdersRecord =
+                                                listViewOrdersRecordList[
+                                                    listViewIndex];
+                                            return Column(
+                                              mainAxisSize: MainAxisSize.max,
+                                              children: [
+                                                InkWell(
+                                                  splashColor:
+                                                      Colors.transparent,
+                                                  focusColor:
+                                                      Colors.transparent,
+                                                  hoverColor:
+                                                      Colors.transparent,
+                                                  highlightColor:
+                                                      Colors.transparent,
+                                                  onTap: () async {
+                                                    await showModalBottomSheet(
+                                                      isScrollControlled: true,
+                                                      backgroundColor:
+                                                          Colors.transparent,
+                                                      enableDrag: false,
+                                                      context: context,
+                                                      builder: (context) {
+                                                        return GestureDetector(
+                                                          onTap: () => _model
+                                                                  .unfocusNode
+                                                                  .canRequestFocus
+                                                              ? FocusScope.of(
+                                                                      context)
+                                                                  .requestFocus(
+                                                                      _model
+                                                                          .unfocusNode)
+                                                              : FocusScope.of(
+                                                                      context)
+                                                                  .unfocus(),
+                                                          child: Padding(
+                                                            padding: MediaQuery
+                                                                .viewInsetsOf(
+                                                                    context),
+                                                            child:
+                                                                CustomerAcceptWidget(
+                                                              data:
+                                                                  listViewOrdersRecord,
+                                                            ),
+                                                          ),
+                                                        );
+                                                      },
+                                                    ).then((value) =>
+                                                        safeSetState(() {}));
+                                                  },
+                                                  child: Container(
+                                                    width: double.infinity,
+                                                    decoration: const BoxDecoration(),
+                                                    child: HistorycardWidget(
+                                                      key: Key(
+                                                          'Key7ut_${listViewIndex}_of_${listViewOrdersRecordList.length}'),
+                                                      iscompletd: false,
+                                                      data:
+                                                          listViewOrdersRecord,
+                                                    ),
+                                                  ),
+                                                ),
+                                                Divider(
+                                                  height: 24.0,
+                                                  thickness: 1.0,
+                                                  indent: 20.0,
+                                                  endIndent: 20.0,
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primaryText,
+                                                ),
+                                              ].divide(const SizedBox(height: 16.0)),
+                                            );
+                                          },
                                         ),
-                                        Divider(
-                                          height: 24.0,
-                                          thickness: 1.0,
-                                          indent: 20.0,
-                                          endIndent: 20.0,
-                                          color: FlutterFlowTheme.of(context)
-                                              .primaryText,
-                                        ),
-                                      ].divide(SizedBox(height: 16.0)),
-                                    );
-                                  },
+                                      );
+                                    },
+                                  ),
                                 ),
-                              );
-                            },
+                            ],
                           ),
                         ),
                         KeepAliveWidgetWrapper(
-                          builder: (context) =>
-                              FutureBuilder<List<OrdersRecord>>(
-                            future: queryOrdersRecordOnce(
-                              queryBuilder: (ordersRecord) => ordersRecord
-                                  .where(
-                                    'customer',
-                                    isEqualTo: currentUserReference,
-                                  )
-                                  .whereIn(
-                                      'status',
-                                      OrderStatus.values
-                                          .where((e) => valueOrDefault<bool>(
-                                                () {
-                                                  if (e ==
-                                                      OrderStatus.canceled) {
-                                                    return true;
-                                                  } else if (e ==
-                                                      OrderStatus.completed) {
-                                                    return true;
-                                                  } else {
-                                                    return false;
-                                                  }
-                                                }(),
-                                                false,
-                                              ))
-                                          .toList()
-                                          .map((e) => e.serialize())
-                                          .toList())
-                                  .orderBy('orderDate', descending: true),
-                            ),
-                            builder: (context, snapshot) {
-                              // Customize what your widget looks like when it's loading.
-                              if (!snapshot.hasData) {
-                                return Center(
-                                  child: SizedBox(
-                                    width: 50.0,
-                                    height: 50.0,
-                                    child: CircularProgressIndicator(
-                                      valueColor: AlwaysStoppedAnimation<Color>(
-                                        FlutterFlowTheme.of(context).primary,
-                                      ),
+                          builder: (context) => Stack(
+                            children: [
+                              if (currentUserDocument?.role == Roles.customer)
+                                AuthUserStreamWidget(
+                                  builder: (context) =>
+                                      FutureBuilder<List<OrdersRecord>>(
+                                    future: queryOrdersRecordOnce(
+                                      queryBuilder: (ordersRecord) =>
+                                          ordersRecord
+                                              .where(
+                                                'customer',
+                                                isEqualTo: currentUserReference,
+                                              )
+                                              .whereIn(
+                                                  'status',
+                                                  OrderStatus.values
+                                                      .where((e) =>
+                                                          valueOrDefault<bool>(
+                                                            () {
+                                                              if (e ==
+                                                                  OrderStatus
+                                                                      .canceled) {
+                                                                return true;
+                                                              } else if (e ==
+                                                                  OrderStatus
+                                                                      .completed) {
+                                                                return true;
+                                                              } else {
+                                                                return false;
+                                                              }
+                                                            }(),
+                                                            false,
+                                                          ))
+                                                      .toList()
+                                                      .map((e) => e.serialize())
+                                                      .toList())
+                                              .orderBy('orderDate',
+                                                  descending: true),
                                     ),
-                                  ),
-                                );
-                              }
-                              List<OrdersRecord> listViewOrdersRecordList =
-                                  snapshot.data!;
-                              return ListView.separated(
-                                padding: EdgeInsets.fromLTRB(
-                                  0,
-                                  24.0,
-                                  0,
-                                  48.0,
-                                ),
-                                shrinkWrap: true,
-                                scrollDirection: Axis.vertical,
-                                itemCount: listViewOrdersRecordList.length,
-                                separatorBuilder: (_, __) =>
-                                    SizedBox(height: 24.0),
-                                itemBuilder: (context, listViewIndex) {
-                                  final listViewOrdersRecord =
-                                      listViewOrdersRecordList[listViewIndex];
-                                  return Column(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Container(
-                                        width: double.infinity,
-                                        decoration: BoxDecoration(),
-                                        child: HistorycardWidget(
-                                          key: Key(
-                                              'Keyvem_${listViewIndex}_of_${listViewOrdersRecordList.length}'),
-                                          iscompletd: true,
-                                          data: listViewOrdersRecord,
+                                    builder: (context, snapshot) {
+                                      // Customize what your widget looks like when it's loading.
+                                      if (!snapshot.hasData) {
+                                        return Center(
+                                          child: SizedBox(
+                                            width: 50.0,
+                                            height: 50.0,
+                                            child: CircularProgressIndicator(
+                                              valueColor:
+                                                  AlwaysStoppedAnimation<Color>(
+                                                FlutterFlowTheme.of(context)
+                                                    .primary,
+                                              ),
+                                            ),
+                                          ),
+                                        );
+                                      }
+                                      List<OrdersRecord>
+                                          listViewOrdersRecordList =
+                                          snapshot.data!;
+                                      return ListView.separated(
+                                        padding: const EdgeInsets.fromLTRB(
+                                          0,
+                                          24.0,
+                                          0,
+                                          48.0,
                                         ),
-                                      ),
-                                      Divider(
-                                        height: 24.0,
-                                        thickness: 1.0,
-                                        indent: 20.0,
-                                        endIndent: 20.0,
-                                        color: FlutterFlowTheme.of(context)
-                                            .primaryText,
-                                      ),
-                                    ].divide(SizedBox(height: 16.0)),
-                                  );
-                                },
-                              );
-                            },
+                                        shrinkWrap: true,
+                                        scrollDirection: Axis.vertical,
+                                        itemCount:
+                                            listViewOrdersRecordList.length,
+                                        separatorBuilder: (_, __) =>
+                                            const SizedBox(height: 24.0),
+                                        itemBuilder: (context, listViewIndex) {
+                                          final listViewOrdersRecord =
+                                              listViewOrdersRecordList[
+                                                  listViewIndex];
+                                          return Column(
+                                            mainAxisSize: MainAxisSize.max,
+                                            children: [
+                                              Container(
+                                                width: double.infinity,
+                                                decoration: const BoxDecoration(),
+                                                child: HistorycardWidget(
+                                                  key: Key(
+                                                      'Keyvem_${listViewIndex}_of_${listViewOrdersRecordList.length}'),
+                                                  iscompletd: true,
+                                                  data: listViewOrdersRecord,
+                                                ),
+                                              ),
+                                              Divider(
+                                                height: 24.0,
+                                                thickness: 1.0,
+                                                indent: 20.0,
+                                                endIndent: 20.0,
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryText,
+                                              ),
+                                            ].divide(const SizedBox(height: 16.0)),
+                                          );
+                                        },
+                                      );
+                                    },
+                                  ),
+                                ),
+                              if (currentUserDocument?.role == Roles.seller)
+                                AuthUserStreamWidget(
+                                  builder: (context) =>
+                                      FutureBuilder<List<OrdersRecord>>(
+                                    future: queryOrdersRecordOnce(
+                                      queryBuilder: (ordersRecord) =>
+                                          ordersRecord
+                                              .where(
+                                                'seller',
+                                                isEqualTo: currentUserReference,
+                                              )
+                                              .whereIn(
+                                                  'status',
+                                                  OrderStatus.values
+                                                      .where((e) =>
+                                                          valueOrDefault<bool>(
+                                                            () {
+                                                              if (e ==
+                                                                  OrderStatus
+                                                                      .canceled) {
+                                                                return true;
+                                                              } else if (e ==
+                                                                  OrderStatus
+                                                                      .completed) {
+                                                                return true;
+                                                              } else {
+                                                                return false;
+                                                              }
+                                                            }(),
+                                                            false,
+                                                          ))
+                                                      .toList()
+                                                      .map((e) => e.serialize())
+                                                      .toList())
+                                              .orderBy('orderDate',
+                                                  descending: true),
+                                    ),
+                                    builder: (context, snapshot) {
+                                      // Customize what your widget looks like when it's loading.
+                                      if (!snapshot.hasData) {
+                                        return Center(
+                                          child: SizedBox(
+                                            width: 50.0,
+                                            height: 50.0,
+                                            child: CircularProgressIndicator(
+                                              valueColor:
+                                                  AlwaysStoppedAnimation<Color>(
+                                                FlutterFlowTheme.of(context)
+                                                    .primary,
+                                              ),
+                                            ),
+                                          ),
+                                        );
+                                      }
+                                      List<OrdersRecord>
+                                          listViewOrdersRecordList =
+                                          snapshot.data!;
+                                      return ListView.separated(
+                                        padding: const EdgeInsets.fromLTRB(
+                                          0,
+                                          24.0,
+                                          0,
+                                          48.0,
+                                        ),
+                                        shrinkWrap: true,
+                                        scrollDirection: Axis.vertical,
+                                        itemCount:
+                                            listViewOrdersRecordList.length,
+                                        separatorBuilder: (_, __) =>
+                                            const SizedBox(height: 24.0),
+                                        itemBuilder: (context, listViewIndex) {
+                                          final listViewOrdersRecord =
+                                              listViewOrdersRecordList[
+                                                  listViewIndex];
+                                          return Column(
+                                            mainAxisSize: MainAxisSize.max,
+                                            children: [
+                                              Container(
+                                                width: double.infinity,
+                                                decoration: const BoxDecoration(),
+                                                child: HistorycardWidget(
+                                                  key: Key(
+                                                      'Keyt6x_${listViewIndex}_of_${listViewOrdersRecordList.length}'),
+                                                  iscompletd: true,
+                                                  data: listViewOrdersRecord,
+                                                ),
+                                              ),
+                                              Divider(
+                                                height: 24.0,
+                                                thickness: 1.0,
+                                                indent: 20.0,
+                                                endIndent: 20.0,
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryText,
+                                              ),
+                                            ].divide(const SizedBox(height: 16.0)),
+                                          );
+                                        },
+                                      );
+                                    },
+                                  ),
+                                ),
+                            ],
                           ),
                         ),
                       ],
@@ -339,11 +647,11 @@ class _OrderPageWidgetState extends State<OrderPageWidget>
                 ],
               ),
               Align(
-                alignment: AlignmentDirectional(0.0, 1.0),
+                alignment: const AlignmentDirectional(0.0, 1.0),
                 child: wrapWithModel(
                   model: _model.navModel,
                   updateCallback: () => setState(() {}),
-                  child: NavWidget(
+                  child: const NavWidget(
                     pageseletcted: Pages.orders,
                   ),
                 ),

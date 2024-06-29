@@ -3,12 +3,9 @@ import '/componets/cus_home/cus_home_widget.dart';
 import '/componets/nav/nav_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import '/actions/actions.dart' as action_blocks;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'cus_homepage_model.dart';
 export 'cus_homepage_model.dart';
 
@@ -59,14 +56,14 @@ class _CusHomepageWidgetState extends State<CusHomepageWidget> {
               wrapWithModel(
                 model: _model.cusHomeModel,
                 updateCallback: () => setState(() {}),
-                child: CusHomeWidget(),
+                child: const CusHomeWidget(),
               ),
               Align(
-                alignment: AlignmentDirectional(0.0, 1.0),
+                alignment: const AlignmentDirectional(0.0, 1.0),
                 child: wrapWithModel(
                   model: _model.navModel,
                   updateCallback: () => setState(() {}),
-                  child: NavWidget(
+                  child: const NavWidget(
                     pageseletcted: Pages.home,
                   ),
                 ),

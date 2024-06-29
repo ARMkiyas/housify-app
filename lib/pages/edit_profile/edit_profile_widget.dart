@@ -9,14 +9,8 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/upload_data.dart';
-import 'dart:math';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
-import 'package:provider/provider.dart';
 import 'edit_profile_model.dart';
 export 'edit_profile_model.dart';
 
@@ -65,8 +59,8 @@ class _EditProfileWidgetState extends State<EditProfileWidget>
             curve: Curves.easeInOut,
             delay: 0.0.ms,
             duration: 600.0.ms,
-            begin: Offset(0.6, 0.6),
-            end: Offset(1.0, 1.0),
+            begin: const Offset(0.6, 0.6),
+            end: const Offset(1.0, 1.0),
           ),
         ],
       ),
@@ -85,8 +79,8 @@ class _EditProfileWidgetState extends State<EditProfileWidget>
             curve: Curves.easeInOut,
             delay: 0.0.ms,
             duration: 600.0.ms,
-            begin: Offset(0.0, 20.0),
-            end: Offset(0.0, 0.0),
+            begin: const Offset(0.0, 20.0),
+            end: const Offset(0.0, 0.0),
           ),
         ],
       ),
@@ -105,8 +99,8 @@ class _EditProfileWidgetState extends State<EditProfileWidget>
             curve: Curves.easeInOut,
             delay: 0.0.ms,
             duration: 600.0.ms,
-            begin: Offset(0.0, 20.0),
-            end: Offset(0.0, 0.0),
+            begin: const Offset(0.0, 20.0),
+            end: const Offset(0.0, 0.0),
           ),
         ],
       ),
@@ -125,8 +119,8 @@ class _EditProfileWidgetState extends State<EditProfileWidget>
             curve: Curves.easeInOut,
             delay: 0.0.ms,
             duration: 600.0.ms,
-            begin: Offset(0.0, 20.0),
-            end: Offset(0.0, 0.0),
+            begin: const Offset(0.0, 20.0),
+            end: const Offset(0.0, 0.0),
           ),
         ],
       ),
@@ -145,8 +139,8 @@ class _EditProfileWidgetState extends State<EditProfileWidget>
             curve: Curves.easeInOut,
             delay: 0.0.ms,
             duration: 600.0.ms,
-            begin: Offset(0.0, 60.0),
-            end: Offset(0.0, 0.0),
+            begin: const Offset(0.0, 60.0),
+            end: const Offset(0.0, 0.0),
           ),
         ],
       ),
@@ -165,8 +159,8 @@ class _EditProfileWidgetState extends State<EditProfileWidget>
             curve: Curves.easeInOut,
             delay: 200.0.ms,
             duration: 600.0.ms,
-            begin: Offset(0.0, 60.0),
-            end: Offset(0.0, 0.0),
+            begin: const Offset(0.0, 60.0),
+            end: const Offset(0.0, 0.0),
           ),
         ],
       ),
@@ -185,8 +179,8 @@ class _EditProfileWidgetState extends State<EditProfileWidget>
             curve: Curves.easeInOut,
             delay: 200.0.ms,
             duration: 600.0.ms,
-            begin: Offset(0.0, 60.0),
-            end: Offset(0.0, 0.0),
+            begin: const Offset(0.0, 60.0),
+            end: const Offset(0.0, 0.0),
           ),
         ],
       ),
@@ -205,8 +199,8 @@ class _EditProfileWidgetState extends State<EditProfileWidget>
             curve: Curves.easeInOut,
             delay: 400.0.ms,
             duration: 600.0.ms,
-            begin: Offset(0.0, 60.0),
-            end: Offset(0.0, 0.0),
+            begin: const Offset(0.0, 60.0),
+            end: const Offset(0.0, 0.0),
           ),
         ],
       ),
@@ -240,7 +234,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget>
           automaticallyImplyLeading: false,
           actions: [
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 12.0, 0.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 12.0, 0.0),
               child: FlutterFlowIconButton(
                 borderColor: Colors.transparent,
                 borderRadius: 30.0,
@@ -263,7 +257,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget>
         body: SafeArea(
           top: true,
           child: Stack(
-            alignment: AlignmentDirectional(0.0, 1.0),
+            alignment: const AlignmentDirectional(0.0, 1.0),
             children: [
               Column(
                 mainAxisSize: MainAxisSize.max,
@@ -275,7 +269,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget>
                       borderRadius: BorderRadius.circular(50.0),
                     ),
                     child: Padding(
-                      padding: EdgeInsets.all(2.0),
+                      padding: const EdgeInsets.all(2.0),
                       child: AuthUserStreamWidget(
                         builder: (context) => InkWell(
                           splashColor: Colors.transparent,
@@ -341,8 +335,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget>
                             borderRadius: BorderRadius.circular(60.0),
                             child: Image.network(
                               valueOrDefault<String>(
-                                currentUserPhoto != null &&
-                                        currentUserPhoto != ''
+                                currentUserPhoto != ''
                                     ? currentUserPhoto
                                     : 'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/housify-ujjxfr/assets/52u2ht71nn25/default_profile_photo.png',
                                 'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/housify-ujjxfr/assets/52u2ht71nn25/default_profile_photo.png',
@@ -359,7 +352,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget>
                       animationsMap['cardOnPageLoadAnimation']!),
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
                     child: AuthUserStreamWidget(
                       builder: (context) => Text(
                         currentUserDisplayName,
@@ -373,7 +366,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget>
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 4.0, 0.0, 0.0),
+                    padding: const EdgeInsetsDirectional.fromSTEB(0.0, 4.0, 0.0, 0.0),
                     child: Text(
                       currentUserEmail,
                       style: FlutterFlowTheme.of(context).titleSmall.override(
@@ -394,7 +387,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget>
                       animationsMap['dividerOnPageLoadAnimation']!),
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
                     child: Container(
                       width: double.infinity,
                       decoration: BoxDecoration(
@@ -407,7 +400,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget>
                       ),
                       child: Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 8.0, 0.0),
+                            const EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 8.0, 0.0),
                         child: TextFormField(
                           controller: _model.textController1,
                           focusNode: _model.textFieldFocusNode1,
@@ -428,14 +421,14 @@ class _EditProfileWidgetState extends State<EditProfileWidget>
                                   letterSpacing: 0.0,
                                 ),
                             enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
+                              borderSide: const BorderSide(
                                 color: Color(0x00000000),
                                 width: 2.0,
                               ),
                               borderRadius: BorderRadius.circular(8.0),
                             ),
                             focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
+                              borderSide: const BorderSide(
                                 color: Color(0x00000000),
                                 width: 2.0,
                               ),
@@ -470,7 +463,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget>
                   ),
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(16.0, 12.0, 16.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(16.0, 12.0, 16.0, 0.0),
                     child: Container(
                       width: double.infinity,
                       decoration: BoxDecoration(
@@ -483,7 +476,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget>
                       ),
                       child: Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 8.0, 0.0),
+                            const EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 8.0, 0.0),
                         child: TextFormField(
                           controller: _model.textController2,
                           focusNode: _model.textFieldFocusNode2,
@@ -504,14 +497,14 @@ class _EditProfileWidgetState extends State<EditProfileWidget>
                                   letterSpacing: 0.0,
                                 ),
                             enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
+                              borderSide: const BorderSide(
                                 color: Color(0x00000000),
                                 width: 2.0,
                               ),
                               borderRadius: BorderRadius.circular(8.0),
                             ),
                             focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
+                              borderSide: const BorderSide(
                                 color: Color(0x00000000),
                                 width: 2.0,
                               ),
@@ -546,7 +539,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget>
                   ),
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(16.0, 12.0, 16.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(16.0, 12.0, 16.0, 0.0),
                     child: Container(
                       width: double.infinity,
                       decoration: BoxDecoration(
@@ -559,7 +552,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget>
                       ),
                       child: Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 8.0, 0.0),
+                            const EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 8.0, 0.0),
                         child: TextFormField(
                           controller: _model.textController3,
                           focusNode: _model.textFieldFocusNode3,
@@ -580,14 +573,14 @@ class _EditProfileWidgetState extends State<EditProfileWidget>
                                   letterSpacing: 0.0,
                                 ),
                             enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
+                              borderSide: const BorderSide(
                                 color: Color(0x00000000),
                                 width: 2.0,
                               ),
                               borderRadius: BorderRadius.circular(8.0),
                             ),
                             focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
+                              borderSide: const BorderSide(
                                 color: Color(0x00000000),
                                 width: 2.0,
                               ),
@@ -623,7 +616,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget>
                   ),
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
                     child: FFButtonWidget(
                       onPressed: () async {
                         await currentUserReference!
@@ -638,9 +631,9 @@ class _EditProfileWidgetState extends State<EditProfileWidget>
                         width: 150.0,
                         height: 44.0,
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                         iconPadding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                         color: FlutterFlowTheme.of(context).primaryBackground,
                         textStyle:
                             FlutterFlowTheme.of(context).bodyLarge.override(
@@ -662,7 +655,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget>
               wrapWithModel(
                 model: _model.navModel,
                 updateCallback: () => setState(() {}),
-                child: NavWidget(
+                child: const NavWidget(
                   pageseletcted: Pages.profile,
                 ),
               ),
