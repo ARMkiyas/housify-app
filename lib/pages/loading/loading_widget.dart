@@ -1,11 +1,11 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/schema/enums/enums.dart';
+import '/components/loading_lottie_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/actions/actions.dart' as action_blocks;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:lottie/lottie.dart';
 import 'loading_model.dart';
 export 'loading_model.dart';
 
@@ -28,7 +28,7 @@ class _LoadingWidgetState extends State<LoadingWidget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      await Future.delayed(const Duration(milliseconds: 10000));
+      await Future.delayed(const Duration(milliseconds: 1500));
       await action_blocks.updateCurrentLocation(context);
       if (currentUserDocument?.role == Roles.seller) {
         await action_blocks.issellervarfied(context);
@@ -69,12 +69,10 @@ class _LoadingWidgetState extends State<LoadingWidget> {
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Lottie.network(
-                          'https://lottie.host/523c8884-4a21-4912-9f11-076b4d1372cc/t3hPEcaKdB.json',
-                          width: 150.0,
-                          height: 130.0,
-                          fit: BoxFit.cover,
-                          animate: true,
+                        wrapWithModel(
+                          model: _model.loadingLottieModel,
+                          updateCallback: () => setState(() {}),
+                          child: const LoadingLottieWidget(),
                         ),
                       ],
                     ),

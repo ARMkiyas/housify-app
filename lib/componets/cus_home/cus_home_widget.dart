@@ -1,5 +1,6 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
+import '/components/location_picker_widget.dart';
 import '/components/temp_page_widget.dart';
 import '/componets/offer_card/offer_card_widget.dart';
 import '/componets/productitem/productitem_widget.dart';
@@ -152,38 +153,50 @@ class _CusHomeWidgetState extends State<CusHomeWidget> {
                                           ),
                                         ],
                                       ),
-                                      Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        children: [
-                                          Icon(
-                                            Icons.location_on,
-                                            color: FlutterFlowTheme.of(context)
-                                                .secondaryText,
-                                            size: 16.0,
-                                          ),
-                                          Expanded(
-                                            child: AutoSizeText(
-                                              valueOrDefault<String>(
-                                                FFAppState()
-                                                    .DeviceCurrentLoctationAddress,
-                                                'Sri Lanka',
-                                              ),
-                                              maxLines: 1,
-                                              minFontSize: 8.0,
-                                              style: FlutterFlowTheme.of(
-                                                      context)
-                                                  .titleMedium
-                                                  .override(
-                                                    fontFamily: 'Readex Pro',
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .primaryText,
-                                                    fontSize: 14.0,
-                                                    letterSpacing: 0.0,
-                                                  ),
+                                      InkWell(
+                                        splashColor: Colors.transparent,
+                                        focusColor: Colors.transparent,
+                                        hoverColor: Colors.transparent,
+                                        highlightColor: Colors.transparent,
+                                        onTap: () async {
+                                          _model.showplacepicker = true;
+                                          setState(() {});
+                                        },
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: [
+                                            Icon(
+                                              Icons.location_on,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryText,
+                                              size: 16.0,
                                             ),
-                                          ),
-                                        ],
+                                            Expanded(
+                                              child: AutoSizeText(
+                                                valueOrDefault<String>(
+                                                  FFAppState()
+                                                      .DeviceCurrentLoctationAddress,
+                                                  'Sri Lanka',
+                                                ),
+                                                maxLines: 1,
+                                                minFontSize: 8.0,
+                                                style: FlutterFlowTheme.of(
+                                                        context)
+                                                    .titleMedium
+                                                    .override(
+                                                      fontFamily: 'Readex Pro',
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .primaryText,
+                                                      fontSize: 14.0,
+                                                      letterSpacing: 0.0,
+                                                    ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     ].divide(const SizedBox(height: 4.0)),
                                   ),
@@ -1049,6 +1062,22 @@ class _CusHomeWidgetState extends State<CusHomeWidget> {
             ),
           ),
         ),
+        if (_model.showplacepicker)
+          Container(
+            decoration: const BoxDecoration(),
+            child: wrapWithModel(
+              model: _model.locationPickerModel,
+              updateCallback: () => setState(() {}),
+              child: LocationPickerWidget(
+                locationcallback: (loc) async {
+                  FFAppState().DeviceCurrentLoctationAddress = loc!;
+                  setState(() {});
+                  _model.showplacepicker = false;
+                  setState(() {});
+                },
+              ),
+            ),
+          ),
       ],
     );
   }

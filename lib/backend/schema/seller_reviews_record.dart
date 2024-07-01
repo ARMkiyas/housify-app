@@ -45,6 +45,16 @@ class SellerReviewsRecord extends FirestoreRecord {
   String get userImage => _userImage ?? '';
   bool hasUserImage() => _userImage != null;
 
+  // "service" field.
+  DocumentReference? _service;
+  DocumentReference? get service => _service;
+  bool hasService() => _service != null;
+
+  // "order" field.
+  DocumentReference? _order;
+  DocumentReference? get order => _order;
+  bool hasOrder() => _order != null;
+
   DocumentReference get parentReference => reference.parent.parent!;
 
   void _initializeFields() {
@@ -54,6 +64,8 @@ class SellerReviewsRecord extends FirestoreRecord {
     _dateTime = snapshotData['DateTime'] as DateTime?;
     _user = snapshotData['user'] as DocumentReference?;
     _userImage = snapshotData['userImage'] as String?;
+    _service = snapshotData['service'] as DocumentReference?;
+    _order = snapshotData['order'] as DocumentReference?;
   }
 
   static Query<Map<String, dynamic>> collection([DocumentReference? parent]) =>
@@ -102,6 +114,8 @@ Map<String, dynamic> createSellerReviewsRecordData({
   DateTime? dateTime,
   DocumentReference? user,
   String? userImage,
+  DocumentReference? service,
+  DocumentReference? order,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -111,6 +125,8 @@ Map<String, dynamic> createSellerReviewsRecordData({
       'DateTime': dateTime,
       'user': user,
       'userImage': userImage,
+      'service': service,
+      'order': order,
     }.withoutNulls,
   );
 
@@ -128,7 +144,9 @@ class SellerReviewsRecordDocumentEquality
         e1?.feedback == e2?.feedback &&
         e1?.dateTime == e2?.dateTime &&
         e1?.user == e2?.user &&
-        e1?.userImage == e2?.userImage;
+        e1?.userImage == e2?.userImage &&
+        e1?.service == e2?.service &&
+        e1?.order == e2?.order;
   }
 
   @override
@@ -138,7 +156,9 @@ class SellerReviewsRecordDocumentEquality
         e?.feedback,
         e?.dateTime,
         e?.user,
-        e?.userImage
+        e?.userImage,
+        e?.service,
+        e?.order
       ]);
 
   @override

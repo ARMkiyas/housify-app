@@ -84,8 +84,10 @@ class _ProductitemWidgetState extends State<ProductitemWidget> {
                     child: CachedNetworkImage(
                       fadeInDuration: const Duration(milliseconds: 500),
                       fadeOutDuration: const Duration(milliseconds: 500),
-                      imageUrl:
-                          'https://th.bing.com/th/id/OIP.uSpy4CzuMiX5D_r9wRacJQHaE8?rs=1&pid=ImgDetMain',
+                      imageUrl: valueOrDefault<String>(
+                        widget.servicedoc?.image,
+                        'https://th.bing.com/th/id/OIP.uSpy4CzuMiX5D_r9wRacJQHaE8?rs=1&pid=ImgDetMain',
+                      ),
                       width: double.infinity,
                       height: double.infinity,
                       fit: BoxFit.cover,

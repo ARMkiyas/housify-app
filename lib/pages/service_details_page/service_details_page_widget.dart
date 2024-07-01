@@ -14,6 +14,7 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart'
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'service_details_page_model.dart';
 export 'service_details_page_model.dart';
@@ -787,6 +788,8 @@ class _ServiceDetailsPageWidgetState extends State<ServiceDetailsPageWidget>
                                           .titleSmall
                                           .override(
                                             fontFamily: 'Readex Pro',
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryText,
                                             letterSpacing: 0.0,
                                           ),
                                     ),
@@ -811,8 +814,9 @@ class _ServiceDetailsPageWidgetState extends State<ServiceDetailsPageWidget>
                                   ],
                                 ),
                               ),
-                              FutureBuilder<List<SellerReviewsRecord>>(
-                                future: querySellerReviewsRecordOnce(
+                              StreamBuilder<List<SellerReviewsRecord>>(
+                                stream: querySellerReviewsRecord(
+                                  parent: widget.sericeDoc?.reference,
                                   limit: 3,
                                 ),
                                 builder: (context, snapshot) {
@@ -820,14 +824,12 @@ class _ServiceDetailsPageWidgetState extends State<ServiceDetailsPageWidget>
                                   if (!snapshot.hasData) {
                                     return Center(
                                       child: SizedBox(
-                                        width: 50.0,
-                                        height: 50.0,
-                                        child: CircularProgressIndicator(
-                                          valueColor:
-                                              AlwaysStoppedAnimation<Color>(
-                                            FlutterFlowTheme.of(context)
-                                                .primary,
-                                          ),
+                                        width: 40.0,
+                                        height: 40.0,
+                                        child: SpinKitThreeBounce(
+                                          color: FlutterFlowTheme.of(context)
+                                              .primary,
+                                          size: 40.0,
                                         ),
                                       ),
                                     );
