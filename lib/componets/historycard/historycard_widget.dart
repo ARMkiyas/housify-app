@@ -328,9 +328,12 @@ class _HistorycardWidgetState extends State<HistorycardWidget> {
                                               ).then((value) =>
                                                   safeSetState(() {}));
                                             },
-                                      text: buttonSellerReviewsRecord != null
-                                          ? 'Reviewed'
-                                          : 'Leave Review',
+                                      text: valueOrDefault<String>(
+                                        buttonSellerReviewsRecord != null
+                                            ? 'Reviewed'
+                                            : 'Leave Review',
+                                        'Leave Review',
+                                      ),
                                       options: FFButtonOptions(
                                         padding: const EdgeInsetsDirectional.fromSTEB(
                                             20.0, 8.0, 20.0, 8.0),

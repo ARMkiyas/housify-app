@@ -128,8 +128,6 @@ class _CategoryPageWidgetState extends State<CategoryPageWidget> {
                                       key: Key(
                                           'Keyhh4_${cetagoriesIndex}_of_${cetagories.length}'),
                                       pros: cetagoriesItem,
-                                      count: cetagoriesItem.serviceRef.length
-                                          .toString(),
                                     ),
                                   );
                                 }).divide(const SizedBox(height: 8.0)),
