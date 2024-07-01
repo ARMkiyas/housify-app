@@ -1,5 +1,5 @@
-import '/backend/api_requests/api_calls.dart';
 import '/backend/backend.dart';
+import '/components/location_picker_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'service_edit_form_widget.dart' show ServiceEditFormWidget;
 import 'package:flutter/material.dart';
@@ -8,8 +8,6 @@ class ServiceEditFormModel extends FlutterFlowModel<ServiceEditFormWidget> {
   ///  Local state fields for this page.
 
   bool displayplacepicker = false;
-
-  bool listPlaces = false;
 
   ///  State fields for stateful widgets in this page.
 
@@ -73,12 +71,8 @@ class ServiceEditFormModel extends FlutterFlowModel<ServiceEditFormWidget> {
 
   // Stores action output result for [Backend Call - Create Document] action in Button widget.
   ServiceAllRecord? creatednewService;
-  // State field(s) for TextField widget.
-  FocusNode? textFieldFocusNode;
-  TextEditingController? textController5;
-  String? Function(BuildContext, String?)? textController5Validator;
-  // Stores action output result for [Backend Call - API (ForwareGeoLocationEncording)] action in TextField widget.
-  ApiCallResponse? geoListforward;
+  // Model for LocationPicker component.
+  late LocationPickerModel locationPickerModel;
 
   @override
   void initState(BuildContext context) {
@@ -86,6 +80,7 @@ class ServiceEditFormModel extends FlutterFlowModel<ServiceEditFormWidget> {
     descriptionTextControllerValidator = _descriptionTextControllerValidator;
     priceTextControllerValidator = _priceTextControllerValidator;
     locationTextControllerValidator = _locationTextControllerValidator;
+    locationPickerModel = createModel(context, () => LocationPickerModel());
   }
 
   @override
@@ -103,7 +98,6 @@ class ServiceEditFormModel extends FlutterFlowModel<ServiceEditFormWidget> {
     locationFocusNode?.dispose();
     locationTextController?.dispose();
 
-    textFieldFocusNode?.dispose();
-    textController5?.dispose();
+    locationPickerModel.dispose();
   }
 }

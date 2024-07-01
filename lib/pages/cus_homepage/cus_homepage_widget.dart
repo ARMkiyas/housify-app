@@ -3,9 +3,7 @@ import '/componets/cus_home/cus_home_widget.dart';
 import '/componets/nav/nav_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/actions/actions.dart' as action_blocks;
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'cus_homepage_model.dart';
 export 'cus_homepage_model.dart';
 
@@ -25,12 +23,6 @@ class _CusHomepageWidgetState extends State<CusHomepageWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => CusHomepageModel());
-
-    // On page load action.
-    SchedulerBinding.instance.addPostFrameCallback((_) async {
-      await action_blocks.updateCurrentLocation(context);
-      setState(() {});
-    });
   }
 
   @override

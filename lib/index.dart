@@ -16,7 +16,7 @@ export '/pages/category_page/category_page_widget.dart' show CategoryPageWidget;
 export '/offerpage/offerpage_widget.dart' show OfferpageWidget;
 export '/pages/order_page/order_page_widget.dart' show OrderPageWidget;
 export '/pages/loading/loading_widget.dart' show LoadingWidget;
-export '/pages/seller_home_page/seller_home_page_widget.dart'
+export '/seller_pages/seller_home_page/seller_home_page_widget.dart'
     show SellerHomePageWidget;
 export '/pages/order_view_page/order_view_page_widget.dart'
     show OrderViewPageWidget;

@@ -2,6 +2,8 @@ import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:provider/provider.dart';
 import 'ceta_comp_model.dart';
 export 'ceta_comp_model.dart';
 
@@ -43,6 +45,8 @@ class _CetaCompWidgetState extends State<CetaCompWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
@@ -95,12 +99,50 @@ class _CetaCompWidgetState extends State<CetaCompWidget> {
                   Padding(
                     padding:
                         const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
-                    child: Text(
-                      '${widget.count} Services',
-                      style: FlutterFlowTheme.of(context).titleLarge.override(
-                            fontFamily: 'Readex Pro',
-                            letterSpacing: 0.0,
-                          ),
+                    child: FutureBuilder<int>(
+                      future: queryServiceAllRecordCount(
+                        queryBuilder: (serviceAllRecord) => serviceAllRecord
+                            .where(
+                              'category',
+                              isEqualTo: widget.pros?.reference,
+                            )
+                            .where(
+                              'serviceLocation',
+                              isEqualTo:
+                                  FFAppState().DeviceCurrentLoctationAddress,
+                            ),
+                      ),
+                      builder: (context, snapshot) {
+                        // Customize what your widget looks like when it's loading.
+                        if (!snapshot.hasData) {
+                          return Center(
+                            child: Padding(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 0.0, 20.0, 0.0),
+                              child: SizedBox(
+                                width: 40.0,
+                                height: 40.0,
+                                child: SpinKitThreeBounce(
+                                  color: FlutterFlowTheme.of(context).primary,
+                                  size: 40.0,
+                                ),
+                              ),
+                            ),
+                          );
+                        }
+                        int textCount = snapshot.data!;
+                        return Text(
+                          '${valueOrDefault<String>(
+                            textCount.toString(),
+                            '0',
+                          )} Services',
+                          style:
+                              FlutterFlowTheme.of(context).titleLarge.override(
+                                    fontFamily: 'Readex Pro',
+                                    letterSpacing: 0.0,
+                                  ),
+                        );
+                      },
                     ),
                   ),
                 ],

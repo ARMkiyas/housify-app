@@ -1,3 +1,4 @@
+import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'review_widget.dart' show ReviewWidget;
 import 'package:flutter/material.dart';
@@ -19,6 +20,11 @@ class ReviewModel extends FlutterFlowModel<ReviewWidget> {
 
     return null;
   }
+
+  // Stores action output result for [Firestore Query - Query a collection] action in Button widget.
+  int? noOfReviews;
+  // Stores action output result for [Backend Call - Read Document] action in Button widget.
+  ServiceAllRecord? service;
 
   @override
   void initState(BuildContext context) {

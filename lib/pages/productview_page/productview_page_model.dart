@@ -6,21 +6,39 @@ import 'package:flutter/material.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
 class ProductviewPageModel extends FlutterFlowModel<ProductviewPageWidget> {
+  ///  Local state fields for this page.
+
+  String? searchvalues;
+
+  List<ServiceAllRecord> searchData = [];
+  void addToSearchData(ServiceAllRecord item) => searchData.add(item);
+  void removeFromSearchData(ServiceAllRecord item) => searchData.remove(item);
+  void removeAtIndexFromSearchData(int index) => searchData.removeAt(index);
+  void insertAtIndexInSearchData(int index, ServiceAllRecord item) =>
+      searchData.insert(index, item);
+  void updateSearchDataAtIndex(
+          int index, Function(ServiceAllRecord) updateFn) =>
+      searchData[index] = updateFn(searchData[index]);
+
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
+  final formKey = GlobalKey<FormState>();
   // Model for back_header component.
   late BackHeaderModel backHeaderModel;
   // State field(s) for tf_search widget.
   FocusNode? tfSearchFocusNode;
   TextEditingController? tfSearchTextController;
   String? Function(BuildContext, String?)? tfSearchTextControllerValidator;
+  // Stores action output result for [Firestore Query - Query a collection] action in tf_search widget.
+  List<ServiceAllRecord>? dataall;
+  List<ServiceAllRecord> simpleSearchResults = [];
   // State field(s) for GridView widget.
 
   PagingController<DocumentSnapshot?, ServiceAllRecord>?
-      gridViewPagingController;
-  Query? gridViewPagingQuery;
-  List<StreamSubscription?> gridViewStreamSubscriptions = [];
+      gridViewPagingController1;
+  Query? gridViewPagingQuery1;
+  List<StreamSubscription?> gridViewStreamSubscriptions1 = [];
 
   @override
   void initState(BuildContext context) {
@@ -34,27 +52,27 @@ class ProductviewPageModel extends FlutterFlowModel<ProductviewPageWidget> {
     tfSearchFocusNode?.dispose();
     tfSearchTextController?.dispose();
 
-    for (var s in gridViewStreamSubscriptions) {
+    for (var s in gridViewStreamSubscriptions1) {
       s?.cancel();
     }
-    gridViewPagingController?.dispose();
+    gridViewPagingController1?.dispose();
   }
 
   /// Additional helper methods.
-  PagingController<DocumentSnapshot?, ServiceAllRecord> setGridViewController(
+  PagingController<DocumentSnapshot?, ServiceAllRecord> setGridViewController1(
     Query query, {
     DocumentReference<Object?>? parent,
   }) {
-    gridViewPagingController ??= _createGridViewController(query, parent);
-    if (gridViewPagingQuery != query) {
-      gridViewPagingQuery = query;
-      gridViewPagingController?.refresh();
+    gridViewPagingController1 ??= _createGridViewController1(query, parent);
+    if (gridViewPagingQuery1 != query) {
+      gridViewPagingQuery1 = query;
+      gridViewPagingController1?.refresh();
     }
-    return gridViewPagingController!;
+    return gridViewPagingController1!;
   }
 
   PagingController<DocumentSnapshot?, ServiceAllRecord>
-      _createGridViewController(
+      _createGridViewController1(
     Query query,
     DocumentReference<Object?>? parent,
   ) {
@@ -63,9 +81,9 @@ class ProductviewPageModel extends FlutterFlowModel<ProductviewPageWidget> {
     return controller
       ..addPageRequestListener(
         (nextPageMarker) => queryServiceAllRecordPage(
-          queryBuilder: (_) => gridViewPagingQuery ??= query,
+          queryBuilder: (_) => gridViewPagingQuery1 ??= query,
           nextPageMarker: nextPageMarker,
-          streamSubscriptions: gridViewStreamSubscriptions,
+          streamSubscriptions: gridViewStreamSubscriptions1,
           controller: controller,
           pageSize: 20,
           isStream: true,

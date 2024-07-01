@@ -196,7 +196,27 @@ class _ReviewWidgetState extends State<ReviewWidget> {
                             service: widget.serviceref,
                             order: widget.orderref,
                           ));
+                          _model.noOfReviews =
+                              await querySellerReviewsRecordCount(
+                            parent: widget.serviceref,
+                          );
+                          _model.service =
+                              await ServiceAllRecord.getDocumentOnce(
+                                  widget.serviceref!);
+
+                          await widget.serviceref!
+                              .update(createServiceAllRecordData(
+                            overallRating: valueOrDefault<double>(
+                              ((_model.service!.overallRating *
+                                          (_model.noOfReviews!)) +
+                                      (_model.ratingBarValue!)) /
+                                  (_model.noOfReviews!),
+                              0.0,
+                            ),
+                          ));
                           Navigator.pop(context);
+
+                          setState(() {});
                         },
                         text: 'Submit Feedback',
                         options: FFButtonOptions(

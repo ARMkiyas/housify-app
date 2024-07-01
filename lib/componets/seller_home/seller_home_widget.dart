@@ -1,10 +1,13 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
+import '/backend/schema/enums/enums.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:provider/provider.dart';
 import 'seller_home_model.dart';
 export 'seller_home_model.dart';
 
@@ -40,6 +43,8 @@ class _SellerHomeWidgetState extends State<SellerHomeWidget>
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Padding(
       padding: const EdgeInsetsDirectional.fromSTEB(0.0, 14.0, 0.0, 0.0),
       child: Column(
@@ -108,7 +113,7 @@ class _SellerHomeWidgetState extends State<SellerHomeWidget>
                             padding: const EdgeInsetsDirectional.fromSTEB(
                                 5.0, 0.0, 0.0, 0.0),
                             child: Text(
-                              'Sri Lanka',
+                              FFAppState().DeviceCurrentLoctationAddress,
                               style: FlutterFlowTheme.of(context)
                                   .bodySmall
                                   .override(
@@ -130,147 +135,169 @@ class _SellerHomeWidgetState extends State<SellerHomeWidget>
           ),
           Padding(
             padding: const EdgeInsetsDirectional.fromSTEB(10.0, 16.0, 10.0, 0.0),
-            child: Row(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Material(
-                  color: Colors.transparent,
-                  elevation: 0.0,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
-                  child: Container(
-                    width: 100.0,
-                    height: 100.0,
-                    decoration: BoxDecoration(
-                      color: const Color(0x0014181B),
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
-                              5.0, 0.0, 0.0, 0.0),
-                          child: Text(
-                            '150',
-                            style:
-                                FlutterFlowTheme.of(context).bodySmall.override(
-                                      fontFamily: 'Outfit',
-                                      color: FlutterFlowTheme.of(context)
-                                          .secondaryText,
-                                      fontSize: 18.0,
-                                      letterSpacing: 0.0,
-                                      fontWeight: FontWeight.w600,
-                                      lineHeight: 2.0,
-                                    ),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
-                              5.0, 0.0, 0.0, 0.0),
-                          child: Text(
-                            'Orders',
-                            textAlign: TextAlign.center,
-                            style:
-                                FlutterFlowTheme.of(context).bodySmall.override(
-                                      fontFamily: 'Outfit',
-                                      color: FlutterFlowTheme.of(context)
-                                          .secondaryText,
-                                      fontSize: 14.0,
-                                      letterSpacing: 0.0,
-                                      fontWeight: FontWeight.w300,
-                                    ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+            child: FutureBuilder<List<ServiceAllRecord>>(
+              future: queryServiceAllRecordOnce(
+                queryBuilder: (serviceAllRecord) => serviceAllRecord.where(
+                  'seller',
+                  isEqualTo: currentUserReference,
                 ),
-                Material(
-                  color: Colors.transparent,
-                  elevation: 0.0,
-                  child: Container(
-                    width: 100.0,
-                    height: 100.0,
-                    decoration: const BoxDecoration(
-                      color: Color(0x0014181B),
+                singleRecord: true,
+              ),
+              builder: (context, snapshot) {
+                // Customize what your widget looks like when it's loading.
+                if (!snapshot.hasData) {
+                  return Center(
+                    child: Padding(
+                      padding:
+                          const EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 0.0),
+                      child: LinearProgressIndicator(
+                        color: FlutterFlowTheme.of(context).primary,
+                      ),
                     ),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
-                              5.0, 0.0, 0.0, 0.0),
-                          child: Text(
-                            '30',
-                            style:
-                                FlutterFlowTheme.of(context).bodySmall.override(
-                                      fontFamily: 'Outfit',
-                                      color: FlutterFlowTheme.of(context)
-                                          .secondaryText,
-                                      fontSize: 18.0,
-                                      letterSpacing: 0.0,
-                                      fontWeight: FontWeight.w600,
-                                      lineHeight: 2.0,
-                                    ),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
-                              5.0, 0.0, 0.0, 0.0),
-                          child: Text(
-                            'Rating',
-                            textAlign: TextAlign.center,
-                            style:
-                                FlutterFlowTheme.of(context).bodySmall.override(
-                                      fontFamily: 'Outfit',
-                                      color: FlutterFlowTheme.of(context)
-                                          .secondaryText,
-                                      fontSize: 14.0,
-                                      letterSpacing: 0.0,
-                                      fontWeight: FontWeight.w300,
-                                    ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                Material(
-                  color: Colors.transparent,
-                  elevation: 0.0,
-                  child: Container(
-                    width: 100.0,
-                    height: 100.0,
-                    decoration: const BoxDecoration(
+                  );
+                }
+                List<ServiceAllRecord> rowServiceAllRecordList = snapshot.data!;
+                final rowServiceAllRecord = rowServiceAllRecordList.isNotEmpty
+                    ? rowServiceAllRecordList.first
+                    : null;
+                return Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Material(
                       color: Colors.transparent,
-                    ),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              0.0, 0.0, 0.0, 5.0),
-                          child: Icon(
-                            Icons.check_circle,
-                            color: Color(0xFF18B600),
-                            size: 30.0,
-                          ),
+                      elevation: 0.0,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      child: Container(
+                        width: 100.0,
+                        height: 100.0,
+                        decoration: BoxDecoration(
+                          color: const Color(0x0014181B),
+                          borderRadius: BorderRadius.circular(10.0),
                         ),
-                        Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
-                              5.0, 0.0, 0.0, 0.0),
-                          child: Text(
-                            'SellerVerified',
-                            textAlign: TextAlign.center,
-                            style:
-                                FlutterFlowTheme.of(context).bodySmall.override(
+                        child: FutureBuilder<int>(
+                          future: queryOrdersRecordCount(
+                            queryBuilder: (ordersRecord) => ordersRecord
+                                .where(
+                                  'seller',
+                                  isEqualTo: currentUserReference,
+                                )
+                                .where(
+                                  'status',
+                                  isEqualTo: OrderStatus.completed.serialize(),
+                                ),
+                          ),
+                          builder: (context, snapshot) {
+                            // Customize what your widget looks like when it's loading.
+                            if (!snapshot.hasData) {
+                              return Center(
+                                child: SizedBox(
+                                  width: 40.0,
+                                  height: 40.0,
+                                  child: SpinKitPulse(
+                                    color: FlutterFlowTheme.of(context).primary,
+                                    size: 40.0,
+                                  ),
+                                ),
+                              );
+                            }
+                            int columnCount = snapshot.data!;
+                            return Column(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                      5.0, 0.0, 0.0, 0.0),
+                                  child: Text(
+                                    valueOrDefault<String>(
+                                      columnCount.toString(),
+                                      '0',
+                                    ),
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodySmall
+                                        .override(
+                                          fontFamily: 'Outfit',
+                                          color: FlutterFlowTheme.of(context)
+                                              .secondaryText,
+                                          fontSize: 18.0,
+                                          letterSpacing: 0.0,
+                                          fontWeight: FontWeight.w600,
+                                          lineHeight: 2.0,
+                                        ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                      5.0, 0.0, 0.0, 0.0),
+                                  child: Text(
+                                    'Orders',
+                                    textAlign: TextAlign.center,
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodySmall
+                                        .override(
+                                          fontFamily: 'Outfit',
+                                          color: FlutterFlowTheme.of(context)
+                                              .secondaryText,
+                                          fontSize: 14.0,
+                                          letterSpacing: 0.0,
+                                          fontWeight: FontWeight.w300,
+                                        ),
+                                  ),
+                                ),
+                              ],
+                            );
+                          },
+                        ),
+                      ),
+                    ),
+                    Material(
+                      color: Colors.transparent,
+                      elevation: 0.0,
+                      child: Container(
+                        width: 100.0,
+                        height: 100.0,
+                        decoration: const BoxDecoration(
+                          color: Color(0x0014181B),
+                        ),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
+                                  5.0, 0.0, 0.0, 0.0),
+                              child: Text(
+                                valueOrDefault<String>(
+                                  rowServiceAllRecord?.overallRating
+                                      .toString(),
+                                  '0',
+                                ),
+                                style: FlutterFlowTheme.of(context)
+                                    .bodySmall
+                                    .override(
+                                      fontFamily: 'Outfit',
+                                      color: FlutterFlowTheme.of(context)
+                                          .secondaryText,
+                                      fontSize: 18.0,
+                                      letterSpacing: 0.0,
+                                      fontWeight: FontWeight.w600,
+                                      lineHeight: 2.0,
+                                    ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
+                                  5.0, 0.0, 0.0, 0.0),
+                              child: Text(
+                                'Overall Rating ',
+                                textAlign: TextAlign.center,
+                                style: FlutterFlowTheme.of(context)
+                                    .bodySmall
+                                    .override(
                                       fontFamily: 'Outfit',
                                       color: FlutterFlowTheme.of(context)
                                           .secondaryText,
@@ -278,13 +305,59 @@ class _SellerHomeWidgetState extends State<SellerHomeWidget>
                                       letterSpacing: 0.0,
                                       fontWeight: FontWeight.w300,
                                     ),
-                          ),
+                              ),
+                            ),
+                          ],
                         ),
-                      ],
+                      ),
                     ),
-                  ),
-                ),
-              ],
+                    Material(
+                      color: Colors.transparent,
+                      elevation: 0.0,
+                      child: Container(
+                        width: 100.0,
+                        height: 100.0,
+                        decoration: const BoxDecoration(
+                          color: Colors.transparent,
+                        ),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 0.0, 0.0, 5.0),
+                              child: Icon(
+                                Icons.check_circle,
+                                color: Color(0xFF18B600),
+                                size: 30.0,
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
+                                  5.0, 0.0, 0.0, 0.0),
+                              child: Text(
+                                'SellerVerified',
+                                textAlign: TextAlign.center,
+                                style: FlutterFlowTheme.of(context)
+                                    .bodySmall
+                                    .override(
+                                      fontFamily: 'Outfit',
+                                      color: FlutterFlowTheme.of(context)
+                                          .secondaryText,
+                                      fontSize: 14.0,
+                                      letterSpacing: 0.0,
+                                      fontWeight: FontWeight.w300,
+                                    ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                );
+              },
             ),
           ),
           Flexible(
@@ -433,7 +506,12 @@ class _SellerHomeWidgetState extends State<SellerHomeWidget>
                                                 const EdgeInsetsDirectional.fromSTEB(
                                                     10.0, 0.0, 0.0, 0.0),
                                             child: Text(
-                                              containerCount.toString(),
+                                              valueOrDefault<String>(
+                                                containerCount <= 0
+                                                    ? 'Service Not Available'
+                                                    : 'Service Available',
+                                                'Service Not Available',
+                                              ),
                                               textAlign: TextAlign.start,
                                               style: FlutterFlowTheme.of(
                                                       context)

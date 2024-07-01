@@ -187,6 +187,15 @@ class _CustomerAcceptWidgetState extends State<CustomerAcceptWidget> {
                                               .update(createOrdersRecordData(
                                             status: OrderStatus.completed,
                                           ));
+
+                                          await widget.data!.service!.update({
+                                            ...mapToFirestore(
+                                              {
+                                                'no_of_sold':
+                                                    FieldValue.increment(1),
+                                              },
+                                            ),
+                                          });
                                         }
 
                                         Navigator.pop(context);
@@ -259,14 +268,8 @@ class _CustomerAcceptWidgetState extends State<CustomerAcceptWidget> {
                 ),
                 Padding(
                   padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 8.0),
-                  child: StreamBuilder<List<UsersRecord>>(
-                    stream: queryUsersRecord(
-                      queryBuilder: (usersRecord) => usersRecord.where(
-                        'service',
-                        isEqualTo: widget.data?.service,
-                      ),
-                      singleRecord: true,
-                    ),
+                  child: FutureBuilder<UsersRecord>(
+                    future: UsersRecord.getDocumentOnce(widget.data!.seller!),
                     builder: (context, snapshot) {
                       // Customize what your widget looks like when it's loading.
                       if (!snapshot.hasData) {
@@ -282,14 +285,7 @@ class _CustomerAcceptWidgetState extends State<CustomerAcceptWidget> {
                           ),
                         );
                       }
-                      List<UsersRecord> rowUsersRecordList = snapshot.data!;
-                      // Return an empty Container when the item does not exist.
-                      if (snapshot.data!.isEmpty) {
-                        return Container();
-                      }
-                      final rowUsersRecord = rowUsersRecordList.isNotEmpty
-                          ? rowUsersRecordList.first
-                          : null;
+                      final rowUsersRecord = snapshot.data!;
                       return Row(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -306,7 +302,7 @@ class _CustomerAcceptWidgetState extends State<CustomerAcceptWidget> {
                                   ),
                                   TextSpan(
                                     text: valueOrDefault<String>(
-                                      rowUsersRecord?.displayName,
+                                      rowUsersRecord.displayName,
                                       'name',
                                     ),
                                     style: FlutterFlowTheme.of(context)
@@ -339,7 +335,7 @@ class _CustomerAcceptWidgetState extends State<CustomerAcceptWidget> {
                                   ),
                                   TextSpan(
                                     text: valueOrDefault<String>(
-                                      rowUsersRecord?.email,
+                                      rowUsersRecord.email,
                                       'email@mail.com',
                                     ),
                                     style: FlutterFlowTheme.of(context)
