@@ -48,7 +48,7 @@ class _LogoWidgetState extends State<LogoWidget> {
           ),
         ),
         Text(
-          'Housefy',
+          'Housify',
           style: FlutterFlowTheme.of(context).displaySmall.override(
                 fontFamily: 'Inter',
                 color: FlutterFlowTheme.of(context).info,

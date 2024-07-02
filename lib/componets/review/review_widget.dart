@@ -208,7 +208,7 @@ class _ReviewWidgetState extends State<ReviewWidget> {
                               .update(createServiceAllRecordData(
                             overallRating: valueOrDefault<double>(
                               ((_model.service!.overallRating *
-                                          (_model.noOfReviews!)) +
+                                          ((_model.noOfReviews!) - 1)) +
                                       (_model.ratingBarValue!)) /
                                   (_model.noOfReviews!),
                               0.0,

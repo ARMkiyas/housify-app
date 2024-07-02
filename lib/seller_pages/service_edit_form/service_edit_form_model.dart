@@ -9,6 +9,8 @@ class ServiceEditFormModel extends FlutterFlowModel<ServiceEditFormWidget> {
 
   bool displayplacepicker = false;
 
+  bool isimageUploaded = true;
+
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
@@ -71,6 +73,8 @@ class ServiceEditFormModel extends FlutterFlowModel<ServiceEditFormWidget> {
 
   // Stores action output result for [Backend Call - Create Document] action in Button widget.
   ServiceAllRecord? creatednewService;
+  // Stores action output result for [Backend Call - Read Document] action in Button widget.
+  UsersRecord? userData;
   // Model for LocationPicker component.
   late LocationPickerModel locationPickerModel;
 

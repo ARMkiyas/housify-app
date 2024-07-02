@@ -9,7 +9,7 @@
           "order": "ASCENDING"
         },
         {
-          "fieldPath": "overall_rating",
+          "fieldPath": "no_of_sold",
           "order": "ASCENDING"
         }
       ]
