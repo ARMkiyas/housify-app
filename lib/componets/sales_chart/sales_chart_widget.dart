@@ -86,13 +86,14 @@ class _SalesChartWidgetState extends State<SalesChartWidget> {
               borderRadius: BorderRadius.circular(10.0),
             ),
             child: Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 20.0),
+              padding:
+                  const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 20.0),
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(16.0, 20.0, 16.0, 10.0),
+                    padding: const EdgeInsetsDirectional.fromSTEB(
+                        16.0, 20.0, 16.0, 10.0),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -122,8 +123,8 @@ class _SalesChartWidgetState extends State<SalesChartWidget> {
                   ),
                   Expanded(
                     child: Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 5.0, 0.0),
+                      padding: const EdgeInsetsDirectional.fromSTEB(
+                          5.0, 0.0, 5.0, 0.0),
                       child: SizedBox(
                         height: double.infinity,
                         child: FlutterFlowBarChart(
@@ -142,7 +143,7 @@ class _SalesChartWidgetState extends State<SalesChartWidget> {
                           xLabels: containerOrdersRecordList
                               .take(5)
                               .toList()
-                              .map((d) => d.orderDate)
+                              .map((d) => d.orderDate.toString())
                               .toList(),
                           barWidth: 30.0,
                           barBorderRadius: const BorderRadius.only(
