@@ -116,7 +116,8 @@ class _ProductviewPageWidgetState extends State<ProductviewPageWidget> {
                                                   onChanged: (_) =>
                                                       EasyDebounce.debounce(
                                                     '_model.tfSearchTextController',
-                                                    const Duration(milliseconds: 200),
+                                                    const Duration(
+                                                        milliseconds: 200),
                                                     () async {
                                                       _model.searchvalues = _model
                                                           .tfSearchTextController
@@ -140,7 +141,8 @@ class _ProductviewPageWidgetState extends State<ProductviewPageWidget> {
                                                                     .where(
                                                                       'category',
                                                                       isEqualTo: widget
-                                                                              .ceta?.reference,
+                                                                          .ceta
+                                                                          ?.reference,
                                                                     ),
                                                       );
                                                       safeSetState(() {
@@ -200,7 +202,8 @@ class _ProductviewPageWidgetState extends State<ProductviewPageWidget> {
                                                         ),
                                                     enabledBorder:
                                                         OutlineInputBorder(
-                                                      borderSide: const BorderSide(
+                                                      borderSide:
+                                                          const BorderSide(
                                                         color:
                                                             Color(0x00000000),
                                                         width: 1.0,
@@ -211,7 +214,8 @@ class _ProductviewPageWidgetState extends State<ProductviewPageWidget> {
                                                     ),
                                                     focusedBorder:
                                                         OutlineInputBorder(
-                                                      borderSide: const BorderSide(
+                                                      borderSide:
+                                                          const BorderSide(
                                                         color:
                                                             Color(0x00000000),
                                                         width: 1.0,
@@ -249,7 +253,7 @@ class _ProductviewPageWidgetState extends State<ProductviewPageWidget> {
                                                     contentPadding:
                                                         const EdgeInsetsDirectional
                                                             .fromSTEB(20.0, 0.0,
-                                                                8.0, 0.0),
+                                                            8.0, 0.0),
                                                     prefixIcon: Icon(
                                                       Icons.search_sharp,
                                                       color:
@@ -305,8 +309,8 @@ class _ProductviewPageWidgetState extends State<ProductviewPageWidget> {
                                       visible: _model.searchvalues != null &&
                                           _model.searchvalues != '',
                                       child: Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
-                                            5.0, 5.0, 0.0, 5.0),
+                                        padding: const EdgeInsetsDirectional
+                                            .fromSTEB(5.0, 5.0, 0.0, 5.0),
                                         child: InkWell(
                                           splashColor: Colors.transparent,
                                           focusColor: Colors.transparent,
@@ -360,7 +364,7 @@ class _ProductviewPageWidgetState extends State<ProductviewPageWidget> {
                               20.0, 30.0, 20.0, 0.0),
                           child: PagedGridView<DocumentSnapshot<Object?>?,
                               ServiceAllRecord>(
-                            pagingController: _model.setGridViewController1(
+                            pagingController: _model.setServiceListGridController(
                               ServiceAllRecord.collection
                                   .where(
                                     'category',
@@ -384,11 +388,13 @@ class _ProductviewPageWidgetState extends State<ProductviewPageWidget> {
                             builderDelegate:
                                 PagedChildBuilderDelegate<ServiceAllRecord>(
                               // Customize what your widget looks like when it's loading the first page.
-                              firstPageProgressIndicatorBuilder: (_) => const Center(
+                              firstPageProgressIndicatorBuilder: (_) =>
+                                  const Center(
                                 child: LoadingLottieWidget(),
                               ),
                               // Customize what your widget looks like when it's loading another page.
-                              newPageProgressIndicatorBuilder: (_) => const Center(
+                              newPageProgressIndicatorBuilder: (_) =>
+                                  const Center(
                                 child: LoadingLottieWidget(),
                               ),
 

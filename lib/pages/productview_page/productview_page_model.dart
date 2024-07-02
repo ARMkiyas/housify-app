@@ -59,11 +59,11 @@ class ProductviewPageModel extends FlutterFlowModel<ProductviewPageWidget> {
   }
 
   /// Additional helper methods.
-  PagingController<DocumentSnapshot?, ServiceAllRecord> setGridViewController1(
+  PagingController<DocumentSnapshot?, ServiceAllRecord> setServiceListGridController(
     Query query, {
     DocumentReference<Object?>? parent,
   }) {
-    gridViewPagingController1 ??= _createGridViewController1(query, parent);
+    gridViewPagingController1 ??= _createServiceListGridController(query, parent);
     if (gridViewPagingQuery1 != query) {
       gridViewPagingQuery1 = query;
       gridViewPagingController1?.refresh();
@@ -72,7 +72,7 @@ class ProductviewPageModel extends FlutterFlowModel<ProductviewPageWidget> {
   }
 
   PagingController<DocumentSnapshot?, ServiceAllRecord>
-      _createGridViewController1(
+      _createServiceListGridController(
     Query query,
     DocumentReference<Object?>? parent,
   ) {
