@@ -129,7 +129,7 @@ class _Auth2ForgotPasswordWidgetState extends State<Auth2ForgotPasswordWidget>
                           ),
                         ),
                         Text(
-                          'Housefy',
+                          'Housify',
                           style: FlutterFlowTheme.of(context)
                               .displaySmall
                               .override(
@@ -199,7 +199,7 @@ class _Auth2ForgotPasswordWidgetState extends State<Auth2ForgotPasswordWidget>
                               padding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 12.0, 0.0, 0.0),
                               child: Text(
-                                'Forgot Password',
+                                'Reset Password',
                                 textAlign: TextAlign.center,
                                 style: FlutterFlowTheme.of(context)
                                     .displaySmall

@@ -1,4 +1,5 @@
 import '/auth/firebase_auth/auth_util.dart';
+import '/backend/backend.dart';
 import '/backend/schema/enums/enums.dart';
 import '/components/loading_lottie_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -28,8 +29,12 @@ class _LoadingWidgetState extends State<LoadingWidget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      await Future.delayed(const Duration(milliseconds: 1500));
+      await Future.delayed(const Duration(milliseconds: 2000));
       await action_blocks.updateCurrentLocation(context);
+      _model.dataCategory = await queryProfessonsRecordOnce(
+        queryBuilder: (professonsRecord) =>
+            professonsRecord.orderBy('category_name'),
+      );
       if (currentUserDocument?.role == Roles.seller) {
         await action_blocks.issellervarfied(context);
       } else {

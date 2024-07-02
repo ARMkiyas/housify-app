@@ -13,19 +13,19 @@ class EditProfileModel extends FlutterFlowModel<EditProfileWidget> {
       FFUploadedFile(bytes: Uint8List.fromList([]));
   String uploadedFileUrl = '';
 
-  // State field(s) for TextField widget.
-  FocusNode? textFieldFocusNode1;
-  TextEditingController? textController1;
-  String? Function(BuildContext, String?)? textController1Validator;
-  // State field(s) for TextField widget.
-  FocusNode? textFieldFocusNode2;
-  TextEditingController? textController2;
-  String? Function(BuildContext, String?)? textController2Validator;
-  // State field(s) for TextField widget.
-  FocusNode? textFieldFocusNode3;
-  TextEditingController? textController3;
-  final textFieldMask3 = MaskTextInputFormatter(mask: '+# (###) ###-##-##');
-  String? Function(BuildContext, String?)? textController3Validator;
+  // State field(s) for name widget.
+  FocusNode? nameFocusNode;
+  TextEditingController? nameTextController;
+  String? Function(BuildContext, String?)? nameTextControllerValidator;
+  // State field(s) for Email widget.
+  FocusNode? emailFocusNode;
+  TextEditingController? emailTextController;
+  String? Function(BuildContext, String?)? emailTextControllerValidator;
+  // State field(s) for phone widget.
+  FocusNode? phoneFocusNode;
+  TextEditingController? phoneTextController;
+  final phoneMask = MaskTextInputFormatter(mask: '+# (###) ###-##-##');
+  String? Function(BuildContext, String?)? phoneTextControllerValidator;
   // Model for nav component.
   late NavModel navModel;
 
@@ -37,14 +37,14 @@ class EditProfileModel extends FlutterFlowModel<EditProfileWidget> {
   @override
   void dispose() {
     unfocusNode.dispose();
-    textFieldFocusNode1?.dispose();
-    textController1?.dispose();
+    nameFocusNode?.dispose();
+    nameTextController?.dispose();
 
-    textFieldFocusNode2?.dispose();
-    textController2?.dispose();
+    emailFocusNode?.dispose();
+    emailTextController?.dispose();
 
-    textFieldFocusNode3?.dispose();
-    textController3?.dispose();
+    phoneFocusNode?.dispose();
+    phoneTextController?.dispose();
 
     navModel.dispose();
   }

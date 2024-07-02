@@ -34,14 +34,17 @@ class _EditProfileWidgetState extends State<EditProfileWidget>
     super.initState();
     _model = createModel(context, () => EditProfileModel());
 
-    _model.textController1 ??= TextEditingController();
-    _model.textFieldFocusNode1 ??= FocusNode();
+    _model.nameTextController ??=
+        TextEditingController(text: currentUserDisplayName);
+    _model.nameFocusNode ??= FocusNode();
 
-    _model.textController2 ??= TextEditingController();
-    _model.textFieldFocusNode2 ??= FocusNode();
+    _model.emailTextController ??=
+        TextEditingController(text: currentUserEmail);
+    _model.emailFocusNode ??= FocusNode();
 
-    _model.textController3 ??= TextEditingController();
-    _model.textFieldFocusNode3 ??= FocusNode();
+    _model.phoneTextController ??=
+        TextEditingController(text: currentPhoneNumber);
+    _model.phoneFocusNode ??= FocusNode();
 
     animationsMap.addAll({
       'cardOnPageLoadAnimation': AnimationInfo(
@@ -401,61 +404,64 @@ class _EditProfileWidgetState extends State<EditProfileWidget>
                       child: Padding(
                         padding:
                             const EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 8.0, 0.0),
-                        child: TextFormField(
-                          controller: _model.textController1,
-                          focusNode: _model.textFieldFocusNode1,
-                          autofocus: true,
-                          obscureText: false,
-                          decoration: InputDecoration(
-                            labelStyle: FlutterFlowTheme.of(context)
-                                .labelMedium
-                                .override(
-                                  fontFamily: 'Readex Pro',
-                                  letterSpacing: 0.0,
-                                ),
-                            hintText: 'Name',
-                            hintStyle: FlutterFlowTheme.of(context)
-                                .labelMedium
-                                .override(
-                                  fontFamily: 'Readex Pro',
-                                  letterSpacing: 0.0,
-                                ),
-                            enabledBorder: UnderlineInputBorder(
-                              borderSide: const BorderSide(
-                                color: Color(0x00000000),
-                                width: 2.0,
-                              ),
-                              borderRadius: BorderRadius.circular(8.0),
-                            ),
-                            focusedBorder: UnderlineInputBorder(
-                              borderSide: const BorderSide(
-                                color: Color(0x00000000),
-                                width: 2.0,
-                              ),
-                              borderRadius: BorderRadius.circular(8.0),
-                            ),
-                            errorBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
-                                color: FlutterFlowTheme.of(context).error,
-                                width: 2.0,
-                              ),
-                              borderRadius: BorderRadius.circular(8.0),
-                            ),
-                            focusedErrorBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
-                                color: FlutterFlowTheme.of(context).error,
-                                width: 2.0,
-                              ),
-                              borderRadius: BorderRadius.circular(8.0),
-                            ),
-                          ),
-                          style:
-                              FlutterFlowTheme.of(context).bodyMedium.override(
+                        child: AuthUserStreamWidget(
+                          builder: (context) => TextFormField(
+                            controller: _model.nameTextController,
+                            focusNode: _model.nameFocusNode,
+                            autofocus: true,
+                            obscureText: false,
+                            decoration: InputDecoration(
+                              labelStyle: FlutterFlowTheme.of(context)
+                                  .labelMedium
+                                  .override(
                                     fontFamily: 'Readex Pro',
                                     letterSpacing: 0.0,
                                   ),
-                          validator: _model.textController1Validator
-                              .asValidator(context),
+                              hintText: 'Name',
+                              hintStyle: FlutterFlowTheme.of(context)
+                                  .labelMedium
+                                  .override(
+                                    fontFamily: 'Readex Pro',
+                                    letterSpacing: 0.0,
+                                  ),
+                              enabledBorder: UnderlineInputBorder(
+                                borderSide: const BorderSide(
+                                  color: Color(0x00000000),
+                                  width: 2.0,
+                                ),
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                              focusedBorder: UnderlineInputBorder(
+                                borderSide: const BorderSide(
+                                  color: Color(0x00000000),
+                                  width: 2.0,
+                                ),
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                              errorBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: FlutterFlowTheme.of(context).error,
+                                  width: 2.0,
+                                ),
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                              focusedErrorBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: FlutterFlowTheme.of(context).error,
+                                  width: 2.0,
+                                ),
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                            ),
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  fontFamily: 'Readex Pro',
+                                  letterSpacing: 0.0,
+                                ),
+                            validator: _model.nameTextControllerValidator
+                                .asValidator(context),
+                          ),
                         ),
                       ),
                     ).animateOnPageLoad(
@@ -478,8 +484,8 @@ class _EditProfileWidgetState extends State<EditProfileWidget>
                         padding:
                             const EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 8.0, 0.0),
                         child: TextFormField(
-                          controller: _model.textController2,
-                          focusNode: _model.textFieldFocusNode2,
+                          controller: _model.emailTextController,
+                          focusNode: _model.emailFocusNode,
                           autofocus: true,
                           obscureText: false,
                           decoration: InputDecoration(
@@ -530,7 +536,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget>
                                     fontFamily: 'Readex Pro',
                                     letterSpacing: 0.0,
                                   ),
-                          validator: _model.textController2Validator
+                          validator: _model.emailTextControllerValidator
                               .asValidator(context),
                         ),
                       ),
@@ -553,62 +559,65 @@ class _EditProfileWidgetState extends State<EditProfileWidget>
                       child: Padding(
                         padding:
                             const EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 8.0, 0.0),
-                        child: TextFormField(
-                          controller: _model.textController3,
-                          focusNode: _model.textFieldFocusNode3,
-                          autofocus: true,
-                          obscureText: false,
-                          decoration: InputDecoration(
-                            labelStyle: FlutterFlowTheme.of(context)
-                                .labelMedium
-                                .override(
-                                  fontFamily: 'Readex Pro',
-                                  letterSpacing: 0.0,
-                                ),
-                            hintText: 'Phone number',
-                            hintStyle: FlutterFlowTheme.of(context)
-                                .labelMedium
-                                .override(
-                                  fontFamily: 'Readex Pro',
-                                  letterSpacing: 0.0,
-                                ),
-                            enabledBorder: UnderlineInputBorder(
-                              borderSide: const BorderSide(
-                                color: Color(0x00000000),
-                                width: 2.0,
-                              ),
-                              borderRadius: BorderRadius.circular(8.0),
-                            ),
-                            focusedBorder: UnderlineInputBorder(
-                              borderSide: const BorderSide(
-                                color: Color(0x00000000),
-                                width: 2.0,
-                              ),
-                              borderRadius: BorderRadius.circular(8.0),
-                            ),
-                            errorBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
-                                color: FlutterFlowTheme.of(context).error,
-                                width: 2.0,
-                              ),
-                              borderRadius: BorderRadius.circular(8.0),
-                            ),
-                            focusedErrorBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
-                                color: FlutterFlowTheme.of(context).error,
-                                width: 2.0,
-                              ),
-                              borderRadius: BorderRadius.circular(8.0),
-                            ),
-                          ),
-                          style:
-                              FlutterFlowTheme.of(context).bodyMedium.override(
+                        child: AuthUserStreamWidget(
+                          builder: (context) => TextFormField(
+                            controller: _model.phoneTextController,
+                            focusNode: _model.phoneFocusNode,
+                            autofocus: true,
+                            obscureText: false,
+                            decoration: InputDecoration(
+                              labelStyle: FlutterFlowTheme.of(context)
+                                  .labelMedium
+                                  .override(
                                     fontFamily: 'Readex Pro',
                                     letterSpacing: 0.0,
                                   ),
-                          validator: _model.textController3Validator
-                              .asValidator(context),
-                          inputFormatters: [_model.textFieldMask3],
+                              hintText: 'Phone number',
+                              hintStyle: FlutterFlowTheme.of(context)
+                                  .labelMedium
+                                  .override(
+                                    fontFamily: 'Readex Pro',
+                                    letterSpacing: 0.0,
+                                  ),
+                              enabledBorder: UnderlineInputBorder(
+                                borderSide: const BorderSide(
+                                  color: Color(0x00000000),
+                                  width: 2.0,
+                                ),
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                              focusedBorder: UnderlineInputBorder(
+                                borderSide: const BorderSide(
+                                  color: Color(0x00000000),
+                                  width: 2.0,
+                                ),
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                              errorBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: FlutterFlowTheme.of(context).error,
+                                  width: 2.0,
+                                ),
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                              focusedErrorBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: FlutterFlowTheme.of(context).error,
+                                  width: 2.0,
+                                ),
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                            ),
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  fontFamily: 'Readex Pro',
+                                  letterSpacing: 0.0,
+                                ),
+                            validator: _model.phoneTextControllerValidator
+                                .asValidator(context),
+                            inputFormatters: [_model.phoneMask],
+                          ),
                         ),
                       ),
                     ).animateOnPageLoad(
@@ -621,10 +630,26 @@ class _EditProfileWidgetState extends State<EditProfileWidget>
                       onPressed: () async {
                         await currentUserReference!
                             .update(createUsersRecordData(
-                          email: _model.textController2.text,
-                          displayName: _model.textController1.text,
-                          phone: _model.textController3.text,
+                          email: _model.emailTextController.text,
+                          displayName: _model.nameTextController.text,
+                          phone: _model.phoneTextController.text,
                         ));
+                        if (_model.emailTextController.text.isEmpty) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text(
+                                'Email required!',
+                              ),
+                            ),
+                          );
+                          return;
+                        }
+
+                        await authManager.updateEmail(
+                          email: _model.emailTextController.text,
+                          context: context,
+                        );
+                        setState(() {});
                       },
                       text: 'Save',
                       options: FFButtonOptions(

@@ -53,6 +53,7 @@ class _SellerHomePageWidgetState extends State<SellerHomePageWidget> {
                   child: wrapWithModel(
                     model: _model.sellerHomeModel,
                     updateCallback: () => setState(() {}),
+                    updateOnChange: true,
                     child: const SellerHomeWidget(),
                   ),
                 ),
