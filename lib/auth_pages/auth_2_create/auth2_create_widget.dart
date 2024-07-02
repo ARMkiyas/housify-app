@@ -140,7 +140,7 @@ class _Auth2CreateWidgetState extends State<Auth2CreateWidget>
                           ),
                         ),
                         Text(
-                          'Housefy',
+                          'Housify',
                           style: FlutterFlowTheme.of(context)
                               .displaySmall
                               .override(

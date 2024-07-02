@@ -243,107 +243,196 @@ class _ServiceEditFormWidgetState extends State<ServiceEditFormWidget>
                                           width: 2.0,
                                         ),
                                       ),
-                                      child: InkWell(
-                                        splashColor: Colors.transparent,
-                                        focusColor: Colors.transparent,
-                                        hoverColor: Colors.transparent,
-                                        highlightColor: Colors.transparent,
-                                        onTap: () async {
-                                          final selectedMedia =
-                                              await selectMediaWithSourceBottomSheet(
-                                            context: context,
-                                            allowPhoto: true,
-                                          );
-                                          if (selectedMedia != null &&
-                                              selectedMedia.every((m) =>
-                                                  validateFileFormat(
-                                                      m.storagePath,
-                                                      context))) {
-                                            setState(() =>
-                                                _model.isDataUploading = true);
-                                            var selectedUploadedFiles =
-                                                <FFUploadedFile>[];
+                                      child: SizedBox(
+                                        width: double.infinity,
+                                        child: Stack(
+                                          alignment:
+                                              const AlignmentDirectional(0.0, 0.0),
+                                          children: [
+                                            InkWell(
+                                              splashColor: Colors.transparent,
+                                              focusColor: Colors.transparent,
+                                              hoverColor: Colors.transparent,
+                                              highlightColor:
+                                                  Colors.transparent,
+                                              onTap: () async {
+                                                final selectedMedia =
+                                                    await selectMediaWithSourceBottomSheet(
+                                                  context: context,
+                                                  allowPhoto: true,
+                                                );
+                                                if (selectedMedia != null &&
+                                                    selectedMedia.every((m) =>
+                                                        validateFileFormat(
+                                                            m.storagePath,
+                                                            context))) {
+                                                  setState(() => _model
+                                                      .isDataUploading = true);
+                                                  var selectedUploadedFiles =
+                                                      <FFUploadedFile>[];
 
-                                            var downloadUrls = <String>[];
-                                            try {
-                                              selectedUploadedFiles =
-                                                  selectedMedia
-                                                      .map(
-                                                          (m) => FFUploadedFile(
-                                                                name: m
-                                                                    .storagePath
-                                                                    .split('/')
-                                                                    .last,
-                                                                bytes: m.bytes,
-                                                                height: m
-                                                                    .dimensions
-                                                                    ?.height,
-                                                                width: m
-                                                                    .dimensions
-                                                                    ?.width,
-                                                                blurHash:
-                                                                    m.blurHash,
-                                                              ))
-                                                      .toList();
+                                                  var downloadUrls = <String>[];
+                                                  try {
+                                                    showUploadMessage(
+                                                      context,
+                                                      'Uploading file...',
+                                                      showLoading: true,
+                                                    );
+                                                    selectedUploadedFiles =
+                                                        selectedMedia
+                                                            .map((m) =>
+                                                                FFUploadedFile(
+                                                                  name: m
+                                                                      .storagePath
+                                                                      .split(
+                                                                          '/')
+                                                                      .last,
+                                                                  bytes:
+                                                                      m.bytes,
+                                                                  height: m
+                                                                      .dimensions
+                                                                      ?.height,
+                                                                  width: m
+                                                                      .dimensions
+                                                                      ?.width,
+                                                                  blurHash: m
+                                                                      .blurHash,
+                                                                ))
+                                                            .toList();
 
-                                              downloadUrls = (await Future.wait(
-                                                selectedMedia.map(
-                                                  (m) async => await uploadData(
-                                                      m.storagePath, m.bytes),
-                                                ),
-                                              ))
-                                                  .where((u) => u != null)
-                                                  .map((u) => u!)
-                                                  .toList();
-                                            } finally {
-                                              _model.isDataUploading = false;
-                                            }
-                                            if (selectedUploadedFiles.length ==
-                                                    selectedMedia.length &&
-                                                downloadUrls.length ==
-                                                    selectedMedia.length) {
-                                              setState(() {
-                                                _model.uploadedLocalFile =
-                                                    selectedUploadedFiles.first;
-                                                _model.uploadedFileUrl =
-                                                    downloadUrls.first;
-                                              });
-                                            } else {
-                                              setState(() {});
-                                              return;
-                                            }
-                                          }
-                                        },
-                                        child: ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(8.0),
-                                          child: Image.network(
-                                            valueOrDefault<String>(
-                                              () {
-                                                if (widget.image != null &&
-                                                    widget.image != '') {
-                                                  return widget.image;
-                                                } else if (_model.uploadedFileUrl !=
-                                                        '') {
-                                                  return _model.uploadedFileUrl;
-                                                } else if (_model.existingData
-                                                            ?.image !=
-                                                        null &&
-                                                    _model.existingData
-                                                            ?.image !=
-                                                        '') {
-                                                  return _model
-                                                      .existingData?.image;
-                                                } else {
-                                                  return 'https://picsum.photos/seed/570/600';
+                                                    downloadUrls = (await Future
+                                                            .wait(
+                                                      selectedMedia.map(
+                                                        (m) async =>
+                                                            await uploadData(
+                                                                m.storagePath,
+                                                                m.bytes),
+                                                      ),
+                                                    ))
+                                                        .where((u) => u != null)
+                                                        .map((u) => u!)
+                                                        .toList();
+                                                  } finally {
+                                                    ScaffoldMessenger.of(
+                                                            context)
+                                                        .hideCurrentSnackBar();
+                                                    _model.isDataUploading =
+                                                        false;
+                                                  }
+                                                  if (selectedUploadedFiles
+                                                              .length ==
+                                                          selectedMedia
+                                                              .length &&
+                                                      downloadUrls.length ==
+                                                          selectedMedia
+                                                              .length) {
+                                                    setState(() {
+                                                      _model.uploadedLocalFile =
+                                                          selectedUploadedFiles
+                                                              .first;
+                                                      _model.uploadedFileUrl =
+                                                          downloadUrls.first;
+                                                    });
+                                                    showUploadMessage(
+                                                        context, 'Success!');
+                                                  } else {
+                                                    setState(() {});
+                                                    showUploadMessage(context,
+                                                        'Failed to upload data');
+                                                    return;
+                                                  }
                                                 }
-                                              }(),
-                                              'https://picsum.photos/seed/570/600',
+
+                                                _model.isimageUploaded = false;
+                                                setState(() {});
+                                              },
+                                              child: Hero(
+                                                tag: valueOrDefault<String>(
+                                                  () {
+                                                    if (widget.image != null &&
+                                                        widget.image != '') {
+                                                      return widget.image;
+                                                    } else if (_model.uploadedFileUrl !=
+                                                            '') {
+                                                      return _model
+                                                          .uploadedFileUrl;
+                                                    } else if (_model
+                                                                .existingData
+                                                                ?.image !=
+                                                            null &&
+                                                        _model.existingData
+                                                                ?.image !=
+                                                            '') {
+                                                      return _model
+                                                          .existingData?.image;
+                                                    } else {
+                                                      return 'https://picsum.photos/seed/570/600';
+                                                    }
+                                                  }(),
+                                                  'https://picsum.photos/seed/570/600',
+                                                ),
+                                                transitionOnUserGestures: true,
+                                                child: ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          8.0),
+                                                  child: Image.network(
+                                                    valueOrDefault<String>(
+                                                      () {
+                                                        if (widget.image !=
+                                                                null &&
+                                                            widget.image !=
+                                                                '') {
+                                                          return widget.image;
+                                                        } else if (_model.uploadedFileUrl !=
+                                                                '') {
+                                                          return _model
+                                                              .uploadedFileUrl;
+                                                        } else if (_model
+                                                                    .existingData
+                                                                    ?.image !=
+                                                                null &&
+                                                            _model.existingData
+                                                                    ?.image !=
+                                                                '') {
+                                                          return _model
+                                                              .existingData
+                                                              ?.image;
+                                                        } else {
+                                                          return 'https://picsum.photos/seed/570/600';
+                                                        }
+                                                      }(),
+                                                      'https://picsum.photos/seed/570/600',
+                                                    ),
+                                                    width: double.infinity,
+                                                    height: 200.0,
+                                                    fit: BoxFit.cover,
+                                                  ),
+                                                ),
+                                              ),
                                             ),
-                                            width: 300.0,
-                                            height: 200.0,
-                                            fit: BoxFit.cover,
-                                          ),
+                                            if (valueOrDefault<bool>(
+                                              widget.isnew! &&
+                                                      _model.isimageUploaded
+                                                  ? true
+                                                  : false,
+                                              false,
+                                            ))
+                                              Text(
+                                                'Image Is requested Please Upload one ',
+                                                style: FlutterFlowTheme.of(
+                                                        context)
+                                                    .bodyMedium
+                                                    .override(
+                                                      fontFamily: 'Readex Pro',
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .error,
+                                                      letterSpacing: 0.0,
+                                                    ),
+                                              ),
+                                          ],
                                         ),
                                       ),
                                     ).animateOnPageLoad(animationsMap[
@@ -658,70 +747,78 @@ class _ServiceEditFormWidgetState extends State<ServiceEditFormWidget>
                                   0.0, 24.0, 0.0, 12.0),
                               child: FFButtonWidget(
                                 onPressed: () async {
+                                  var shouldSetState = false;
                                   if (_model.formKey.currentState == null ||
                                       !_model.formKey.currentState!
                                           .validate()) {
                                     return;
                                   }
                                   if (widget.isnew!) {
-                                    var serviceAllRecordReference =
-                                        ServiceAllRecord.collection.doc();
-                                    await serviceAllRecordReference
-                                        .set(createServiceAllRecordData(
-                                      title: _model.titleTextController.text,
-                                      price: double.tryParse(
-                                          _model.priceTextController.text),
-                                      description:
-                                          _model.descriptionTextController.text,
-                                      image: _model.uploadedFileUrl,
-                                      available: true,
-                                      category: currentUserDocument?.professon,
-                                      seller: currentUserReference,
-                                      serviceLocation:
-                                          _model.locationTextController.text,
-                                      overallRating: 0.0,
-                                      noOfSold: 0,
-                                      noOfReviews: 0,
-                                    ));
-                                    _model.creatednewService =
-                                        ServiceAllRecord.getDocumentFromData(
-                                            createServiceAllRecordData(
-                                              title: _model
-                                                  .titleTextController.text,
-                                              price: double.tryParse(_model
-                                                  .priceTextController.text),
-                                              description: _model
-                                                  .descriptionTextController
-                                                  .text,
-                                              image: _model.uploadedFileUrl,
-                                              available: true,
-                                              category: currentUserDocument
-                                                  ?.professon,
-                                              seller: currentUserReference,
-                                              serviceLocation: _model
-                                                  .locationTextController.text,
-                                              overallRating: 0.0,
-                                              noOfSold: 0,
-                                              noOfReviews: 0,
-                                            ),
-                                            serviceAllRecordReference);
+                                    if (!_model.isimageUploaded) {
+                                      var serviceAllRecordReference =
+                                          ServiceAllRecord.collection.doc();
+                                      await serviceAllRecordReference
+                                          .set(createServiceAllRecordData(
+                                        title: _model.titleTextController.text,
+                                        price: double.tryParse(
+                                            _model.priceTextController.text),
+                                        description: _model
+                                            .descriptionTextController.text,
+                                        image: _model.uploadedFileUrl,
+                                        available: true,
+                                        category:
+                                            currentUserDocument?.professon,
+                                        seller: currentUserReference,
+                                        serviceLocation:
+                                            _model.locationTextController.text,
+                                        overallRating: 0.0,
+                                        noOfSold: 0,
+                                        noOfReviews: 0,
+                                      ));
+                                      _model.creatednewService =
+                                          ServiceAllRecord.getDocumentFromData(
+                                              createServiceAllRecordData(
+                                                title: _model
+                                                    .titleTextController.text,
+                                                price: double.tryParse(_model
+                                                    .priceTextController.text),
+                                                description: _model
+                                                    .descriptionTextController
+                                                    .text,
+                                                image: _model.uploadedFileUrl,
+                                                available: true,
+                                                category: currentUserDocument
+                                                    ?.professon,
+                                                seller: currentUserReference,
+                                                serviceLocation: _model
+                                                    .locationTextController
+                                                    .text,
+                                                overallRating: 0.0,
+                                                noOfSold: 0,
+                                                noOfReviews: 0,
+                                              ),
+                                              serviceAllRecordReference);
+                                      shouldSetState = true;
+                                      _model.userData =
+                                          await UsersRecord.getDocumentOnce(
+                                              currentUserReference!);
+                                      shouldSetState = true;
 
-                                    await currentUserDocument!.professon!
-                                        .update({
-                                      ...mapToFirestore(
-                                        {
-                                          'serviceRef': FieldValue.arrayUnion([
-                                            _model.creatednewService?.reference
-                                          ]),
-                                        },
-                                      ),
-                                    });
+                                      await _model.userData!.reference
+                                          .update(createUsersRecordData(
+                                        service:
+                                            _model.creatednewService?.reference,
+                                      ));
+                                    } else {
+                                      _model.isimageUploaded = true;
+                                      setState(() {});
+                                      if (shouldSetState) setState(() {});
+                                      return;
+                                    }
 
-                                    await currentUserReference!
-                                        .update(createUsersRecordData(
-                                      service:
-                                          _model.creatednewService?.reference,
-                                    ));
+                                    context.safePop();
+                                    if (shouldSetState) setState(() {});
+                                    return;
                                   } else {
                                     await _model.existingData!.reference
                                         .update(createServiceAllRecordData(
@@ -740,11 +837,15 @@ class _ServiceEditFormWidgetState extends State<ServiceEditFormWidget>
                                     ));
                                   }
 
-                                  context.pushNamed('seller_home_page');
-
-                                  setState(() {});
+                                  context.safePop();
+                                  if (shouldSetState) setState(() {});
                                 },
-                                text: 'Edit and Publish',
+                                text: valueOrDefault<String>(
+                                  widget.isnew!
+                                      ? 'Create and Publish'
+                                      : 'Edit and Publish',
+                                  'Edit and Publish',
+                                ),
                                 icon: const Icon(
                                   Icons.receipt_long,
                                   size: 15.0,

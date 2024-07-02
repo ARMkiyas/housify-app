@@ -156,7 +156,7 @@ class _OrderPageWidgetState extends State<OrderPageWidget>
                                         );
                                       }
                                       List<OrdersRecord>
-                                          listViewOrdersRecordList =
+                                          customerongoingListviewOrdersRecordList =
                                           snapshot.data!;
                                       return RefreshIndicator(
                                         onRefresh: () async {
@@ -176,14 +176,15 @@ class _OrderPageWidgetState extends State<OrderPageWidget>
                                           shrinkWrap: true,
                                           scrollDirection: Axis.vertical,
                                           itemCount:
-                                              listViewOrdersRecordList.length,
+                                              customerongoingListviewOrdersRecordList
+                                                  .length,
                                           separatorBuilder: (_, __) =>
                                               const SizedBox(height: 24.0),
-                                          itemBuilder:
-                                              (context, listViewIndex) {
-                                            final listViewOrdersRecord =
-                                                listViewOrdersRecordList[
-                                                    listViewIndex];
+                                          itemBuilder: (context,
+                                              customerongoingListviewIndex) {
+                                            final customerongoingListviewOrdersRecord =
+                                                customerongoingListviewOrdersRecordList[
+                                                    customerongoingListviewIndex];
                                             return Column(
                                               mainAxisSize: MainAxisSize.max,
                                               children: [
@@ -229,7 +230,7 @@ class _OrderPageWidgetState extends State<OrderPageWidget>
                                                               child:
                                                                   CustomerAcceptWidget(
                                                                 data:
-                                                                    listViewOrdersRecord,
+                                                                    customerongoingListviewOrdersRecord,
                                                               ),
                                                             ),
                                                           ),
@@ -243,10 +244,10 @@ class _OrderPageWidgetState extends State<OrderPageWidget>
                                                     decoration: const BoxDecoration(),
                                                     child: HistorycardWidget(
                                                       key: Key(
-                                                          'Keyy0w_${listViewIndex}_of_${listViewOrdersRecordList.length}'),
+                                                          'Keyy0w_${customerongoingListviewIndex}_of_${customerongoingListviewOrdersRecordList.length}'),
                                                       iscompletd: false,
                                                       data:
-                                                          listViewOrdersRecord,
+                                                          customerongoingListviewOrdersRecord,
                                                     ),
                                                   ),
                                                 ),
@@ -329,7 +330,7 @@ class _OrderPageWidgetState extends State<OrderPageWidget>
                                         );
                                       }
                                       List<OrdersRecord>
-                                          listViewOrdersRecordList =
+                                          sellerongoingnlistviewOrdersRecordList =
                                           snapshot.data!;
                                       return RefreshIndicator(
                                         onRefresh: () async {
@@ -349,14 +350,15 @@ class _OrderPageWidgetState extends State<OrderPageWidget>
                                           shrinkWrap: true,
                                           scrollDirection: Axis.vertical,
                                           itemCount:
-                                              listViewOrdersRecordList.length,
+                                              sellerongoingnlistviewOrdersRecordList
+                                                  .length,
                                           separatorBuilder: (_, __) =>
                                               const SizedBox(height: 24.0),
-                                          itemBuilder:
-                                              (context, listViewIndex) {
-                                            final listViewOrdersRecord =
-                                                listViewOrdersRecordList[
-                                                    listViewIndex];
+                                          itemBuilder: (context,
+                                              sellerongoingnlistviewIndex) {
+                                            final sellerongoingnlistviewOrdersRecord =
+                                                sellerongoingnlistviewOrdersRecordList[
+                                                    sellerongoingnlistviewIndex];
                                             return Column(
                                               mainAxisSize: MainAxisSize.max,
                                               children: [
@@ -402,7 +404,7 @@ class _OrderPageWidgetState extends State<OrderPageWidget>
                                                               child:
                                                                   CustomerAcceptWidget(
                                                                 data:
-                                                                    listViewOrdersRecord,
+                                                                    sellerongoingnlistviewOrdersRecord,
                                                               ),
                                                             ),
                                                           ),
@@ -416,10 +418,10 @@ class _OrderPageWidgetState extends State<OrderPageWidget>
                                                     decoration: const BoxDecoration(),
                                                     child: HistorycardWidget(
                                                       key: Key(
-                                                          'Key7ut_${listViewIndex}_of_${listViewOrdersRecordList.length}'),
+                                                          'Key7ut_${sellerongoingnlistviewIndex}_of_${sellerongoingnlistviewOrdersRecordList.length}'),
                                                       iscompletd: false,
                                                       data:
-                                                          listViewOrdersRecord,
+                                                          sellerongoingnlistviewOrdersRecord,
                                                     ),
                                                   ),
                                                 ),
@@ -501,7 +503,7 @@ class _OrderPageWidgetState extends State<OrderPageWidget>
                                         );
                                       }
                                       List<OrdersRecord>
-                                          listViewOrdersRecordList =
+                                          customercompletedListviewOrdersRecordList =
                                           snapshot.data!;
                                       return ListView.separated(
                                         padding: const EdgeInsets.fromLTRB(
@@ -513,13 +515,15 @@ class _OrderPageWidgetState extends State<OrderPageWidget>
                                         shrinkWrap: true,
                                         scrollDirection: Axis.vertical,
                                         itemCount:
-                                            listViewOrdersRecordList.length,
+                                            customercompletedListviewOrdersRecordList
+                                                .length,
                                         separatorBuilder: (_, __) =>
                                             const SizedBox(height: 24.0),
-                                        itemBuilder: (context, listViewIndex) {
-                                          final listViewOrdersRecord =
-                                              listViewOrdersRecordList[
-                                                  listViewIndex];
+                                        itemBuilder: (context,
+                                            customercompletedListviewIndex) {
+                                          final customercompletedListviewOrdersRecord =
+                                              customercompletedListviewOrdersRecordList[
+                                                  customercompletedListviewIndex];
                                           return Column(
                                             mainAxisSize: MainAxisSize.max,
                                             children: [
@@ -528,9 +532,10 @@ class _OrderPageWidgetState extends State<OrderPageWidget>
                                                 decoration: const BoxDecoration(),
                                                 child: HistorycardWidget(
                                                   key: Key(
-                                                      'Keyvem_${listViewIndex}_of_${listViewOrdersRecordList.length}'),
+                                                      'Keyvem_${customercompletedListviewIndex}_of_${customercompletedListviewOrdersRecordList.length}'),
                                                   iscompletd: true,
-                                                  data: listViewOrdersRecord,
+                                                  data:
+                                                      customercompletedListviewOrdersRecord,
                                                 ),
                                               ),
                                               Divider(
@@ -604,7 +609,7 @@ class _OrderPageWidgetState extends State<OrderPageWidget>
                                         );
                                       }
                                       List<OrdersRecord>
-                                          listViewOrdersRecordList =
+                                          sellercompletedListviewOrdersRecordList =
                                           snapshot.data!;
                                       return ListView.separated(
                                         padding: const EdgeInsets.fromLTRB(
@@ -616,13 +621,15 @@ class _OrderPageWidgetState extends State<OrderPageWidget>
                                         shrinkWrap: true,
                                         scrollDirection: Axis.vertical,
                                         itemCount:
-                                            listViewOrdersRecordList.length,
+                                            sellercompletedListviewOrdersRecordList
+                                                .length,
                                         separatorBuilder: (_, __) =>
                                             const SizedBox(height: 24.0),
-                                        itemBuilder: (context, listViewIndex) {
-                                          final listViewOrdersRecord =
-                                              listViewOrdersRecordList[
-                                                  listViewIndex];
+                                        itemBuilder: (context,
+                                            sellercompletedListviewIndex) {
+                                          final sellercompletedListviewOrdersRecord =
+                                              sellercompletedListviewOrdersRecordList[
+                                                  sellercompletedListviewIndex];
                                           return Column(
                                             mainAxisSize: MainAxisSize.max,
                                             children: [
@@ -631,9 +638,10 @@ class _OrderPageWidgetState extends State<OrderPageWidget>
                                                 decoration: const BoxDecoration(),
                                                 child: HistorycardWidget(
                                                   key: Key(
-                                                      'Keyt6x_${listViewIndex}_of_${listViewOrdersRecordList.length}'),
+                                                      'Keyt6x_${sellercompletedListviewIndex}_of_${sellercompletedListviewOrdersRecordList.length}'),
                                                   iscompletd: true,
-                                                  data: listViewOrdersRecord,
+                                                  data:
+                                                      sellercompletedListviewOrdersRecord,
                                                 ),
                                               ),
                                               Divider(

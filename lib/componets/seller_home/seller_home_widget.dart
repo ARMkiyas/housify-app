@@ -4,7 +4,6 @@ import '/backend/schema/enums/enums.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
@@ -369,17 +368,15 @@ class _SellerHomeWidgetState extends State<SellerHomeWidget>
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Expanded(
-                    child: FutureBuilder<int>(
-                      future:
-                          (_model.firestoreRequestCompleter ??= Completer<int>()
-                                ..complete(queryServiceAllRecordCount(
-                                  queryBuilder: (serviceAllRecord) =>
-                                      serviceAllRecord.where(
-                                    'seller',
-                                    isEqualTo: currentUserReference,
-                                  ),
-                                )))
-                              .future,
+                    child: StreamBuilder<List<ServiceAllRecord>>(
+                      stream: queryServiceAllRecord(
+                        queryBuilder: (serviceAllRecord) =>
+                            serviceAllRecord.where(
+                          'seller',
+                          isEqualTo: currentUserReference,
+                        ),
+                        singleRecord: true,
+                      ),
                       builder: (context, snapshot) {
                         // Customize what your widget looks like when it's loading.
                         if (!snapshot.hasData) {
@@ -395,7 +392,12 @@ class _SellerHomeWidgetState extends State<SellerHomeWidget>
                             ),
                           );
                         }
-                        int containerCount = snapshot.data!;
+                        List<ServiceAllRecord> containerServiceAllRecordList =
+                            snapshot.data!;
+                        final containerServiceAllRecord =
+                            containerServiceAllRecordList.isNotEmpty
+                                ? containerServiceAllRecordList.first
+                                : null;
                         return Material(
                           color: Colors.transparent,
                           elevation: 0.0,
@@ -460,9 +462,8 @@ class _SellerHomeWidgetState extends State<SellerHomeWidget>
                                               'ServiceEditForm',
                                               queryParameters: {
                                                 'isnew': serializeParam(
-                                                  containerCount <= 0
-                                                      ? true
-                                                      : false,
+                                                  containerServiceAllRecord ==
+                                                      null,
                                                   ParamType.bool,
                                                 ),
                                               }.withoutNulls,
@@ -483,52 +484,40 @@ class _SellerHomeWidgetState extends State<SellerHomeWidget>
                                     ),
                                   ],
                                 ),
-                                RefreshIndicator(
-                                  onRefresh: () async {
-                                    setState(() => _model
-                                        .firestoreRequestCompleter = null);
-                                    await _model
-                                        .waitForFirestoreRequestCompleted();
-                                  },
-                                  child: SingleChildScrollView(
-                                    physics:
-                                        const AlwaysScrollableScrollPhysics(),
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        if (containerCount <= 0)
-                                          Padding(
-                                            padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
-                                                    10.0, 0.0, 0.0, 0.0),
-                                            child: Text(
-                                              valueOrDefault<String>(
-                                                containerCount <= 0
-                                                    ? 'Service Not Available'
-                                                    : 'Service Available',
-                                                'Service Not Available',
-                                              ),
-                                              textAlign: TextAlign.start,
-                                              style: FlutterFlowTheme.of(
-                                                      context)
-                                                  .bodySmall
-                                                  .override(
-                                                    fontFamily: 'Outfit',
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .error,
-                                                    fontSize: 24.0,
-                                                    letterSpacing: 0.0,
-                                                    fontWeight: FontWeight.w300,
-                                                  ),
+                                SingleChildScrollView(
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      if (containerServiceAllRecord == null)
+                                        Padding(
+                                          padding:
+                                              const EdgeInsetsDirectional.fromSTEB(
+                                                  10.0, 0.0, 0.0, 0.0),
+                                          child: Text(
+                                            valueOrDefault<String>(
+                                              containerServiceAllRecord == null
+                                                  ? 'Service Not Available'
+                                                  : 'Service Available',
+                                              'Service Not Available',
                                             ),
+                                            textAlign: TextAlign.start,
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodySmall
+                                                .override(
+                                                  fontFamily: 'Outfit',
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .error,
+                                                  fontSize: 24.0,
+                                                  letterSpacing: 0.0,
+                                                  fontWeight: FontWeight.w300,
+                                                ),
                                           ),
-                                      ].divide(const SizedBox(height: 4.0)),
-                                    ),
+                                        ),
+                                    ].divide(const SizedBox(height: 4.0)),
                                   ),
                                 ),
                                 Padding(
@@ -578,6 +567,8 @@ class _SellerHomeWidgetState extends State<SellerHomeWidget>
                                         decoration: BoxDecoration(
                                           color: FlutterFlowTheme.of(context)
                                               .secondaryBackground,
+                                          borderRadius:
+                                              BorderRadius.circular(8.0),
                                         ),
                                         child: Column(
                                           mainAxisSize: MainAxisSize.max,
@@ -608,7 +599,7 @@ class _SellerHomeWidgetState extends State<SellerHomeWidget>
                                             Padding(
                                               padding: const EdgeInsetsDirectional
                                                   .fromSTEB(
-                                                      4.0, 10.0, 4.0, 0.0),
+                                                      5.0, 10.0, 4.0, 0.0),
                                               child: Text(
                                                 valueOrDefault<String>(
                                                   containerServiceAllRecord
@@ -630,7 +621,7 @@ class _SellerHomeWidgetState extends State<SellerHomeWidget>
                                             Padding(
                                               padding: const EdgeInsetsDirectional
                                                   .fromSTEB(
-                                                      4.0, 14.0, 4.0, 0.0),
+                                                      8.0, 14.0, 4.0, 0.0),
                                               child: Text(
                                                 valueOrDefault<String>(
                                                   containerServiceAllRecord
@@ -654,7 +645,7 @@ class _SellerHomeWidgetState extends State<SellerHomeWidget>
                                             Padding(
                                               padding: const EdgeInsetsDirectional
                                                   .fromSTEB(
-                                                      0.0, 10.0, 0.0, 0.0),
+                                                      8.0, 10.0, 0.0, 0.0),
                                               child: Column(
                                                 mainAxisSize: MainAxisSize.max,
                                                 crossAxisAlignment:
@@ -696,9 +687,7 @@ class _SellerHomeWidgetState extends State<SellerHomeWidget>
                                                   ),
                                                   Padding(
                                                     padding:
-                                                        const EdgeInsetsDirectional
-                                                            .fromSTEB(0.0, 20.0,
-                                                                0.0, 0.0),
+                                                        const EdgeInsets.all(10.0),
                                                     child: Text(
                                                       formatNumber(
                                                         containerServiceAllRecord!

@@ -1,6 +1,6 @@
 import '/components/location_picker_widget.dart';
+import '/componets/productitem/productitem_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/form_field_controller.dart';
 import 'cus_home_widget.dart' show CusHomeWidget;
 import 'package:flutter/material.dart';
 
@@ -19,22 +19,20 @@ class CusHomeModel extends FlutterFlowModel<CusHomeWidget> {
           pageViewController!.page != null
       ? pageViewController!.page!.round()
       : 0;
-  // State field(s) for ChoiceChips widget.
-  FormFieldController<List<String>>? choiceChipsValueController;
-  String? get choiceChipsValue =>
-      choiceChipsValueController?.value?.firstOrNull;
-  set choiceChipsValue(String? val) =>
-      choiceChipsValueController?.value = val != null ? [val] : [];
+  // Models for productitem dynamic component.
+  late FlutterFlowDynamicModels<ProductitemModel> productitemModels;
   // Model for LocationPicker component.
   late LocationPickerModel locationPickerModel;
 
   @override
   void initState(BuildContext context) {
+    productitemModels = FlutterFlowDynamicModels(() => ProductitemModel());
     locationPickerModel = createModel(context, () => LocationPickerModel());
   }
 
   @override
   void dispose() {
+    productitemModels.dispose();
     locationPickerModel.dispose();
   }
 }

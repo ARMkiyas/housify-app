@@ -16,6 +16,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'service_details_page_model.dart';
 export 'service_details_page_model.dart';
 
@@ -315,18 +316,6 @@ class _ServiceDetailsPageWidgetState extends State<ServiceDetailsPageWidget>
                                                     letterSpacing: 0.0,
                                                   ),
                                             ),
-                                          ),
-                                          Text(
-                                            '( ${widget.sericeDoc?.noOfReviews.toString()}  reviews )',
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyMedium
-                                                .override(
-                                                  fontFamily: 'Readex Pro',
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .secondaryText,
-                                                  letterSpacing: 0.0,
-                                                ),
                                           ),
                                         ],
                                       ),
@@ -783,7 +772,7 @@ class _ServiceDetailsPageWidgetState extends State<ServiceDetailsPageWidget>
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      'Last 3 reviews',
+                                      'Service Reviews',
                                       style: FlutterFlowTheme.of(context)
                                           .titleSmall
                                           .override(
@@ -814,71 +803,78 @@ class _ServiceDetailsPageWidgetState extends State<ServiceDetailsPageWidget>
                                   ],
                                 ),
                               ),
-                              StreamBuilder<List<SellerReviewsRecord>>(
-                                stream: querySellerReviewsRecord(
-                                  parent: widget.sericeDoc?.reference,
-                                  limit: 3,
+                              PagedListView<DocumentSnapshot<Object?>?,
+                                  SellerReviewsRecord>.separated(
+                                pagingController: _model.setListViewController(
+                                    SellerReviewsRecord.collection(
+                                        widget.sericeDoc?.reference),
+                                    parent: widget.sericeDoc?.reference),
+                                padding: const EdgeInsets.fromLTRB(
+                                  0,
+                                  24.0,
+                                  0,
+                                  24.0,
                                 ),
-                                builder: (context, snapshot) {
-                                  // Customize what your widget looks like when it's loading.
-                                  if (!snapshot.hasData) {
-                                    return Center(
-                                      child: SizedBox(
-                                        width: 40.0,
-                                        height: 40.0,
-                                        child: SpinKitThreeBounce(
-                                          color: FlutterFlowTheme.of(context)
-                                              .primary,
-                                          size: 40.0,
-                                        ),
+                                primary: false,
+                                shrinkWrap: true,
+                                reverse: false,
+                                scrollDirection: Axis.vertical,
+                                separatorBuilder: (_, __) =>
+                                    const SizedBox(height: 16.0),
+                                builderDelegate: PagedChildBuilderDelegate<
+                                    SellerReviewsRecord>(
+                                  // Customize what your widget looks like when it's loading the first page.
+                                  firstPageProgressIndicatorBuilder: (_) =>
+                                      Center(
+                                    child: SizedBox(
+                                      width: 40.0,
+                                      height: 40.0,
+                                      child: SpinKitThreeBounce(
+                                        color: FlutterFlowTheme.of(context)
+                                            .primary,
+                                        size: 40.0,
+                                      ),
+                                    ),
+                                  ),
+                                  // Customize what your widget looks like when it's loading another page.
+                                  newPageProgressIndicatorBuilder: (_) =>
+                                      Center(
+                                    child: SizedBox(
+                                      width: 40.0,
+                                      height: 40.0,
+                                      child: SpinKitThreeBounce(
+                                        color: FlutterFlowTheme.of(context)
+                                            .primary,
+                                        size: 40.0,
+                                      ),
+                                    ),
+                                  ),
+
+                                  itemBuilder: (context, _, listViewIndex) {
+                                    final listViewSellerReviewsRecord = _model
+                                        .listViewPagingController!
+                                        .itemList![listViewIndex];
+                                    return Padding(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                          20.0, 0.0, 20.0, 0.0),
+                                      child: ReviewsWidget(
+                                        key: Key(
+                                            'Key1lk_${listViewIndex}_of_${_model.listViewPagingController!.itemList!.length}'),
+                                        userAvatar: listViewSellerReviewsRecord
+                                            .userImage,
+                                        userName: listViewSellerReviewsRecord
+                                            .customerName,
+                                        reviewNumber:
+                                            listViewSellerReviewsRecord.rating,
+                                        date: listViewSellerReviewsRecord
+                                            .dateTime,
+                                        reviewFeedback:
+                                            listViewSellerReviewsRecord
+                                                .feedback,
                                       ),
                                     );
-                                  }
-                                  List<SellerReviewsRecord>
-                                      listViewSellerReviewsRecordList =
-                                      snapshot.data!;
-                                  return ListView.separated(
-                                    padding: const EdgeInsets.fromLTRB(
-                                      0,
-                                      24.0,
-                                      0,
-                                      24.0,
-                                    ),
-                                    primary: false,
-                                    shrinkWrap: true,
-                                    scrollDirection: Axis.vertical,
-                                    itemCount:
-                                        listViewSellerReviewsRecordList.length,
-                                    separatorBuilder: (_, __) =>
-                                        const SizedBox(height: 16.0),
-                                    itemBuilder: (context, listViewIndex) {
-                                      final listViewSellerReviewsRecord =
-                                          listViewSellerReviewsRecordList[
-                                              listViewIndex];
-                                      return Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
-                                            20.0, 0.0, 20.0, 0.0),
-                                        child: ReviewsWidget(
-                                          key: Key(
-                                              'Key1lk_${listViewIndex}_of_${listViewSellerReviewsRecordList.length}'),
-                                          userAvatar:
-                                              listViewSellerReviewsRecord
-                                                  .userImage,
-                                          userName: listViewSellerReviewsRecord
-                                              .customerName,
-                                          reviewNumber:
-                                              listViewSellerReviewsRecord
-                                                  .rating,
-                                          date: listViewSellerReviewsRecord
-                                              .dateTime,
-                                          reviewFeedback:
-                                              listViewSellerReviewsRecord
-                                                  .feedback,
-                                        ),
-                                      );
-                                    },
-                                  );
-                                },
+                                  },
+                                ),
                               ),
                             ],
                           ),

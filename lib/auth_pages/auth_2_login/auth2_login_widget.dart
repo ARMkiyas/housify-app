@@ -131,7 +131,7 @@ class _Auth2LoginWidgetState extends State<Auth2LoginWidget>
                           ),
                         ),
                         Text(
-                          'Housefy',
+                          'Housify',
                           style: FlutterFlowTheme.of(context)
                               .displaySmall
                               .override(
@@ -285,7 +285,7 @@ class _Auth2LoginWidgetState extends State<Auth2LoginWidget>
                                           fontFamily: 'Readex Pro',
                                           letterSpacing: 0.0,
                                         ),
-                                    hintText: 'Paaword',
+                                    hintText: 'Password',
                                     enabledBorder: OutlineInputBorder(
                                       borderSide: BorderSide(
                                         color: FlutterFlowTheme.of(context)
